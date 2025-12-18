@@ -4,6 +4,101 @@ title: "STRATO | Where Stability Meets Opportunity"
 description: "Easily earn on vaulted gold, silver & crypto. Get instant credit. Built by ETH veterans"
 ---
 
+<!-- Rewards Banner -->
+<section class="rewards-banner">
+    <!-- Animated stars effect -->
+    <div class="rewards-banner-stars" id="rewards-stars"></div>
+
+    <div class="rewards-banner-container">
+        <div class="rewards-banner-content">
+            <!-- Left side - Main message -->
+            <div class="rewards-banner-text">
+                <h2>Up to 1,000,000 Reward Points</h2>
+                <p>Earn rewards through platform activities. Join the Prelaunch campaign now.</p>
+            </div>
+
+            <!-- Right side - Countdown and CTA -->
+            <div class="rewards-banner-cta">
+                <!-- Countdown -->
+                <div class="rewards-countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="countdown-days">0</div>
+                        <span class="countdown-label">DAYS</span>
+                    </div>
+                    <div class="countdown-separator">.</div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="countdown-hours">0</div>
+                        <span class="countdown-label">HRS</span>
+                    </div>
+                    <div class="countdown-separator">.</div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="countdown-mins">0</div>
+                        <span class="countdown-label">MINS</span>
+                    </div>
+                    <div class="countdown-separator">.</div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="countdown-secs">0</div>
+                        <span class="countdown-label">SECS</span>
+                    </div>
+                </div>
+
+                <!-- CTA Button -->
+                <a href="https://app.strato.nexus/rewards" class="rewards-banner-button" target="_blank" rel="noopener">
+                    Participate Now
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+(function() {
+    // Generate stars
+    const starsContainer = document.getElementById('rewards-stars');
+    if (starsContainer) {
+        for (let i = 0; i < 30; i++) {
+            const star = document.createElement('div');
+            star.className = 'reward-star';
+            const size = Math.random() * 3 + 1;
+            const isBigStar = size > 2.5;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.animationDuration = (2 + Math.random() * 3) + 's';
+            star.style.animationDelay = (Math.random() * 3) + 's';
+            star.style.opacity = isBigStar ? '0.9' : '0.6';
+            if (isBigStar) {
+                star.style.boxShadow = '0 0 4px 1px rgba(255, 255, 255, 0.8)';
+            }
+            starsContainer.appendChild(star);
+        }
+    }
+
+    // Countdown timer
+    function updateCountdown() {
+        const endDate = new Date('2026-03-04T12:00:00');
+        const now = new Date();
+        const difference = endDate.getTime() - now.getTime();
+
+        if (difference > 0) {
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+            const mins = Math.floor((difference / 1000 / 60) % 60);
+            const secs = Math.floor((difference / 1000) % 60);
+
+            document.getElementById('countdown-days').textContent = days;
+            document.getElementById('countdown-hours').textContent = hours;
+            document.getElementById('countdown-mins').textContent = mins;
+            document.getElementById('countdown-secs').textContent = secs;
+        }
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+})();
+</script>
+
 <!-- Hero Section -->
 <section class="hero-section">
     <video class="hero-video" autoplay muted loop playsinline>
