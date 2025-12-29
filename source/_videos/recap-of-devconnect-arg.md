@@ -2,7 +2,7 @@
 title: "Recap of Devconnect ARG"
 date: 2025-11-26
 hosts: ["Bob Summerwill", "Victor Wong", "Kieren James-Lubin", "Jim Hormuzdiar"]
-description: "We all attended [Devconnect](https://devconnect.org) 'World Fair' in Argentina last week.  This is the secondary event organized by the Ethereum Foundation in addition to the primary DEVCON event.  We share our impressions."
+description: "Recap of the Ethereum Foundation’s [Devconnect](https://devconnect.org) World Fair in Buenos Aires: conference format + logistics, city impressions, quantum/elliptic-curve security chatter, the renewed push for Ethereum privacy (including ‘privacy pools’ debates), agentic AI hype vs reality, and what the team thinks is actually coming next for ZK scaling and UX."
 img: /images/covers-for-spaces/recap-of-devconnect-arg.png
 embed:
   url: https://www.youtube.com/embed/81889Ep1OEI

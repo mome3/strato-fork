@@ -3,10 +3,29 @@ title: "Onchain Oracles: The Future of NFTs with SuperRare's John Crain"
 date: 2025-12-10
 hosts: ["Bob Summerwill", "Victor Wong", "Kieren James-Lubin", "Michael Tan"]
 guests: ["John Crain"]
-description: "Interview with <a href='https://x.com/SuperRareJohn'>John Crain</a>"
+description: "Interview with <a href='https://x.com/SuperRareJohn'>John Crain</a>, founder of <a href='https://superrare.com/'>SuperRare</a>, on the future of NFTs and onchain provenance—covering curation vs. decentralization, token/DAO governance lessons, AI’s impact on art and authenticity, and why Bitcoin Ordinals/onchain data matter."
 embed:
   url: https://www.youtube.com/embed/mqStnmOwuR0
 img: /images/covers-for-spaces/onchain-oracles-the-future-of-nfts-with-superrares-john-crain.png
+table_of_contents:
+  - link: "#strato-spotlight-rewards-program"
+    title: "STRATO Spotlight: Rewards Program demo"
+  - link: "#introductions"
+    title: "Introductions and guest background"
+  - link: "#superrare-origins"
+    title: "What inspired SuperRare and early NFT history"
+  - link: "#rare-token-and-dao"
+    title: "$RARE token, airdrop strategy, and DAO governance"
+  - link: "#curation-vs-decentralization"
+    title: "Curation vs decentralization and marketplace dynamics"
+  - link: "#future-of-nfts-and-provenance"
+    title: "Future of NFTs: provenance, physical art, and certificates"
+  - link: "#ai-and-art"
+    title: "AI and art: tooling, authenticity, and signatures"
+  - link: "#ordinals-and-onchain-data"
+    title: "Bitcoin Ordinals / onchain data vs offchain metadata"
+  - link: "#closing"
+    title: "Closing and where to find John"
 ---
 
 ## Audio
@@ -19,6 +38,10 @@ img: /images/covers-for-spaces/onchain-oracles-the-future-of-nfts-with-superrare
 ## Transcript
 
 <!-- TABLE_OF_CONTENTS -->
+
+<a id="strato-spotlight-rewards-program"></a>
+
+### STRATO Spotlight: Rewards Program demo
 
 **[[00:00]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=0s) Victor Wong:** OK, well, we have a special treat for you. Before we get into our regular scheduled content, we are adding a new weekly segment called **STRATO Spotlight**, where we highlight the latest and greatest features on [STRATO](https://strato.nexus). And for this week, we have a really special one. [Kieren](/people/kieren-james-lubin), why don't you announce it?
 
@@ -41,6 +64,11 @@ img: /images/covers-for-spaces/onchain-oracles-the-future-of-nfts-with-superrare
 **[[03:10]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=190s) Kieren James-Lubin:** Just that this was on testnet, it is live on livenet. You'll see very slight differences when you do so.
 
 **[[03:18]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=198s) Victor Wong:** Yeah, so thank you, everyone. Please start using the reward system. We'd love to give out lots of rewards to you in preparation to launching our full mainnet and making these rewards tradable in the future. So thank you for tuning in. Hope you use our rewards and tune in for more **STRATO Spotlight** segments in the future. Take care.
+
+
+<a id="introductions"></a>
+
+### Introductions and guest background
 
 Okay, we are live, and we have a very special episode today. We are talking about the future of art and NFTs, and we're joined by special guest and very old friend, [John Crain](https://x.com/SuperRareJohn). Welcome, [John Crain](https://x.com/SuperRareJohn).
 
@@ -94,6 +122,11 @@ Okay, we are live, and we have a very special episode today. We are talking abou
 
 **[[06:32]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=392s) John Crain:** Yeah, exactly. If only.
 
+
+<a id="superrare-origins"></a>
+
+### What inspired SuperRare and early NFT history
+
 **[[06:35]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=395s) Victor Wong:** So what inspired [SuperRare](https://superrare.com/)? I know when you were working with us, you kind of became our head of product and you were working on a bunch of those enterprise implementations. But what triggered you to kind of create [SuperRare](https://superrare.com/), which is for anyone who doesn't know, one of the first NFT platforms really out there?
 
 **[[06:52]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=412s) John Crain:** Yeah, I, well, I mean, it was super interesting, right? We were all kind of on the ground floor at the Consensus office, or like at least me and [Kieren](/people/kieren-james-lubin) were hanging out there. And watching the ICO boom happen was fascinating. Cause I was like, I remember me and [Kieren](/people/kieren-james-lubin) talked a bunch about [ERC-20](https://eips.ethereum.org/EIPS/eip-20) tokens and like, I found it was super interesting that it was this very small bit of standard, a super simple protocol, very simple code. But like the adoption created this, there's massive wealth generation. And even if there were also lots of scams, I'd say generally net positive for humans in the economy. Like it was incredible to see that happen. And so then I saw some of the standards conversations around [ERC-721](https://eips.ethereum.org/EIPS/eip-721) and I saw the [CryptoPunks](https://www.cryptopunks.app/) launch and I was like, well, this is pretty crazy. If you think about the consumer web, it's all an image and a title tag and some metadata. It could be that the entire consumer web turns into NFTs and that I don't know exactly what the business model is going to look like, but the total addressable market is probably pretty large. So that got me into NFTs. And then on the flip side of that, I was also kind of in and around the New York art scene, like going to the art fairs. I had friends who were looking for gallery representation and kind of part of the business of art. And it just seemed obvious. I was like, oh, there's now a way to truly own digital assets. And this is obviously going to apply to digital art. So it's kind of like the marriage of my interest in the tech side, but then also my interests and passions around art.
@@ -120,6 +153,11 @@ Okay, we are live, and we have a very special episode today. We are talking abou
 
 ![fat protocols](/images/usv.com/writing/2016/08/fat-protocols/fat-protocols.png)
 
+
+<a id="rare-token-and-dao"></a>
+
+### $RARE token, airdrop strategy, and DAO governance
+
 **[[11:35]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=695s) Victor Wong:** Did you do it like classic ICO style? Was there like fixed price auction? How did the [Rare](https://coinmarketcap.com/currencies/superrare/) get in there?
 
 **[[11:42]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=702s) John Crain:** Yeah, we actually just did a huge airdrop. Probably one of our mistakes. Yeah. So we should have probably sold a bunch of tokens, but we actually just gave them away. And yeah, I mean, there's plenty of challenges to like, DAOs are hard to manage and run. But it's cool to see the current administration kind of change tack and actually seem like they're interested in building and pushing forward. So.
@@ -141,6 +179,11 @@ Okay, we are live, and we have a very special episode today. We are talking abou
 **[[13:28]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=808s) John Crain:** I think it kind of depends on specifically what you're doing. If it's something like, I mean, Bitcoin and Ethereum are obviously not DAOs, but just where it's like if small changes can have potentially catastrophic impact, I think that's one thing. If it's like [SuperRare](https://superrare.com/) where it's like, if there's a low level protocol and there's application and other than the escrow contracts for auctions and things, the stakes are fairly low. I do kind of like the idea of if you can empower a team or a few individuals to kind of just keep going, and then the token holders can tell people to stop versus having to approve everything, that's a very silly, arduous process. And I feel like it should be more like, okay, if you're veering off in the wrong direction, there's a way to kind of raise your voice and influence it. Having a vote on what color the button should be or something is very absurd.
 
 **[[14:22]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=862s) Victor Wong:** I'm curious, given that you're a decentralization advocate, how do you balance being a curated kind of platform and being open? How do you think about those two? Because I think one of the advantages of [SuperRare](https://superrare.com/) with the curation side in art, you keep the quality very, very high, unlike more marketplace type NFT platforms which just frankly puts a ton of crap out there. So yeah, how do you balance those two and kind of keep decentralized do you think?
+
+
+<a id="curation-vs-decentralization"></a>
+
+### Curation vs decentralization and marketplace dynamics
 
 **[[14:52]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=892s) John Crain:** Yeah, no it is, I mean it's kind of challenging. It's almost a paradox. But I think we've kind of always taken the minimal decentralization, so it's like you have it where it's useful. And then one example is like we were talking about token models early on, it was like maybe we'll have token holders vote on artists. And I was just like, that sounds like the most dramatic terrible thing I could ever imagine. It's like people voting, your art's terrible, you're like, oh my word.
 
@@ -186,6 +229,11 @@ Okay, we are live, and we have a very special episode today. We are talking abou
 
 **[[18:55]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=1135s) Kieren James-Lubin:** I'm curious what you see as the future of just generally art and NFTs. Can I jump in on this? Yeah, please. Take a take on it. So in DeFi, we're starting to see, as the administration has cleared the way to some extent, it seems like there was a pent up demand for something like a TradFi DeFi merger. It's not all the way there yet, but it's getting to just be five. Like I see the path to that happening. Do you think NFTs really stay sort of like a distinct asset class forever? I know, maybe you could talk about your gallery. I know you started to do a lot of physical sales and like, does it kind of, what, do they merge? Do they not? Do they? Yeah, like trad art become NFT art and digital art or?
 
+
+<a id="future-of-nfts-and-provenance"></a>
+
+### Future of NFTs: provenance, physical art, and certificates
+
 **[[19:38]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=1178s) John Crain:** Yeah. I, like the NFT stuff, I do think kind of just eventually fades into the background. The real zero to one is cryptographically secure provenance. So you could use that for physical art. You could use it for digital. I think it was more of a breakthrough with digital, because you can kind of argue the token is the art. You now have this more liquid asset. So for art specifically, yeah, it's kind of just becoming part of the market. And I think you'll see NFTs used with digital art, obviously, but also with physical art. Like no one's really, if you like, the lack of good data on provenance in the art market and collectibles in general is kind of amazing. It's still like, oh, there's a sticker on the back that says it was from this gallery. Probably it was. Probably it was? Nobody knows. And also, I think a lot of people are really trying to tie the physical asset to the digital asset, which I think is a waste of time. Personally, if you have the physical asset and you also have custody of the certificate of authenticity, that's kind of good enough. You don't really need some complicated tech solution there. And it's hard to imagine a world in which collectors and customers that you just want, I personally have a higher perceived value for physical art that also has an NFT with it. And I think in general, that trend continues. So I think digital art will kind of just become a bigger part of the contemporary art market. And then eventually we'll see NFTs used as certificates of authenticity for all high value objects.
 
 **[[21:10]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=1270s) Victor Wong:** Yeah, I mean, one of the big things I didn't realize is that a friend of mine is an artist and she often gets a request for the value that was paid for it because someone wants to insure it, right? And there's this whole downstream kind of economy. Insurance, appraisal, lending, you need much better.
@@ -228,6 +276,11 @@ Okay, we are live, and we have a very special episode today. We are talking abou
 
 **[[26:52]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=1612s) Jim Hormuzdiar:** Well, it's a little bit of a different topic, but I'll throw it in right now anyway. What has been the effect for good or bad of AI and art on what you're doing?
 
+
+<a id="ai-and-art"></a>
+
+### AI and art: tooling, authenticity, and signatures
+
 **[[27:02]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=1622s) John Crain:** Yeah. As far as the startup goes, it's been great. We had a little robot on our Slack you can talk to that does things for you. As far as the art market goes, I think it's also been kind of great. In my mind, this is just a new tool that unlocks creative, you can do different creative things.
 
 **[[27:22]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=1642s) Jim Hormuzdiar:** You're encouraging it then.
@@ -239,6 +292,11 @@ Okay, we are live, and we have a very special episode today. We are talking abou
 **[[28:22]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=1702s) John Crain:** Yeah. I mean, I think, yeah, just if you, it's super amazing to see the rate at which content's being created and people, it's like, you can watch a video of like, that person didn't actually say that, but it looks like they did. I think that's where you're like, nobody ever answers a random phone number. If someone's calling you and it's not in your phone, you're like, I literally never answer this. I don't know who does that. You'd have to be pretty insane. It's sort of like you've kind of certified the numbers, and I think it'll end up being the same with content and art and stuff where it's like, if it isn't signed somehow cryptographically, you'll probably just assume it's fake because there's no real way to know.
 
 **[[29:05]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=1745s) Bob Summerwill:** Have you seen much interest on the Bitcoin side in terms of [Ordinals](https://ordinals.com/) and [Inscriptions](https://docs.ordinals.com/inscriptions.html) and [STAMPS](https://github.com/mikeinspace/stamps) and [Runes](https://github.com/luminexord/runes)? How is that looking?
+
+
+<a id="ordinals-and-onchain-data"></a>
+
+### Bitcoin Ordinals / onchain data vs offchain metadata
 
 ![ordinals](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-z7Y4kI2GQWo5r3-YIsrCgdLCI5UtJQXLWA&s)
 
@@ -285,6 +343,11 @@ Okay, we are live, and we have a very special episode today. We are talking abou
 ![george bush](https://www.aljazeera.com/wp-content/uploads/2008/04/1_246917_1_2.jpeg)
 
 **Victor Wong:** Well, John, thank you for your time. And as always, we're really glad that you're doing so well. And where can people find you and learn more about all the stuff you do?
+
+
+<a id="closing"></a>
+
+### Closing and where to find John
 
 **[[34:08]](https://www.youtube.com/watch?v=mqStnmOwuR0&t=2048s) John Crain:** Yeah. On X at [@SuperRareJohn](https://x.com/SuperRareJohn) at [@SuperRare](https://x.com/SuperRare). Yeah. You should also, there's currently a show at the gallery that's wrapping up, but we have a new, there's an **XCOPY show December 10th**. So if anyone's in town, swing through.
 
