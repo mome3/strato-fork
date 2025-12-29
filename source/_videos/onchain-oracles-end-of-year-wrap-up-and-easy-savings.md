@@ -6,6 +6,25 @@ description: "End of Year Wrap Up and Easy Savings"
 embed:
   url: https://www.youtube.com/embed/dypgcHwA7C0
 img: /images/covers-for-spaces/onchain-oracles-end-of-year-wrap-up-and-easy-savings.jpeg
+table_of_contents:
+  - link: "#introductions"
+    title: "Introductions"
+  - link: "#strato-spotlight-easy-savings"
+    title: "STRATO Spotlight: Easy Savings walkthrough"
+  - link: "#year-in-review-biggest-story"
+    title: "Crypto year in review: biggest story of the year"
+  - link: "#year-in-review-biggest-surprise"
+    title: "Biggest surprise of the year"
+  - link: "#year-in-review-biggest-disappointment"
+    title: "Biggest disappointment of the year"
+  - link: "#strato-update-and-roadmap"
+    title: "STRATO update and roadmap"
+  - link: "#giveaway"
+    title: "Year-end giveaway"
+  - link: "#predictions-2026"
+    title: "2026 predictions"
+  - link: "#closing"
+    title: "Closing"
 ---
 
 ## Audio
@@ -18,6 +37,10 @@ img: /images/covers-for-spaces/onchain-oracles-end-of-year-wrap-up-and-easy-savi
 ## Transcript
 
 <!-- TABLE_OF_CONTENTS -->
+
+<a id="introductions"></a>
+
+### Introductions
 
 **[00:04] Victor Wong:** Okay, we are live. Welcome to this week's On Chain Oracles. As usual I am joined. I'm Victor Wong, I'm founder and chief product officer at STRATO. And as usual I am joined with Kieren James-Lubin, CEO of STRATO and the man with the oranges Jim Hormuzdiar, CTO of STRATO from sunny California.
 
@@ -37,6 +60,10 @@ img: /images/covers-for-spaces/onchain-oracles-end-of-year-wrap-up-and-easy-savi
 
 **[01:29] Victor Wong:** Yes, thanks Kieren. And then we are joined by Michael Tan today for our STRATO Spotlight because we have lots of new features to show. [Michael](/people/michael-tan), what do you have for us today to talk.
 
+<a id="strato-spotlight-easy-savings"></a>
+
+### STRATO Spotlight: Easy Savings walkthrough
+
 **[01:46] Michael Tan:** Hi everyone. I'm showing you guys the easy savings package path today. Basically it's bridging in. It's bridging in stables from Ethereum and saving them earning yield in the lending pool. So I start by connecting my Ethereum wallet. As such it's a really simple process as long as you have it in the browser. My wallet is connected. I can pick between USDC and USDT. We're going to be adding a couple of different stables soon including yield bearing ones. Bridge in 100 here. Make sure this is checked so that it goes directly into thfe lending pool. We just add these cool modals but you just need to confirm everything. Sign the permit, confirm the transaction. Why is it. All right, there you go. Takes a couple of seconds waiting for the all safe. Great. Now, now should be receiving the deposit one to two minutes into the. Into the lending pool. And that is your easy savings. Fastest and easiest way to earn money earn points on STRATO.
 
 **[02:55] Victor Wong:** And now so in the background what's. What's happening, [Michael](/people/michael-tan)? It looks like we're converting from USDC into our local stables USDST and then putting it into the lending pool. Is that right?
@@ -54,6 +81,11 @@ img: /images/covers-for-spaces/onchain-oracles-end-of-year-wrap-up-and-easy-savi
 **[04:04] Victor Wong:** Awesome. Well, you got bump up your activity to get up on the chart. Yeah, get to the top three soon. Well, thank you for joining us, [Michael](/people/michael-tan). And we look forward to the next segment. So with that, great being here, take care.
 
 **[04:19] Kieren James-Lubin:** Thanks, Michael.
+
+
+<a id="year-in-review-biggest-story"></a>
+
+### Crypto year in review: biggest story of the year
 
 **[04:21] Victor Wong:** Okay, so let's talk about the crypto year in review. This has been like, when I kind of like reflected, I realized this kind of been a crazy year for crypto in general. And I think for us specifically, like, there's just been so much going on. So let's start with what you think is the biggest story of the year. And I'm going to start with Jim. Jim from your boat.
 
@@ -107,6 +139,10 @@ img: /images/covers-for-spaces/onchain-oracles-end-of-year-wrap-up-and-easy-savi
 
 **[19:52] Victor Wong:** I'm sure they're working on it. And I think this is sort of in the space between the diffusion models and the LLMs. So I think that's where like you know and I know a bunch of people are working on kind of getting those. But I think, you know, when you ask the spatial relationship questions, you can be sent to one or the other and it sometimes gets confused. Okay, second big category, biggest surprise of the year. I'm gonna start with Kieren. What's that?
 
+<a id="year-in-review-biggest-surprise"></a>
+
+### Biggest surprise of the year
+
 **[20:18] Kieren James-Lubin:** Okay, so I thought about this. I have two part answer, slightly related one. October 10th, that was like, it was like a Friday. I think we had wrapped some work up. I was sort of like, I can't remember exactly what was going on. But then it just, everything just. Was it November 10, 1010. Right.
 
 **[20:41] Victor Wong:** Yeah.
@@ -134,6 +170,10 @@ img: /images/covers-for-spaces/onchain-oracles-end-of-year-wrap-up-and-easy-savi
 **[28:08] Kieren James-Lubin:** Yeah, there's a wrench attack per year, per week in 2025, something like that.
 
 **[28:14] Victor Wong:** Yeah. So, like, I. I think, I think too there was an assumption that my balance is worse yet I think for mainstream audiences. And, you know, now they're not. So, you know. So my biggest surprise of the year was really the Robinhood announcement. And it wasn't that Robinhood was doing stuff in crypto like we knew that forever. Right. But the kind of many things they announced at the same time, you know, their own L2 that they're putting that they had their own tokenization engine that they were doing secondary stocks and kind of like pushing it out immediately. I think it got like everyone really interested and excited. Like, I think that sort of put in the arms race of institutional adoption. Right. Like, I think that kick started it and it was surprising because like, you know, like we're on the board of the Enterprise Ethereum Alliance. We talked to. We have a lot of connections with enterprises still, even though we're out of that business. And, you know, it caught a lot of those companies off. Like we. We had conversations with a bunch of other companies or like, like explain to me what Robinhood is doing, which is kind of interesting. Okay, next one. We never like to talk bad about anything, but. What was your biggest disappointment this year? I'm going to start this one off. I think like I mentioned before, Libra was this year, it was February this year. It was kind of shocking. The level of interest, manipulation, like when the whole story came out, you know, that something could get effectively to the presidential office of a government, you know, in order to do that. So in that way was kind of shocking to me. I know, Kieren, you have more pro meme coin than me. But like, it was. It's sort of, I think, you know, on the good side, it seemed to be the death knell of meme coins. So I think even though the actual incident was pretty disappointing from my point of view, it did kind of like the consequences, I think put the industry in a much more positive direction. What do you think? What's your biggest disappointment?
+
+<a id="year-in-review-biggest-disappointment"></a>
+
+### Biggest disappointment of the year
 
 **[30:35] Kieren James-Lubin:** So I'm gonna mostly agree, but with the different take, I'd say the nature of the meme flame out, like, you know, I think I'm sort of like excited about all of the, you know, the, the activity and the government kind of getting pro crypto in the US in the Milei revolution. We'll see. You know, but the, the way, I guess it takes a certain amount of expertise to like embrace crypto the right way or a certain level of non cynicism or, or something like they could have just hodled, you know, like. But yeah, I think the, in principle, there is no reason that meme coins have to be a pump and dump vehicle.
 
@@ -173,6 +213,10 @@ img: /images/covers-for-spaces/onchain-oracles-end-of-year-wrap-up-and-easy-savi
 
 **[38:22] Victor Wong:** But it's funny that in many ways we got back to. To basics like in. Not only from the tech, but even in branding. Right. We went back to our original STRATO name, even though we had been kind of like adding over to it. And that, you know, takes us back 10 years. So. Okay. STRATO update and roadmap. So, Kieren, I looked back at this. I think at the end of 2024, our TVL on STRATO was slightly less than $100,000. It is currently about over $9 million.
 
+<a id="strato-update-and-roadmap"></a>
+
+### STRATO update and roadmap
+
 **[38:58] Kieren James-Lubin:** 90X in the year is pretty good.
 
 **[39:00] Victor Wong:** Yeah. Yes, exactly. Can you give a quick update about what's happening with the project and any things that you want to let people know to look forward to in the coming year.
@@ -183,7 +227,19 @@ img: /images/covers-for-spaces/onchain-oracles-end-of-year-wrap-up-and-easy-savi
 
 **[47:03] Jim Hormuzdiar:** Like.
 
-**[47:06] Victor Wong:** To get to have some privacy. I think people are realizing that like that should be an expectation to a certain point. Right. I do think the right thing about shielded balances, like you don't have to protect everything, but you have to protect certain things like how much you got. Okay, before we dive into our 2026 predictions, I want to announce our giveaway. Tying into Kieren's thing about metal. Prices are way up this year despite crypto. We want to take away some of the crypto down paying by doing a giveaway where we give away three of our silver tokens. So each silver token is equivalent to 1oz SilverST and to enter into this, it's a lucky draw. You have to put your Mercata address on our Telegram and we will pull three lucky winners from all the addresses we get and we will send them one silver ST equivalent to one ounce of silver. So hopefully that will be a nice holiday present for a couple people and we hope that you sign up as quickly as possible. Okay. With that, let's go to predictions. Jim, what are your predictions for 2026? Okay.
+**[47:06] Victor Wong:** To get to have some privacy. I think people are realizing that like that should be an expectation to a certain point. Right. I do think the right thing about shielded balances, like you don't have to protect everything, but you have to protect certain things like how much you got.
+
+<a id="giveaway"></a>
+
+### Year-end giveaway
+
+**[47:06] Victor Wong:** Okay, before we dive into our 2026 predictions, I want to announce our giveaway. Tying into Kieren's thing about metal. Prices are way up this year despite crypto. We want to take away some of the crypto down paying by doing a giveaway where we give away three of our silver tokens. So each silver token is equivalent to 1oz SilverST and to enter into this, it's a lucky draw. You have to put your Mercata address on our Telegram and we will pull three lucky winners from all the addresses we get and we will send them one silver ST equivalent to one ounce of silver. So hopefully that will be a nice holiday present for a couple people and we hope that you sign up as quickly as possible.
+
+<a id="predictions-2026"></a>
+
+### 2026 predictions
+
+**[47:06] Victor Wong:** Okay. With that, let's go to predictions. Jim, what are your predictions for 2026? Okay.
 
 **[48:24] Jim Hormuzdiar:** My prediction is that this will be the year of usability. It has to be. There's so much riding on, there's so much good technology out there right now and there's so much riding on who wins this. And so many of these products which are based on something very solid just can't be used. I won't call out names, but multiple times this year Kieren might come to me and say like, here's a really cool project, go use it. And then I would waste days and days just trying out to do the most basic things with it. And I know how this stuff works.
 
@@ -200,5 +256,9 @@ img: /images/covers-for-spaces/onchain-oracles-end-of-year-wrap-up-and-easy-savi
 **[55:15] Kieren James-Lubin:** Know, they're kind of like deliver the whole thing before the TGE now.
 
 **[55:18] Victor Wong:** Yeah, exactly, exactly. Well, with that, thank you very much for joining us for our year in review recap. I'm Victor Wong, you can find us at STRATO Nexus and we hope you have a happy holidays and please sign up for our giveaway and enjoy some vitamin C and sunshine. At least Jim is. Take care.
+
+<a id="closing"></a>
+
+### Closing
 
 **[55:44] Kieren James-Lubin:** Thanks everybody. Happy holidays.
