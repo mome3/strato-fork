@@ -15,8 +15,9 @@ Getting started is simple:
 
 1. **Log into the STRATO app** and navigate to your dashboard
 2. **Click the "Refer a Friend" button** to access your unique referral link
-3. **Share your link** with friends, family, or anyone interested in exploring STRATO
-4. **Climb the leaderboard** as your referrals sign up and activate their accounts
+3. **Add assets** pick the assets you want to share with your friends and family
+4. **Share your link** with friends, family, or anyone interested in exploring STRATO
+5. **Climb the leaderboard** as your referrals sign up and activate their accounts
 
 The more friends you successfully refer, the higher you'll climb on the leaderboard. Every activated account counts toward your total, so spread the word far and wide!
 
@@ -45,12 +46,12 @@ Our top referrers will be rewarded with **SILVST**, our silver-backed digital as
 
 ## Why Refer Friends to STRATO?
 
-STRATO Mercata offers a unique platform for trading real-world assets (RWAs) on the blockchain. By inviting friends, you're introducing them to:
+STRATO offers a unique platform for trading real-world assets (RWAs) on the blockchain. By inviting friends, you're introducing them to:
 
 - **Hard asset-backed tokens** including gold (GOLDST) and silver (SILVST)
 - **DeFi capabilities** like borrowing against collateral and participating in liquidity pools
 - **A seamless user experience** designed for both crypto newcomers and experienced traders
-- **CATA rewards** for active participation on the platform
+- **Point rewards** for active participation on the platform
 
 ## Tips for Maximizing Your Referrals
 
@@ -61,7 +62,7 @@ STRATO Mercata offers a unique platform for trading real-world assets (RWAs) on 
 
 ## Ready to Start?
 
-Log into the [STRATO app](https://app.strato.nexus) now and click the "Refer a Friend" button on your dashboard to get your unique referral link. The leaderboard updates in real-time, so you can track your progress throughout the contest.
+Log into the [STRATO app](https://app.strato.nexus) now and click the "Get Started" button on Refer Friend hero on your dashboard to create unique referral links. The [leaderboard](https://stratoscan.strato.nexus/referral-leaderboard) updates in real-time, so you can track your progress throughout the contest.
 
 Have questions? Join our [Telegram community](https://t.me/strato_net) where our team is ready to help.
 
