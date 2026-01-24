@@ -27,7 +27,10 @@ You can use it with [Claude Code](https://www.anthropic.com/claude/claude-code),
 
 ## Hosted and self-hosted
 
-We have a hosted instance at [https://griphook.strato.nexus/login](https://griphook.strato.nexus/login) which supports both mainnet and testnet.  You can also self-host with custom OAuth configuration.
+We have hosted instances for both environments, or you can self-host with custom OAuth configuration:
+
+- Mainnet: [https://griphook.strato.nexus/login](https://griphook.strato.nexus/login)
+- Testnet: [https://griphook-testnet.strato.nexus/login](https://griphook-testnet.strato.nexus/login)
 
 Sign in with your STRATO account to get an authentication token, then add the MCP server configuration to your AI tool of choice.  See the [GitHub repository](https://github.com/strato-net/strato-griphook) for configuration details.
 
