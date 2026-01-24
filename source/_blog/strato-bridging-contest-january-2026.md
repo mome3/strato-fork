@@ -37,13 +37,13 @@ Participating is simple:
 
 ## Entry Rules
 
-Every **$1 in pts earned = 1 entry**
+Every **one pt earned = 1 entry**
 
 For details on how pts are accumulated and calculated, see our [STRATO Rewards Program guide](/blog/introducing-strato-rewards/).
 
 Entries are calculated as:
 
-> **Total Bridge-Ins − Total Bridge-Outs** during the contest period
+> **Point accrued** during the contest period
 
 **Important details:**
 
