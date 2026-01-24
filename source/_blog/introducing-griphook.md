@@ -9,7 +9,7 @@ categories: ["General"]
 
 We have just launched **Griphook**, an MCP (Model Context Protocol) server which allows AI coding assistants like Claude to interact with the STRATO blockchain.
 
-Check it out at **[https://griphook.strato.nexus](https://griphook.strato.nexus)**.
+Check it out at **[https://griphook.strato.nexus/login](https://griphook.strato.nexus/login)**.
 
 The source code is at **[https://github.com/strato-net/strato-griphook](https://github.com/strato-net/strato-griphook)**.
 
@@ -27,7 +27,7 @@ You can use it with [Claude Code](https://www.anthropic.com/claude/claude-code),
 
 ## Hosted and self-hosted
 
-We have a hosted instance at [https://griphook.strato.nexus](https://griphook.strato.nexus) which supports both mainnet and testnet.  You can also self-host with custom OAuth configuration.
+We have a hosted instance at [https://griphook.strato.nexus/login](https://griphook.strato.nexus/login) which supports both mainnet and testnet.  You can also self-host with custom OAuth configuration.
 
 Sign in with your STRATO account to get an authentication token, then add the MCP server configuration to your AI tool of choice.  See the [GitHub repository](https://github.com/strato-net/strato-griphook) for configuration details.
 
