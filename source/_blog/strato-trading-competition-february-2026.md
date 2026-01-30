@@ -1,6 +1,6 @@
 ---
 title: "STRATO Trading Competition: Trade Smart, Refer Friends, Win Silver"
-date: 2026-02-01
+date: 2026-01-30
 author: "Michael Tan"
 description: "Our newest competition is here! Create a new account, trade during the contest period, and compete for 1 oz of silver. Two ways to win: highest percentage gain or most referrals."
 img: "/images/strato.nexus/2026.02.01/trading-competition-cover.jpg"
