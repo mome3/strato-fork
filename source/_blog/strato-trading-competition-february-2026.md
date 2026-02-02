@@ -35,7 +35,7 @@ Getting started is straightforward:
 
 ## Competition Period
 
-**February 5 – February 17, 2026 (ends at 12pm EST)**
+**February 2 – February 17, 2026 (ends at 12pm EST)**
 
 During the competition period, the following restrictions apply:
 
