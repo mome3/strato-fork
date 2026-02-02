@@ -31,6 +31,8 @@ Getting started is straightforward:
 3. **<a href="https://docs.google.com/forms/d/e/1FAIpQLSc_VlxIXe5vczAmIwIoHtAsSj3xAqiQfsnx7wrHZ-DZdLyZMQ/viewform" target="_blank">Submit the entry form</a>** to lock in your starting balance
 4. **Start trading** once the competition begins
 
+{% include content-embed.html src="https://www.youtube.com/embed/h0-MgrVocww" title="How to Bridge In" %}
+
 **Important:** Your starting balance is locked the moment you submit the entry form. This ensures a fair playing field for all participants.
 
 ## Competition Period
@@ -62,6 +64,8 @@ This category rewards community builders who bring new users to STRATO.
 - Each qualifying referral must **create a new account**
 - Each referral must **bridge in a minimum of $10**
 - The participant with the most qualifying referrals wins
+
+{% include content-embed.html src="https://www.youtube.com/embed/kZEVLqxs0uc" title="How to Bridge to STRATO" %}
 
 ## Disqualification Rules
 
