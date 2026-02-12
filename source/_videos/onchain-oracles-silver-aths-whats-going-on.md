@@ -27,12 +27,6 @@ table_of_contents:
     title: "Closing Thoughts"
 ---
 
-## Video
-
-{% include video-embed.html
-  src="https://www.youtube.com/embed/hg9HSydx1yM"
-%}
-
 ## Audio
 
 <audio controls style="width: 100%; max-width: 600px;">
