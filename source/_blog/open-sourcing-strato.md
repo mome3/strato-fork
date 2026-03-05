@@ -1,13 +1,17 @@
 ---
-title: "Open sourcing STRATO Mercata"
+title: "Open sourcing STRATO"
 date: 2026-03-04
 author: "Bob Summerwill"
-img: /images/img.youtube.com/2026.01.05/vi/x8jIUg5jXjg/hqdefault.jpg
-description: "Announcement of open-sourcing the STRATO Mercata platform, applications and tools."
+img: /images/youtube.com/2025.12.09/epicenterbtc/-aSBcAlHREI/victor-and-kieren.png
+description: "Complete open-sourcing of the STRATO platform, applications and tools."
 categories: ["Press Release"]
 ---
 
-Today we are taking our first major step in open sourcing the entirety of the STRATO Mercata platform, applications and tools.
+Last year we [took out first step](/blogs/open-sourcing-strato-mercata) in the open sourcing of the STRATO platform with a snapshot of the main repository.
+
+Today we complete that journey with the full release of the repository - all 30,000+ commits and eleven years of development!
+
+[https://github.com/strato-net/strato-platform](https://github.com/strato-net/strato-platform)
 
 The core of STRATO is the Haskell Ethereum client software which was built in 2014, during the very early days of Ethereum, prior even to the Ethereum mainnet launch. This codebase was instrumental to the very first Blockchain-as-a-Service (BaaS) offering announced at DEVCON1 in London in 2015 in collaboration with Microsoft, bringing blockchain nodes to Azure.
 
