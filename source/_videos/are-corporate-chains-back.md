@@ -371,7 +371,7 @@ And we would get the inbound from those really big companies and, you know, I th
 Yeah, I know it's a part of that also, it's like when we launched Blockchain as a Service with Microsoft and we made it easy to effectively build your own test nets on clouds, everyone started doing it, right? And the interesting thing is at that time, the real development seemed to be happening by these corporates in these innovation labs versus, you know, independent devs.
 
 {% include content-embed.html
-  src="https://www.youtube.com/embed/x8jIUg5jXjg"
+  src="https://www.youtube.com/embed/ExsTb0iglcs"
   title="DEVCON1: Microsoft Announcing Ethereum Blockchain as a Service (ETH BaaS) on Azure Cloud"
   site="https://www.youtube.com/@EthereumProtocol"
   author='Ethereum'
@@ -379,7 +379,7 @@ Yeah, I know it's a part of that also, it's like when we launched Blockchain as 
 %}
 
 {% include content-embed.html
-  src="https://www.youtube.com/embed/ExsTb0iglcs"
+  src="https://www.youtube.com/embed/x8jIUg5jXjg"
   title="DEVCON 1: BlockApps STRATO - Victor Wong, Kieren James-Lubin, Jim Hormuzdiar"
   site="https://www.youtube.com/@EthereumProtocol"
   author="Ethereum"

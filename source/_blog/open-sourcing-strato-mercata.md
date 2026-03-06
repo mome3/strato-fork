@@ -12,7 +12,7 @@ Today we are taking our first major step in open sourcing the entirety of the ST
 The core of STRATO is the Haskell Ethereum client software which was built in 2014, during the very early days of Ethereum, prior even to the Ethereum mainnet launch. This codebase was instrumental to the very first Blockchain-as-a-Service (BaaS) offering announced at DEVCON1 in London in 2015 in collaboration with Microsoft, bringing blockchain nodes to Azure.
 
 {% include content-embed.html
-  src="https://www.youtube.com/embed/x8jIUg5jXjg"
+  src="https://www.youtube.com/embed/ExsTb0iglcs"
   title="DEVCON1: Microsoft Announcing Ethereum Blockchain as a Service (ETH BaaS) on Azure Cloud"
   site="https://www.youtube.com/@EthereumProtocol"
   author="Ethereum"
@@ -20,14 +20,14 @@ The core of STRATO is the Haskell Ethereum client software which was built in 20
 %}
 
 {% include content-embed.html
-  src="https://www.youtube.com/embed/ExsTb0iglcs"
+  src="https://www.youtube.com/embed/x8jIUg5jXjg"
   title="DEVCON 1: BlockApps STRATO - Victor Wong, Kieren James-Lubin, Jim Hormuzdiar"
   site="https://www.youtube.com/@EthereumProtocol"
   author="Ethereum"
   date="November 10, 2015"
 %}
 
-The codebase was considered for contribution into [Hyperledger](https://hyperledger.org) back in 2015, but that did not come to fruition, with [Hyperledger Burrow](https://github.com/hyperledger-archives/burrow) and later [Hyperledger Besu](https://github.com/hyperledger/besu) being the first Ethereum codebases to make it into the Linux Foundation's open source blockchain collaboration project. BlockApps were founding members of the [Enterprise Ethereum Alliance](https://entethalliance.org) (EEA).
+The codebase was considered for contribution into [Hyperledger](https://hyperledger.org) back in 2016, but that did not come to fruition, with [Hyperledger Burrow](https://github.com/hyperledger-archives/burrow) and later [Hyperledger Besu](https://github.com/hyperledger/besu) being the first Ethereum codebases to make it into the Linux Foundation's open source blockchain collaboration project. BlockApps were founding members of the [Enterprise Ethereum Alliance](https://entethalliance.org) (EEA).
 
 There have been public repositories in the [BlockApps Github](https://github.com/blockapps) organization for many years, but the core platform itself has always been closed source with commercial licensing. That changes today.
 
