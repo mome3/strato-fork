@@ -861,10 +861,6 @@ footer .footer-bottom-links a:hover {
 }
 
 .investment-card-with-bg {
-  background-image: url('/images/strato.nexus/2025.10.11/home-card-background.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   position: relative;
 }
 
@@ -883,10 +879,6 @@ footer .footer-bottom-links a:hover {
 }
 
 .investment-card-with-bg-gold {
-  background-image: url('/images/strato.nexus/2025.10.11/home-card-background2.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   position: relative;
 }
 
