@@ -1,295 +1,348 @@
-# STRATO Website
+# Strato Nexus
 
-The official website for STRATO - a platform to easily earn on vaulted gold, silver & crypto with instant credit. Built by Ethereum veterans.
-
-## About This Project
-
-**STRATO** is a Jekyll-based static website that serves as the primary web presence for STRATO. The site features video content, team member profiles, and information about the platform's capabilities.
-
-### What You'll Find Here
-
-- **Team Profiles**: Biographies and profiles of STRATO team members
-- **Video Content**: Show episodes, contest announcements, and platform demonstrations
-- **Blog**: Platform updates, announcements, and educational content
-- **Platform Information**: Details about trading, lending, and borrowing on real-world assets
+The marketing and content website for **Strato Nexus** — a multi-asset DeFi platform that combines hard asset stability with on-chain efficiency. The site covers the product, team, blog, and legal pages, and is deployed on Vercel.
 
 ---
 
-## Jekyll Setup
+## About This Project
 
-This is a static site built with Jekyll 4.3+ and deployed via GitHub Pages.
+Strato Nexus is a consumer DeFi product built on the STRATO blockchain. This repository is the public-facing website, providing:
 
-### Project Structure
+- A product landing page with animated hero, feature cards, stats, and partner sections
+- A blog with category filtering, full-text post pages, and a featured carousel
+- Team directory pages with per-member extended bios
+- Legal pages (Terms of Service, Privacy Policy, API Terms of Use)
+- A contact page
+
+Content is managed entirely via Markdown/MDX files in the `content/` directory — no external CMS.
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | [Next.js](https://nextjs.org/) 16.1.6 (App Router) |
+| Language | TypeScript 5.7.3 |
+| UI Components | [shadcn/ui](https://ui.shadcn.com/) + [Radix UI](https://radix-ui.com/) |
+| Styling | Tailwind CSS v4 |
+| Animations | [Framer Motion](https://www.framer.com/motion/) 11, [Lottie](https://airbnb.io/lottie/) (lottie-web + lottie-react) |
+| Content parsing | [gray-matter](https://github.com/jonschlinkert/gray-matter), [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote), [react-markdown](https://github.com/remarkjs/react-markdown) |
+| Markdown plugins | remark-gfm, rehype-raw |
+| Image blur placeholders | [plaiceholder](https://plaiceholder.co/) + sharp |
+| Analytics | [@vercel/analytics](https://vercel.com/analytics) |
+| Package manager | pnpm |
+| Deployment | Vercel |
+
+---
+
+## Project Structure
 
 ```
-stratomercata-website/
-├── _config.yml                # Jekyll configuration
-├── Gemfile                    # Ruby dependencies
-└── source/                    # Jekyll source directory
-    ├── _layouts/              # Page templates (default, person, blog, video)
-    ├── _includes/             # Reusable components (auto_link, embeds, SEO)
-    ├── _blog/                 # Blog collection (Markdown files)
-    ├── _people/               # People collection (Markdown files)
-    ├── _videos/               # Video collection (Markdown files)
-    ├── blog/index.html        # Blog listing page
-    ├── people/index.html      # People listing page
-    ├── videos/index.html      # Videos listing page
-    ├── assets/css/            # Stylesheets
-    ├── images/                # Image assets
-    └── videos/raw-audio/      # Source audio files for transcription
+strato-nexus-refresh/
+├── app/                        # Next.js App Router pages
+│   ├── layout.tsx              # Root layout (Poppins font, Analytics)
+│   ├── page.tsx                # Homepage
+│   ├── blog/
+│   │   ├── page.tsx            # Blog index (featured carousel + post grid)
+│   │   └── [slug]/page.tsx     # Individual blog post page
+│   ├── team/
+│   │   ├── page.tsx            # Team directory (grouped by department)
+│   │   └── [slug]/page.tsx     # Individual team member page
+│   ├── contact/page.tsx        # Contact page
+│   ├── terms/page.tsx          # Terms of Service
+│   ├── privacy/page.tsx        # Privacy Policy
+│   └── api-terms/page.tsx      # API Terms of Use
+│
+├── components/                 # React components
+│   ├── ui/                     # shadcn/ui primitives
+│   ├── blog/                   # Blog-specific components
+│   │   ├── featured-carousel.tsx
+│   │   ├── post-card.tsx
+│   │   ├── blog-search.tsx
+│   │   ├── category-filter.tsx
+│   │   ├── blog-pagination.tsx
+│   │   └── recent-posts.tsx
+│   ├── hero-section.tsx        # Homepage hero with Lottie animation
+│   ├── navbar.tsx
+│   ├── footer.tsx
+│   ├── feature-card.tsx
+│   ├── stats-section.tsx
+│   ├── partners-section.tsx
+│   ├── community-section.tsx
+│   ├── hard-money-section.tsx
+│   ├── peace-of-mind-section.tsx
+│   ├── legal-page.tsx          # Shared legal page layout wrapper
+│   └── theme-provider.tsx
+│
+├── content/                    # File-based content
+│   ├── blog/                   # Blog posts (.md / .mdx)
+│   └── team/                   # Team member extended bios (.mdx)
+│
+├── lib/                        # Server-side utilities
+│   ├── posts.ts                # Blog post parsing, filtering, sorting
+│   ├── blog-constants.ts       # Post type definition and category list
+│   ├── team-data.ts            # Static team member records
+│   ├── team-content.ts         # MDX bio loader for team members
+│   ├── blur.ts                 # plaiceholder blur data URL generator
+│   └── utils.ts                # cn() class name utility
+│
+├── hooks/
+│   ├── use-mobile.ts           # Viewport width breakpoint hook
+│   ├── use-reveal.ts           # Intersection-observer reveal hook
+│   └── use-toast.ts            # Toast notification hook
+│
+├── public/                     # Static assets served at /
+│   ├── background-artwork.svg
+│   ├── background-artwork-mobile.svg
+│   ├── hero-media.svg
+│   ├── cards/                  # Static SVG feature cards
+│   ├── blog/                   # Blog cover images
+│   ├── team/                   # Team member portrait images
+│   └── images/                 # Archived external images (cached locally)
+│
+├── next.config.mjs
+├── tsconfig.json
+├── postcss.config.mjs
+├── components.json             # shadcn/ui configuration
+└── pnpm-lock.yaml
 ```
 
-### Configuration Philosophy
+---
 
-The `_config.yml` file contains production settings:
-- **`baseurl: ""`**: Empty for custom domain at root
-- **`url: "https://strato.nexus"`**: Production domain
+## Configuration Overview
 
-For local development, Jekyll's `serve` command automatically overrides the `url` setting to `http://localhost:4000`.
+### `next.config.mjs`
+
+- `typescript.ignoreBuildErrors: true` — TypeScript errors do not fail the Vercel build.
+- SVG files at `/:path*.svg` are served with `Content-Type: image/svg+xml` and a one-year immutable cache header.
+
+### `tsconfig.json`
+
+- Path alias: `@/*` maps to the project root. Import any file as `@/lib/posts`, `@/components/navbar`, etc.
+- Target: ES6, module resolution: `bundler`.
+
+### `postcss.config.mjs`
+
+Uses `@tailwindcss/postcss` for Tailwind CSS v4 integration.
+
+### Environment Variables
+
+This project does not require any environment variables for local development or production. All content is file-based and all third-party integrations (Vercel Analytics) are zero-config.
 
 ---
 
 ## Local Development
 
-### Prerequisites
+**Prerequisites**
 
-- Ruby 3.3+ or Ruby 3.4+ (install via [rbenv](https://github.com/rbenv/rbenv) or [rvm](https://rvm.io/))
-- Bundler: `gem install bundler`
+- Node.js >= 20
+- pnpm >= 9
 
-**Note for Ruby 3.4+**: The `Gemfile` includes compatibility gems (`base64`, `logger`, `bigdecimal`) required for Jekyll 3.10.0 on Ruby 3.4+.
-
-### Setup & Run
+**Setup**
 
 ```bash
+# Clone the repository
+git clone https://github.com/mo-mew/strato-nexus-refresh.git
+cd strato-nexus-refresh
+
 # Install dependencies
-bundle install
+pnpm install
 
-# Clean, build, and serve with incremental builds
-bundle exec jekyll clean && bundle exec jekyll serve --incremental
-
-# Access at http://localhost:4000
+# Start the development server
+pnpm dev
 ```
 
-The development server includes:
-- **Auto-regeneration**: Changes to source files trigger automatic rebuilds
-- **Incremental builds**: Only changed files are rebuilt (faster)
-- **LiveReload**: Browser refreshes automatically when files change
+The dev server starts on [http://localhost:3000](http://localhost:3000) with Turbopack.
+
+**Other commands**
+
+```bash
+# Production build
+pnpm build
+
+# Start production server
+pnpm start
+
+# Lint
+pnpm lint
+```
 
 ---
 
-## Collections
+## Content Architecture
 
-The site uses three Jekyll collections:
+### Blog Posts — `content/blog/`
 
-### Blog (`_blog/`)
-Platform updates, announcements, and educational content about STRATO.
+Posts are `.md` or `.mdx` files parsed with `gray-matter`. All frontmatter fields:
 
-### People (`_people/`)
-Team member profiles with photos, bios, and social links.
-
-Example frontmatter:
 ```yaml
 ---
-name: Bob Summerwill
-role: Head of Ecosystem
-photo: /images/bobsummerwill.com/2025.08.26/bob-summerwill.jpeg
-twitter: bobsummerwill
-linkedin: bob-summerwill
+title: "Post Title"
+date: "2026-02-11"
+description: "Short description shown in cards and meta."
+categories: "Updates"         # "Updates" | "Guides" | "Community" | "Videos"
+img: /images/path/to/cover.png
+featured: true                # true → appears in the featured carousel
+author: "Author Name"
+authorTitle: "Author Role"
+videoUrl: "https://www.youtube.com/embed/VIDEO_ID"   # optional
 ---
 ```
 
-### Videos (`_videos/`)
-Show episodes, contests, and platform demonstrations with embedded YouTube videos and transcripts.
+The `lib/posts.ts` module reads all files at build time, applies `sanitizeContent()` to handle legacy Jekyll liquid tags (`{% include ... %}`), and exposes:
 
-Example frontmatter:
-```yaml
+- `getAllPosts()` — sorted by date descending
+- `getFeaturedPosts()` — filtered to `featured: true`
+- `getPostBySlug(slug)` — single post lookup
+- `getPostsByCategory(category)` — category filter
+
+Blog images are stored in `public/blog/` and referenced by path. Blur placeholders are generated at request time via `lib/blur.ts` using `plaiceholder` + `sharp`.
+
+### Team Members — `content/team/` and `lib/team-data.ts`
+
+Team data is split across two sources:
+
+**`lib/team-data.ts`** — defines all members as a typed static array (`TeamMember[]`). Each record contains:
+
+```ts
+{
+  slug: "bob-summerwill",
+  name: "Bob Summerwill",
+  image: "/team/bob-summerwill.png",
+  jobTitle: "Head of Ecosystem",
+  department: "Leadership",    // "Leadership" | "Team Members" | "Advisors"
+  summary: "One-line summary shown on the team index.",
+  links: {
+    website?: string
+    x?: string
+    github?: string
+    linkedin?: string
+    wikipedia?: string
+  }
+}
+```
+
+**`content/team/{slug}.mdx`** — optional extended bio file. The content is plain MDX (no frontmatter required) with `##` sections for Overview, background, prior roles, etc. If no file exists for a member, the individual page shows only the data from `team-data.ts`.
+
+Portrait images live in `public/team/` and follow the naming convention `{slug}.png`.
+
 ---
-title: "STRATO Show: State of Blockchain"
-date: 2025-10-08
-hosts: ["Bob Summerwill", "Victor Wong", "Kieren James-Lubin"]
-description: "Reflections on TOKEN2049 in Singapore"
-embed:
-  url: https://www.youtube.com/embed/VIDEO_ID
----
-```
 
----
+## Custom Workflows
 
-## Workflow: Adding Video Content with Transcripts
+### Jekyll Liquid Tag Sanitization
 
-### 1. Extract Audio from Video
+Blog posts migrated from a Jekyll site may contain `{% include ... %}` liquid tags. `lib/posts.ts` converts these at parse time:
 
-Download the video from Streamyard/YouTube, then extract audio:
+| Liquid tag | Output |
+|---|---|
+| `{% include twitter-embed.html url="..." %}` | Anchor link to the tweet |
+| `{% include content-embed.html src="..." %}` | YouTube `<iframe>` embed |
+| `{% include content-embed.html url="..." %}` | Article link card |
+| Unknown tags | Stripped silently |
 
-```bash
-ffmpeg -i "video-file.mp4" -q:a 0 -map a "output-audio.mp3"
-```
+`{{ site.baseurl }}` and `{{ '...' | relative_url }}` are also resolved to plain paths.
 
-### 2. Transcribe with TurboScribe
+### Blur Placeholders
 
-1. Upload the audio file to [TurboScribe](https://turboscribe.ai)
-2. Select **Whale Transcription** mode
-3. Enable **Speaker Recognition** in settings
-4. Set number of speakers (usually 2-3)
-5. Click **Transcribe**
-
-### 3. Save Audio File
-
-Store the MP3 for future reference:
-```
-source/videos/raw-audio/show-name-YYYY-MM-DD.mp3
-```
-
-### 4. Create Video Page
-
-Copy an existing video page as a template:
-
-```bash
-cp source/_videos/existing-video.md source/_videos/new-video-YYYY-MM-DD.md
-```
-
-Update the frontmatter with new details.
-
-### 5. Add Transcript
-
-1. Export transcript from TurboScribe as **TXT** with **Section Timestamps** enabled
-2. Paste the content into the video page body
-3. Transform speaker labels and timestamps
-
-Example transformation:
-```
-[Speaker 1] (0:03 - 0:05)
-
-becomes:
-
-[[0:03]](https://www.youtube.com/watch?v=VIDEO_ID&t=3s) **Bob:**
-```
-
-Where `3s` is the starting timestamp in seconds.
-
-### 6. Verify Locally
-
-```bash
-bundle exec jekyll clean && bundle exec jekyll serve --incremental
-```
-
-Visit http://localhost:4000/videos/ to verify the new video appears correctly.
+`lib/blur.ts` generates low-quality image placeholders (LQIP) via `plaiceholder`. Results are in-memory cached per process. Images without a matching file in `public/` return `undefined` (no placeholder).
 
 ---
 
 ## Deployment
 
-### Netlify Deployment
+The site is deployed to **Vercel**.
 
-Netlify provides zero-config Jekyll support with automatic PR preview deployments.
+- **Build command:** `pnpm build` (runs `next build`)
+- **Output:** Static + server-rendered pages via Next.js App Router
+- **Preview deployments:** Every push to a non-`main` branch generates a Vercel preview URL automatically
+- **Production branch:** `main`
+- **Analytics:** Vercel Analytics is injected in `app/layout.tsx` via `<Analytics />`
 
-**Benefits:**
-- Automatic PR preview deployments (each PR gets a unique preview URL)
-- Faster build times
-- Unlimited bandwidth on free tier
-- Zero configuration needed (auto-detects Jekyll)
+No build-time environment variables are required.
 
-**Setup:**
-1. Go to https://app.netlify.com
-2. Click "Add new site" → "Import an existing project"
-3. Choose GitHub and select your repository
-4. Netlify auto-detects Jekyll settings
-5. Click "Deploy site"
+---
 
-**PR Previews:**
-- Enabled by default
-- Each PR gets: `deploy-preview-{PR#}--{site}.netlify.app`
-- Rebuilds automatically on every commit
-- Preview URL posted as GitHub comment
+## Highlight Banner
 
-**Ruby 3.4 Compatibility:**
-The `Gemfile` includes all required compatibility gems for Netlify's Ruby 3.4 environment.
+The highlight banner is a floating toast anchored to the bottom of the hero section. It is fully controlled by the `BANNER_CONFIG` object at the top of `components/highlight-banner.tsx` — no other files need to be touched.
+
+```ts
+// components/highlight-banner.tsx
+
+const BANNER_CONFIG = {
+  // Set to false to hide the banner entirely
+  enabled: true,
+
+  // Main heading — renders with an animated dark-blue-to-mint gradient
+  title: "Strato Nexus is Live",
+
+  // Secondary line shown below the title (mobile) or inline (desktop)
+  subtitle: "Start hedging with hard assets today",
+
+  // URL the banner links to when clicked
+  href: "https://app.strato.nexus/",
+
+  // Open the link in a new tab?
+  openInNewTab: true,
+
+  // Optional countdown target. Use an ISO date string to show a live
+  // days / hours / minutes / seconds countdown.
+  // Set to null to hide the countdown entirely.
+  countdownTarget: null,             // hidden
+  // countdownTarget: "2026-06-01T00:00:00Z",  // example: show a countdown
+}
+```
+
+**Turning the banner on/off:** Set `enabled: true` or `enabled: false`.
+
+**Adding a countdown:** Set `countdownTarget` to an ISO 8601 date string (UTC). The countdown ticks live in the browser and disappears automatically when the target is reached. Set it back to `null` to remove it.
+
+**Dismissal:** Visitors can close the banner with the X button. The dismissed state is in-memory only (resets on page reload) — intentionally kept lightweight without persisting to `localStorage`.
 
 ---
 
 ## Development Tips
 
-### Auto-linking System
-
-The site includes an auto-linking system (`source/_includes/auto_link.html`) that automatically converts mentions of people, blog posts, and videos to links:
-
-```markdown
-Bob Summerwill spoke about blockchain.
-```
-
-Automatically becomes:
-```html
-<a href="/people/bob-summerwill/">Bob Summerwill</a> spoke about blockchain.
-```
-
-The system processes content in priority order:
-1. **Hidden People** - Removes/redacts links to hidden profiles
-2. **Videos** - Links video titles to their pages
-3. **Blog Posts** - Links blog post titles to their pages
-4. **People** - Links person names (with conflict detection to avoid nested links)
-
-### Relative URLs
-
-Always use Jekyll's `relative_url` filter for internal links:
-
-```liquid
-[Link text]({{ '/people/bob-summerwill/' | relative_url }})
-```
-
-This ensures links work correctly in both local development and production.
-
-### Image Paths
-
-Images are organized by source and date:
-```
-source/images/bobsummerwill.com/2025.08.26/photo.jpeg
-source/images/linkedin.com/2025.10.07/profile.png
-source/images/strato.nexus/2025.10.07/screenshot.png
-```
-
-Always use relative paths with the `relative_url` filter for images.
+- **Adding a blog post:** Create a `.md` file in `content/blog/` with the required frontmatter fields. The slug is derived from the filename.
+- **Featuring a post:** Set `featured: true` in the post frontmatter. All posts with this flag appear in the carousel on `/blog`.
+- **Adding a team member:** Add a record to the `teamMembers` array in `lib/team-data.ts`, place a portrait at `public/team/{slug}.png`, and optionally create `content/team/{slug}.mdx` for the full bio.
+- **Path alias:** Use `@/` to import from the project root in all TypeScript files.
+- **SVGs:** The `/:path*.svg` cache header is set to one year (`immutable`). Rename SVG files after updating them to bust the cache in production.
+- **Images:** Locally cached external images are stored under `public/images/{domain}/{date}/`. Do not delete these; they are referenced by archived blog posts.
 
 ---
 
 ## Contributing
 
-Contributions are welcome! Please:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/your-feature`)
-3. Commit your changes (`git commit -m 'Add new feature'`)
-4. Push to the branch (`git push origin feature/your-feature`)
-5. Open a Pull Request
-
-### Git Remote Setup
-
-**Main repository:**
-- `upstream` → https://github.com/stratomercata/stratomercata-website
-
-**Your fork:**
-- `origin` → https://github.com/YOUR_USERNAME/stratomercata-website
-
-To sync your fork with upstream:
 ```bash
-git fetch upstream
-git checkout main
-git merge upstream/main
-git push origin main
+# Fork the repository, then:
+git clone https://github.com/<your-fork>/strato-nexus-refresh.git
+cd strato-nexus-refresh
+pnpm install
+
+# Create a feature branch
+git checkout -b feature/your-feature-name
+
+# Make changes, then commit
+git add .
+git commit -m "feat: describe your change"
+
+# Push and open a pull request against main
+git push origin feature/your-feature-name
 ```
 
-For major changes, please open an issue first to discuss what you would like to change.
+Pull requests are reviewed before merging to `main`.
 
 ---
 
 ## License
 
-This project is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0) - see the [LICENSE](LICENSE) file for details.
+This repository is private. All rights reserved by BlockApps, Inc.
 
 ---
 
-## Support
+## Support / Contact
 
-For questions or support:
-- Open an [issue](https://github.com/stratomercata/stratomercata-website/issues)
-- Contact [@bobsummerwill](https://x.com/bobsummerwill) on X/Twitter
-- Visit [STRATO](https://www.strato.nexus)
+For questions or issues, contact the team at [blockapps.net](https://blockapps.net) or open a GitHub issue in this repository.

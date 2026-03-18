@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="BG_ART" data-name="BG ART" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 9835.0835 2160.0001">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient-3);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="5040.8762" y1=".0002" x2="5040.8762" y2="2159.9997" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d1dcff" stop-opacity="0"/>
+      <stop offset=".5061" stop-color="#d1dcff"/>
+      <stop offset="1" stop-color="#d1dcff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="7171.1252" x2="7171.1252" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-3" x1="3570.9475" x2="3570.9475" xlink:href="#linear-gradient"/>
+  </defs>
+  <path class="cls-3" d="M4821.8496,1709.9343c-48.1693-248.0459,21.1959-509.4443,181.0233-682.1953L5953.749.0002h-999.3717l-412.5044,445.8491c-166.0012,179.4194-289.136,407.6304-356.0919,659.9565-66.9552,252.3291-75.9035,521.8745-25.8737,779.5005l53.3445,274.6934h695.9987l-87.4009-450.0654Z"/>
+  <path class="cls-2" d="M6309.3111,1993.7985c0-254.3462,117.1519-491.3472,305.7363-618.5234L8537.7731,78.6735c54.8553-36.9912,113.5821-63.2012,173.9231-78.6733h-1414.7713l-1021.256,688.6904c-195.8685,132.085-359.1725,322.8281-472.2564,551.6035-113.084,228.7788-172.8583,489.335-172.8583,753.5044v166.2012h678.7569v-166.2012Z"/>
+  <path class="cls-1" d="M3361.7067,1171.2839c-2.0108-254.9087,113.5269-493.7021,301.5234-623.1919L4458.971.0002h-1305.3118c-122.1112,117.4731-225.3344,260.6963-303.5954,422.4448-111.3934,230.2354-169.1712,491.7026-167.0852,756.1436l7.7417,981.4111h678.7858l-7.7994-988.7158Z"/>
+</svg>

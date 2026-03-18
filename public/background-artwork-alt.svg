@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_5" data-name="Layer 5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 9835.0835 2160.0001">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="7211.8368" y1="2160.0001" x2="7211.8368" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#D1DCFF" stop-opacity="0"/>
+      <stop offset=".5054" stop-color="#D1DCFF"/>
+      <stop offset="1" stop-color="#D1DCFF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="4134.0052" x2="4134.0052" xlink:href="#linear-gradient"/>
+  </defs>
+  <path class="cls-2" d="M6830.9008,1329.9041L9134.363,0h-2125.6905l-709.195,409.4542c-306.7048,177.076-562.418,432.7902-739.493,739.4919-177.075,306.7061-270.674,656.0129-270.674,1010.165v.8889h1062.8464v-.8889c0-340.9827,183.4448-658.7114,478.7438-829.207Z"/>
+  <path class="cls-1" d="M4772.6975,153.1629L5037.9836,0h-1552.3005c-167.343,300.4594-255.6562,640.064-255.6562,984.2422v1175.7578h1062.8464V984.2422c0-341.7507,183.8589-660.2019,479.8242-831.0793Z"/>
+</svg>
