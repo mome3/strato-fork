@@ -3,31 +3,67 @@ title: "Online Oracles: From Vault to Blockchain - Tokenizing Gold & Silver"
 date: 2026-03-18
 hosts: ["Kieren James-Lubin", "Bob Summerwill", "Victor Wong", "Jeffry Powell"]
 guests: ["[Pete Rinato](https://www.rinatolaw.com/)"]
-description: "Live discussion with [Kieren James-Lubin](/people/kieren-james-lubin), [Bob Summerwill](/people/bob-summerwill), [Victor Wong](/people/victor-wong), [Jeffry Powell](/people/jeffry-powell), and guest [Pete Rinato](https://www.rinatolaw.com/) on tokenizing vaulted gold and silver, using onchain oracles to connect real-world custody with blockchain liquidity, and why precious metals are a strong fit for [STRATO](https://strato.nexus)."
+description: "A live [STRATO](https://strato.nexus) conversation with [Kieren James-Lubin](/people/kieren-james-lubin), [Bob Summerwill](/people/bob-summerwill), [Victor Wong](/people/victor-wong), [Jeffry Powell](/people/jeffry-powell), and guest [Pete Rinato](https://www.rinatolaw.com/) on the new bimetals flow, why [STRATO](https://strato.nexus) moved into tokenized precious metals, what 47th Street teaches about vaulting and liquidity, and the macro and market forces behind gold and silver volatility."
+embed:
+  url: https://www.youtube.com/embed/mrS9u_Z7vLQ
 img: /images/covers-for-spaces/online-oracles-from-vault-to-blockchain-tokenizing-gold-and-silver.png
+table_of_contents:
+  - link: "#introductions"
+    title: "Introductions"
+  - link: "#strato-spotlight-bimetals-demo"
+    title: "STRATO Spotlight: Bimetals demo"
+  - link: "#pete-rinato-and-47th-street"
+    title: "Pete Rinato and 47th Street"
+  - link: "#why-strato-got-into-tokenized-metals"
+    title: "Why STRATO got into tokenized metals"
+  - link: "#why-pete-found-tokenization-compelling"
+    title: "Why Pete found tokenization compelling"
+  - link: "#whats-driving-silver-and-gold"
+    title: "What's driving silver and gold"
+  - link: "#physical-vs-tokenized-liquidity"
+    title: "Physical vs tokenized liquidity"
+  - link: "#the-47th-street-marketplace"
+    title: "The 47th Street marketplace"
+  - link: "#closing"
+    title: "Closing thoughts"
 ---
 
 Scheduled for March 18, 2026 at 5:00 PM ET, this **Online Oracles** episode explores how vaulted precious metals move from secure storage onto blockchain rails.
 
 The panel covers oracle design, custody and vaulting, tokenized gold and silver, and the practical path from physical metals to onchain liquidity on [STRATO](https://strato.nexus).
 
+## Audio
+
+<audio controls style="width: 100%; max-width: 600px;">
+  <source src="/assets/audio/online-oracles-from-vault-to-blockchain-tokenizing-gold-silver.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
 ## Transcript
 
-**[00:01] [Victor Wong](/people/victor-wong):** We are live.
+<!-- TABLE_OF_CONTENTS -->
 
-**[00:03] [Jeffry Powell](/people/jeffry-powell):** We are live. Hi everyone. Welcome to [STRATO](https://strato.nexus)'s On Chain Oracles. I'm [Jeff Powell](/people/jeffry-powell) from [STRATO](https://strato.nexus). Do a quick introduction to the people on the call. We have our CEO [Kieren James-Lubin](/people/kieren-james-lubin).
+<h3 id="introductions">Introductions</h3>
 
-**[00:17] [Kieren James-Lubin](/people/kieren-james-lubin):** Hello.
+**[[00:01]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1s) [Victor Wong](/people/victor-wong):** We are live.
 
-**[00:18] [Jeffry Powell](/people/jeffry-powell):** Our Chief Product Officer [Victor Wong](/people/victor-wong).
+**[[00:03]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=3s) [Jeffry Powell](/people/jeffry-powell):** We are live. Hi everyone. Welcome to [STRATO](https://strato.nexus)'s On Chain Oracles. I'm [Jeff Powell](/people/jeffry-powell) from [STRATO](https://strato.nexus). Do a quick introduction to the people on the call. We have our CEO [Kieren James-Lubin](/people/kieren-james-lubin).
 
-**[00:21] [Victor Wong](/people/victor-wong):** Hi.
+**[[00:17]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=17s) [Kieren James-Lubin](/people/kieren-james-lubin):** Hello.
 
-**[00:22] [Jeffry Powell](/people/jeffry-powell):** Bob Summerwill, our head of ecosystem, and head of tokenization, Michael Tan. All of us from [STRATO](https://strato.nexus) and our good friend, partner and guest today, [Pete Rinato](https://www.rinatolaw.com/). It's great to have everybody here. Look forward to this interesting conversation about tokenized metals and other things involving metals and jewelry and the 47th Street Diamond District in New York City. We are going to start as always with a quick demo from Michael. Michael, take it away.
+**[[00:18]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=18s) [Jeffry Powell](/people/jeffry-powell):** Our Chief Product Officer [Victor Wong](/people/victor-wong).
+
+**[[00:21]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=21s) [Victor Wong](/people/victor-wong):** Hi.
+
+**[[00:22]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=22s) [Jeffry Powell](/people/jeffry-powell):** Bob Summerwill, our head of ecosystem, and head of tokenization, Michael Tan. All of us from [STRATO](https://strato.nexus) and our good friend, partner and guest today, [Pete Rinato](https://www.rinatolaw.com/). It's great to have everybody here. Look forward to this interesting conversation about tokenized metals and other things involving metals and jewelry and the [47th Street Diamond District](https://en.wikipedia.org/wiki/47th_Street_(Manhattan)#Diamond_District) in New York City. We are going to start as always with a quick demo from Michael. Michael, take it away.
+
+<h3 id="strato-spotlight-bimetals-demo">STRATO Spotlight: Bimetals demo</h3>
 
 All right. I'm going to be demoing our new bimetals flow. It's a little different than our swap flow that most of you are used to. This one mints directly so you can purchase it with USDC which we've re-added to the platform. Or you can the classic USDST, $100. You can buy gold or silver. Just note the spot price and the mid fee purchase. As simple as that. And simple as that. You have your gold. Okay, thanks Michael. Thanks for sharing that. [Pete](/people/pete-rinato), let's go back to you because whereas everybody knows you and knows you as a good friend and partner, I don't think that most of us are really familiar with your background. So please tell us about your background and how you ended up on 47th Street.
 
-**[01:59] [Pete Rinato](https://www.rinatolaw.com/):** It was a long journey to get to 47th Street. I'm an attorney for roughly 25 years. Started my career in tax law in Manhattan, which wasn't super exciting. After about two years of that, I felt like I needed a little bit more in my life. And so I decided to move to Las Vegas, which I thought would be probably a three or four month experiment. And it lasted 12 years. It was out there. I did entertainment law and I was going back and forth to Los Angeles and a lot of venture capital stuff. And I experienced a lot of booms and busts with clients through the years and touched a lot of industries. Early stage companies, later stage companies, IPOs, a lot of stuff in sports. And it was a really exciting time. And as an attorney, I got a lot of good experience in good economy law and bad economy law.
+<h3 id="pete-rinato-and-47th-street">Pete Rinato and 47th Street</h3>
+
+**[[01:59]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=119s) [Pete Rinato](https://www.rinatolaw.com/):** It was a long journey to get to 47th Street. I'm an attorney for roughly 25 years. Started my career in tax law in Manhattan, which wasn't super exciting. After about two years of that, I felt like I needed a little bit more in my life. And so I decided to move to Las Vegas, which I thought would be probably a three or four month experiment. And it lasted 12 years. It was out there. I did entertainment law and I was going back and forth to Los Angeles and a lot of venture capital stuff. And I experienced a lot of booms and busts with clients through the years and touched a lot of industries. Early stage companies, later stage companies, IPOs, a lot of stuff in sports. And it was a really exciting time. And as an attorney, I got a lot of good experience in good economy law and bad economy law.
 
 For example, when I first moved out there, it was 2003 and people were literally lining up in tents to get pre-sales for new home contracts. So you had these big developers like [Toll Brothers](https://www.tollbrothers.com/), [KB Homes](https://www.kbhome.com/) and [DR Horton](https://www.drhorton.com/) announcing a new offering and it was at a point where if you were able to get in that tent and get in line and you got a contract, the contract was like flippable for a pretty substantial profit right away. And the smarter people literally started a week in advance from that offering date with tents and sleeping bags and people coming and bringing them food. And then I was there for ground zero of the mortgage crisis. And you really see fluctuations and things.
 
@@ -37,21 +73,23 @@ So it was definitely an interesting journey. And as crazy as a city as Las Vegas
 
 So it's very incestuous, very entertaining, and you truly never know what to expect. It could be an acquisition of a $50 million building. It could be someone coming in needing help to get a pardon for a gun charge. It's that array of material that comes through here on a daily basis. So there will be an autobiography written at some point when this journey's over, and it'll definitely be worth reading.
 
-**[06:37] [Jeffry Powell](/people/jeffry-powell):** Well, I think you just need to—
+**[[06:37]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=397s) [Jeffry Powell](/people/jeffry-powell):** Well, I think you just need to—
 
-**[06:38] [Victor Wong](/people/victor-wong):** Make it into a movie. From the sounds of it, our pre—
+**[[06:38]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=398s) [Victor Wong](/people/victor-wong):** Make it into a movie. From the sounds of it, our pre—
 
-**[06:42] [Pete Rinato](https://www.rinatolaw.com/):** Call, we discussed movies being bad investments. We'll just go with—
+**[[06:42]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=402s) [Pete Rinato](https://www.rinatolaw.com/):** Call, we discussed movies being bad investments. We'll just go with—
 
-**[06:46] [Kieren James-Lubin](/people/kieren-james-lubin):** [Jeff](/people/jeffry-powell), you gotta lock the rights up right now.
+**[[06:46]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=406s) [Kieren James-Lubin](/people/kieren-james-lubin):** [Jeff](/people/jeffry-powell), you gotta lock the rights up right now.
 
-**[06:50] [Jeffry Powell](/people/jeffry-powell):** I think that clearly, [Pete](/people/pete-rinato), I think you've just demonstrated why we asked you to be on this call today. But I also want to say that that story about the stripper and the eight houses, that's like right out of that book and movie, [The Big Short](https://www.imdb.com/title/tt1596363/), 100%. That's—
+**[[06:50]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=410s) [Jeffry Powell](/people/jeffry-powell):** I think that clearly, [Pete](/people/pete-rinato), I think you've just demonstrated why we asked you to be on this call today. But I also want to say that that story about the stripper and the eight houses, that's like right out of that book and movie, [The Big Short](https://www.imdb.com/title/tt1596363/), 100%. That's—
 
-**[07:08] [Pete Rinato](https://www.rinatolaw.com/):** Those are real stories. Those are real stories. And it wasn't — and I use that as an example to be funny. But it was mortgage brokers, it was hostesses in restaurants and waiters and waitresses and bartenders. I only owned — I was a lawyer. I had one house and one mortgage. So being around this array of people who seem to be real wealthy landowners, the light bulb went off at some point, like this doesn't make sense.
+**[[07:08]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=428s) [Pete Rinato](https://www.rinatolaw.com/):** Those are real stories. Those are real stories. And it wasn't — and I use that as an example to be funny. But it was mortgage brokers, it was hostesses in restaurants and waiters and waitresses and bartenders. I only owned — I was a lawyer. I had one house and one mortgage. So being around this array of people who seem to be real wealthy landowners, the light bulb went off at some point, like this doesn't make sense.
 
-**[07:38] [Jeffry Powell](/people/jeffry-powell):** Yeah, it didn't make sense. I mean, it's an endlessly fascinating story, but anyway, moving on. [Pete](/people/pete-rinato), you're a very important person to us because of having helped us substantially get into the tokenized metals business, which I want to talk about a bit. And just real quickly, [Kieren](/people/kieren-james-lubin), just remind us why and how it was that we got into tokenized metals.
+<h3 id="why-strato-got-into-tokenized-metals">Why STRATO got into tokenized metals</h3>
 
-**[08:00] [Kieren James-Lubin](/people/kieren-james-lubin):** Give a little longer form of the story though. Not that long. So [BlockApps](https://blockapps.net/), the company, [STRATO](https://strato.nexus), the product and protocol have done a bunch of different things over the years. So in the very early days, we built one of the flavors of [Ethereum](https://ethereum.org/), the Haskell mainnet client, and pretty quickly found some product market fit working with big enterprise. So we structured things in a way that were really attractive to big businesses. So [Microsoft](https://www.microsoft.com/), we partnered with them to launch the Blockchain as a Service category and do a long, quite a number of years serving individual corporations and their supply chains or financial consortium, oil and gas consortia, etc.
+**[[07:38]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=458s) [Jeffry Powell](/people/jeffry-powell):** Yeah, it didn't make sense. I mean, it's an endlessly fascinating story, but anyway, moving on. [Pete](/people/pete-rinato), you're a very important person to us because of having helped us substantially get into the tokenized metals business, which I want to talk about a bit. And just real quickly, [Kieren](/people/kieren-james-lubin), just remind us why and how it was that we got into tokenized metals.
+
+**[[08:00]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=480s) [Kieren James-Lubin](/people/kieren-james-lubin):** Give a little longer form of the story though. Not that long. So [BlockApps](https://blockapps.net/), the company, [STRATO](https://strato.nexus), the product and protocol have done a bunch of different things over the years. So in the very early days, we built one of the flavors of [Ethereum](https://ethereum.org/), the Haskell mainnet client, and pretty quickly found some product market fit working with big enterprise. So we structured things in a way that were really attractive to big businesses. So [Microsoft](https://www.microsoft.com/), we partnered with them to launch the Blockchain as a Service category and do a long, quite a number of years serving individual corporations and their supply chains or financial consortium, oil and gas consortia, etc.
 
 And we met kind of on the tail end of that part of the business. It was definitely interrupted by the pandemic and then had sort of a slow decline after that. There was a strange thing where [IBM](https://www.ibm.com/) was one of our main competitors for a few years and they ended up spinning up a pretty big book of business and probably mostly have gotten out of it themselves. Now it's a market that never completely materialized though. It's coming back in a different form.
 
@@ -61,37 +99,41 @@ And so I actually got introduced to [Pete](/people/pete-rinato) just through a f
 
 And even it has gone in different phases. So we initially had a lot of redemptions, like people really wanted to pick up the physical metal, right. And one of the ways — which is not a bad thing. Of course you can always go pick it up if you have it tokenized and you have enough above the minimum quantity and so on. But we realized later on that you needed to give people a reason to keep holding. And one was okay, access to within [DeFi](https://ethereum.org/en/defi/). So if you can transfer the token and get cash pretty quickly, that's actually one of the fastest ways out. And you tend to trade near spot where if you're trying to sell the physical often you don't, especially in this crazy — so when we started, I think the price of silver, which is the one we started with, was like 27, $29 something.
 
-**[12:26] [Jeffry Powell](/people/jeffry-powell):** I think it was even lower. I think it was even lower.
+**[[12:26]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=746s) [Jeffry Powell](/people/jeffry-powell):** I think it was even lower. I think it was even lower.
 
-**[12:29] [Kieren James-Lubin](/people/kieren-james-lubin):** 24 something.
+**[[12:29]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=749s) [Kieren James-Lubin](/people/kieren-james-lubin):** 24 something.
 
-**[12:30] [Victor Wong](/people/victor-wong):** Yeah.
+**[[12:30]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=750s) [Victor Wong](/people/victor-wong):** Yeah.
 
-**[12:32] [Kieren James-Lubin](/people/kieren-james-lubin):** So we experienced quite the run up there. And yeah, if you wanted to go to a dealer and exit in the peak insanity, you just kind of couldn't or you'd get 10% off spot or 15% off spot and so on. With the blockchain, you can trade into stables pretty fast, right. Depending on the size, of course. That's a big advantage.
+**[[12:32]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=752s) [Kieren James-Lubin](/people/kieren-james-lubin):** So we experienced quite the run up there. And yeah, if you wanted to go to a dealer and exit in the peak insanity, you just kind of couldn't or you'd get 10% off spot or 15% off spot and so on. With the blockchain, you can trade into stables pretty fast, right. Depending on the size, of course. That's a big advantage.
 
 And the other is credit. So often we found that people tokenize not to sell and we kind of hope you don't sell. Like other things equal, probably metals are going to beat the dollar over the next 10, 20, 50 years. Not financial advice, so you might want to borrow. And so we can hook you into the mechanisms that allow you to make your precious metals instant credit by tokenizing.
 
 And so it's been an awesome relationship. We developed this experience over the years and [Pete](/people/pete-rinato) has always been very receptive to new ideas and so on, and we have done a better job to date. We always need to do more at keeping the metals in the vault.
 
-**[13:43] [Jeffry Powell](/people/jeffry-powell):** Thanks [Kieren](/people/kieren-james-lubin), for that. I appreciate that. That's a good rundown. And I mean, [Pete](/people/pete-rinato), [Kieren](/people/kieren-james-lubin) may have just listed all of the reasons why you might have found this interesting. But just sort of curious, from your standpoint, like when we started talking to you about the metals, meeting [Kieren](/people/kieren-james-lubin), some other people ultimately coming through to me, what was it that was interesting or appealing to you about getting involved with us on [STRATO](https://strato.nexus)?
+<h3 id="why-pete-found-tokenization-compelling">Why Pete found tokenization compelling</h3>
 
-**[14:07] [Pete Rinato](https://www.rinatolaw.com/):** Yeah. So the family that I work for here, the Rannoff family, they're after Gary Barnett, they're probably the second most substantial family on this block. Been here about 40 years, on multiple buildings, wholesale, retail, manufacturing, pawn. Really involved in many facets of the jewelry business. But the idea of tokenizing physical assets is something that was a little bit beyond the understanding of the patriarch of the family. But it was something that was necessary to explore for future growth. He's a very old world businessman who's very wary of cash. We do deals where we need to come up with $10 million in one day. And we just literally go to the vault and take the money, take the gold and bring it to the refinery and sell it and get a wire and buy a building.
+**[[13:43]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=823s) [Jeffry Powell](/people/jeffry-powell):** Thanks [Kieren](/people/kieren-james-lubin), for that. I appreciate that. That's a good rundown. And I mean, [Pete](/people/pete-rinato), [Kieren](/people/kieren-james-lubin) may have just listed all of the reasons why you might have found this interesting. But just sort of curious, from your standpoint, like when we started talking to you about the metals, meeting [Kieren](/people/kieren-james-lubin), some other people ultimately coming through to me, what was it that was interesting or appealing to you about getting involved with us on [STRATO](https://strato.nexus)?
+
+**[[14:07]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=847s) [Pete Rinato](https://www.rinatolaw.com/):** Yeah. So the family that I work for here, the [Aronov family](https://www.aronovdevelopment.com), they're after [Gary Barnett](https://en.wikipedia.org/wiki/Gary_Barnett_(real_estate_developer)), they're probably the second most substantial family on this block. Been here about 40 years, on multiple buildings, wholesale, retail, manufacturing, pawn. Really involved in many facets of the jewelry business. But the idea of tokenizing physical assets is something that was a little bit beyond the understanding of the patriarch of the family *(Bob - that is Boris Aranov)*. But it was something that was necessary to explore for future growth. He's a very old world businessman who's very wary of cash. We do deals where we need to come up with $10 million in one day. And we just literally go to the vault and take the money, take the gold and bring it to the refinery and sell it and get a wire and buy a building.
 
 So the idea that these assets are much easier to transfer for a variety of transactions or holding it instead of taking up all the vault space, especially silver — we have these silver bars that are like 70 pounds. You got to carry around when you want to liquidate them. So tokenizing it really made a lot of sense.
 
 And it wasn't only on the metal side. I just, I like the idea. I mean, I call it more of democratization of investing. I've been a business lawyer for so long, and I've seen wealthy clients get great opportunities to increase their wealth, whether it's a pre-IPO deal or a seed deal or a Series A deal that just is not available to the average person that doesn't have that network. And being able to get involved with a variety of investment opportunities through a tokenization platform like the one you built was very attractive to me as an entrepreneurial lawyer. I just love that. And if this was something that was available when I was in my 20s, it would have been so much fun versus just being able to open up a [Schwab](https://www.schwab.com/) account and buy public companies. So the whole idea behind it and now the functionality, I know at the beginning was a little bit of a challenge. The functionality is great and I expect it to continue to become a more robust platform.
 
-**[16:35] [Jeffry Powell](/people/jeffry-powell):** Thanks, [Pete](/people/pete-rinato). Those 70 pound silver bars, [Kieren](/people/kieren-james-lubin) and [Victor](/people/victor-wong) like to use them as part of their workout routine. They actually stand back to back and like pass it back and forth.
+<h3 id="whats-driving-silver-and-gold">What's driving silver and gold</h3>
 
-**[16:46] [Kieren James-Lubin](/people/kieren-james-lubin):** Picture somewhere with me holding—
+**[[16:35]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=995s) [Jeffry Powell](/people/jeffry-powell):** Thanks, [Pete](/people/pete-rinato). Those 70 pound silver bars, [Kieren](/people/kieren-james-lubin) and [Victor](/people/victor-wong) like to use them as part of their workout routine. They actually stand back to back and like pass it back and forth.
 
-**[16:50] [Jeffry Powell](/people/jeffry-powell):** Yeah, it's you holding that big bar. Definitely.
+**[[16:46]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1006s) [Kieren James-Lubin](/people/kieren-james-lubin):** Picture somewhere with me holding—
 
-**[16:54] [Victor Wong](/people/victor-wong):** Yeah.
+**[[16:50]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1010s) [Jeffry Powell](/people/jeffry-powell):** Yeah, it's you holding that big bar. Definitely.
 
-**[16:55] [Jeffry Powell](/people/jeffry-powell):** Well, as [Kieren](/people/kieren-james-lubin) mentioned, it's been a really interesting journey for us learning more about metals. And watching the silver, which when we first started offering it was, I think it was 24 an ounce. Then watching it spike up to a hundred and — now it's come back down again, but I don't know that I really know why, what it is, what are the many factors that influence silver pricing? So I know you have some things to say about that.
+**[[16:54]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1014s) [Victor Wong](/people/victor-wong):** Yeah.
 
-**[17:24] [Pete Rinato](https://www.rinatolaw.com/):** Yeah, I can walk through that a little bit at a very high level and from our day to day level. When I started here four years ago, people came in to buy diamonds and watches. And the last couple of months, people are hauling in sacks with candlesticks and forks and spoons, and we're buying — because we have to melt it — we're buying it probably like a 20% discount. But we've been buying a lot of silverware lately, so I don't know, people using plastic to eat. But I'm sure there's a lot of empty kitchens because people have brought their silver here.
+**[[16:55]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1015s) [Jeffry Powell](/people/jeffry-powell):** Well, as [Kieren](/people/kieren-james-lubin) mentioned, it's been a really interesting journey for us learning more about metals. And watching the silver, which when we first started offering it was, I think it was 24 an ounce. Then watching it spike up to a hundred and — now it's come back down again, but I don't know that I really know why, what it is, what are the many factors that influence silver pricing? So I know you have some things to say about that.
+
+**[[17:24]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1044s) [Pete Rinato](https://www.rinatolaw.com/):** Yeah, I can walk through that a little bit at a very high level and from our day to day level. When I started here four years ago, people came in to buy diamonds and watches. And the last couple of months, people are hauling in sacks with candlesticks and forks and spoons, and we're buying — because we have to melt it — we're buying it probably like a 20% discount. But we've been buying a lot of silverware lately, so I don't know, people using plastic to eat. But I'm sure there's a lot of empty kitchens because people have brought their silver here.
 
 But there's a few reasons and you could speculate which ones had the biggest impact. But it really started a lot with the tariff policies and the uncertainty in the global economy and where things were going. We had markets, equities, debts, metals, everything was all over the place for a period of time until people started to breathe again and tariffs started to get challenged. And just at a micro level even what we do, we have a lot of manufacturing that we do in Thailand and in Hong Kong. And when this all first started, we were at a loss on how this was going to work and how we're going to price things. So whenever there's any kind of uncertainty locally or globally, metals always become a safe haven. And gold and silver during that period went up quite a bit.
 
@@ -109,48 +151,54 @@ And another thing that we've seen is less use of silver in retail jewelry produc
 
 So these are some of the factors that affected the decline. We hit the 70s this week. We don't really know. Yeah, we think over a long term silver's got value. It may not — I think the appreciation, the velocity of appreciation will be a little bit slower, but it's, we find it to be safe. We still believe it's at some point a $200 an ounce asset. Whether that's in December or that's in a year from now, we don't know. But I think as business people, we get very spoiled when you make quick hits on things. And if you make 30% in a year, that's normally pretty good, especially at an institutional level, right. You're not always going to make 300% in six months. But 30%, 20% is still better than a lot of opportunities, especially when you have a metal that has a lot of downside protection. Metal is never going to go to zero the way a stock can or a token. So that's our general philosophy on the space.
 
-**[24:09] [Victor Wong](/people/victor-wong):** [Pete](/people/pete-rinato), something you mentioned early on in your description on the silver prices. And I'm wondering if you think this has any impact because you've gotten a lot of speculators where they think silver is silver is silver, right, like it doesn't matter and then they can get out of it quickly. But if you refine it, like you said, it can be up to 20% off spot. Do you think, like, has that been a surprise to a lot of people who are kind of quickly just trying to get into the market, do you think?
+<h3 id="physical-vs-tokenized-liquidity">Physical vs tokenized liquidity</h3>
 
-**[24:38] [Pete Rinato](https://www.rinatolaw.com/):** A little bit. Also the matter of holding it varies, right? You can hold it through your platform. You can buy an ETF. There's a bunch of different — you can buy futures, options on futures or the physical material. I mean, one thing [Jeff](/people/jeffry-powell) and I have spoken about over the last few months, because of the volatility, buying and selling the physical metal has not been easy. People are very hesitant to buy. They want a decent discount in the event they wake up the next day and it's down 8 or 9%. And then because of the refinery backlogs, there hasn't been a lot available. So that's why we've aggressively been buying silverware from people's kitchens. But it's hard to tell the short term, but long term, we're very, very, very bullish on this industry.
+**[[24:09]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1449s) [Victor Wong](/people/victor-wong):** [Pete](/people/pete-rinato), something you mentioned early on in your description on the silver prices. And I'm wondering if you think this has any impact because you've gotten a lot of speculators where they think silver is silver is silver, right, like it doesn't matter and then they can get out of it quickly. But if you refine it, like you said, it can be up to 20% off spot. Do you think, like, has that been a surprise to a lot of people who are kind of quickly just trying to get into the market, do you think?
 
-**[25:37] [Jeffry Powell](/people/jeffry-powell):** Yeah.
+**[[24:38]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1478s) [Pete Rinato](https://www.rinatolaw.com/):** A little bit. Also the matter of holding it varies, right? You can hold it through your platform. You can buy an ETF. There's a bunch of different — you can buy futures, options on futures or the physical material. I mean, one thing [Jeff](/people/jeffry-powell) and I have spoken about over the last few months, because of the volatility, buying and selling the physical metal has not been easy. People are very hesitant to buy. They want a decent discount in the event they wake up the next day and it's down 8 or 9%. And then because of the refinery backlogs, there hasn't been a lot available. So that's why we've aggressively been buying silverware from people's kitchens. But it's hard to tell the short term, but long term, we're very, very, very bullish on this industry.
 
-**[25:40] [Kieren James-Lubin](/people/kieren-james-lubin):** Points on the price dynamics, fitting with the comments [Pete](/people/pete-rinato) made on the tariffs. We're seeing some of the central banks start to build up their gold and silver reserves. I think that was responsible for like some of the initial run up, kind of sparking the match, if you will. And I bet they're quietly accumulating as it's come down a little bit. Kind of right now. I haven't checked.
+**[[25:37]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1537s) [Jeffry Powell](/people/jeffry-powell):** Yeah.
+
+**[[25:40]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1540s) [Kieren James-Lubin](/people/kieren-james-lubin):** Points on the price dynamics, fitting with the comments [Pete](/people/pete-rinato) made on the tariffs. We're seeing some of the central banks start to build up their gold and silver reserves. I think that was responsible for like some of the initial run up, kind of sparking the match, if you will. And I bet they're quietly accumulating as it's come down a little bit. Kind of right now. I haven't checked.
 
 But another thing that's been bizarre is that gold, silver, silver in particular to [Pete](/people/pete-rinato)'s point really became kind of like a meme asset. Everything on social media now because memes spread so fast. It's like we've got meme stocks, we've got tokens, and I think it's such a powerful force that the behavior on any new asset investment opportunity or behavior is just so fast now. So I guess that probably means volatility will be high for a while or there'll be one really volatile thing at a given moment forever in a way we haven't seen before.
 
-**[26:50] [Jeffry Powell](/people/jeffry-powell):** Yeah. Okay. Yeah, thanks for that. So, [Pete](/people/pete-rinato), I'm just sort of — I just find myself replaying a mental image of the guy trying to hit the other guy with the car and him hitting it with like a bag of silver. And when the movie [Uncut Gems](https://www.imdb.com/title/tt5727208/) came out and we all saw it, like, we weren't involved in the metals business yet at that point in time, but I watched it again recently and really saw it in a different way. But not to try and make a caricature out of 47th Street or anything, but one of the things that's been amazing to me, and you alluded to this earlier and maybe just in the last few minutes, is like, it's not just the Diamond District. There's like so much stuff going on down there — jewelry and metals and real estate and, I mean, maybe you could just speak a little bit to the diversity of what's going on in that community.
+<h3 id="the-47th-street-marketplace">The 47th Street marketplace</h3>
 
-**[27:42] [Pete Rinato](https://www.rinatolaw.com/):** Purses and jackets and anything that has demand and value fluctuations or scarcity. It might be some special [Hermès](https://www.hermes.com/) purse that there's not a whole lot of them available and most of them are in Dubai. And this guy's dealing in that. It's just the merchant class. It's almost very anachronistic. It's like 70, 80 year old kind of industry in one street with a lot of colorful characters, many of which are very reputable. A few that are not, and the few that are not often cause a black eye.
+**[[26:50]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1610s) [Jeffry Powell](/people/jeffry-powell):** Yeah. Okay. Yeah, thanks for that. So, [Pete](/people/pete-rinato), I'm just sort of — I just find myself replaying a mental image of the guy trying to hit the other guy with the car and him hitting it with like a bag of silver. And when the movie [Uncut Gems](https://www.imdb.com/title/tt5727208/) came out and we all saw it, like, we weren't involved in the metals business yet at that point in time, but I watched it again recently and really saw it in a different way. But not to try and make a caricature out of [47th Street](https://en.wikipedia.org/wiki/47th_Street_(Manhattan)) or anything, but one of the things that's been amazing to me, and you alluded to this earlier and maybe just in the last few minutes, is like, it's not just the [Diamond District](https://en.wikipedia.org/wiki/47th_Street_(Manhattan)#Diamond_District). There's like so much stuff going on down there — jewelry and metals and real estate and, I mean, maybe you could just speak a little bit to the diversity of what's going on in that community.
+
+**[[27:42]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1662s) [Pete Rinato](https://www.rinatolaw.com/):** Purses and jackets and anything that has demand and value fluctuations or scarcity. It might be some special [Hermès](https://www.hermes.com/) purse that there's not a whole lot of them available and most of them are in Dubai. And this guy's dealing in that. It's just the merchant class. It's almost very anachronistic. It's like 70, 80 year old kind of industry in one street with a lot of colorful characters, many of which are very reputable. A few that are not, and the few that are not often cause a black eye.
 
 But you take a guy like Max at [Tracks](https://tracksnyc.com/) who's really leading the social media charge in this space. He spends a lot of money monthly. He has a big following. But the integrity of the block's important. For him it's a marketing play. This fight he had and he's drawn it out for weeks and weeks and weeks. But for us as a landlord who own that space that he's in, we want people to come in and feel confident they're buying a watch that's a real watch. They're buying 18 karat gold, it's 18 karat gold. That there's no shenanigans because the credibility of that marketplace is really the foundation of what's here. And when you lose that credibility, it hurts everyone's asset values.
 
-**[29:10] [Jeffry Powell](/people/jeffry-powell):** Yeah, okay, thanks for that.
+**[[29:10]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1750s) [Jeffry Powell](/people/jeffry-powell):** Yeah, okay, thanks for that.
 
-**[29:11] [Pete Rinato](https://www.rinatolaw.com/):** And it prevents us from charging high rent too. At the end of the day we're landlords. You want people to feel safe coming here.
+**[[29:11]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1751s) [Pete Rinato](https://www.rinatolaw.com/):** And it prevents us from charging high rent too. At the end of the day we're landlords. You want people to feel safe coming here.
 
-**[29:22] [Jeffry Powell](/people/jeffry-powell):** It is amazing to me how social media drives, seems to drive so much of the jewelry business, right. Especially the high end jewelry business. Okay, well I see we're about at time so I want to go to our On Chain Oracles. You guys have any concluding thoughts?
+<h3 id="closing">Closing thoughts</h3>
 
-**[29:42] [Pete Rinato](https://www.rinatolaw.com/):** You're not required.
+**[[29:22]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1762s) [Jeffry Powell](/people/jeffry-powell):** It is amazing to me how social media drives, seems to drive so much of the jewelry business, right. Especially the high end jewelry business. Okay, well I see we're about at time so I want to go to our On Chain Oracles. You guys have any concluding thoughts?
 
-**[29:44] [Kieren James-Lubin](/people/kieren-james-lubin):** Awesome. To hear a little bit more. It's been now at least a couple months since I've seen [Pete](/people/pete-rinato) in person so we should link up very soon and yeah, just absolute pleasure to have you and I know there are plenty more great stories that we can just kind of slowly dig out. I know a few more than we shared. Of course we'll get there.
+**[[29:42]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1782s) [Pete Rinato](https://www.rinatolaw.com/):** You're not required.
 
-**[30:12] [Pete Rinato](https://www.rinatolaw.com/):** And the thing is it's not static. I mean every day there could be something else. So Monday I might have four more for you.
+**[[29:44]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1784s) [Kieren James-Lubin](/people/kieren-james-lubin):** Awesome. To hear a little bit more. It's been now at least a couple months since I've seen [Pete](/people/pete-rinato) in person so we should link up very soon and yeah, just absolute pleasure to have you and I know there are plenty more great stories that we can just kind of slowly dig out. I know a few more than we shared. Of course we'll get there.
 
-**[30:22] [Victor Wong](/people/victor-wong):** Well, we always talk about the use cases of silver, but it's the first time we've heard about it as a weapon.
+**[[30:12]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1812s) [Pete Rinato](https://www.rinatolaw.com/):** And the thing is it's not static. I mean every day there could be something else. So Monday I might have four more for you.
 
-**[30:27] [Kieren James-Lubin](/people/kieren-james-lubin):** So it will never go to zero.
+**[[30:22]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1822s) [Victor Wong](/people/victor-wong):** Well, we always talk about the use cases of silver, but it's the first time we've heard about it as a weapon.
 
-**[30:31] [Pete Rinato](https://www.rinatolaw.com/):** I'm going to catch you the video when I get off here and you could share with the team.
+**[[30:27]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1827s) [Kieren James-Lubin](/people/kieren-james-lubin):** So it will never go to zero.
 
-**[30:35] [Victor Wong](/people/victor-wong):** Absolutely, absolutely. Well, thanks again, [Pete](/people/pete-rinato), and thank you for being our guide through this. I think the thing is that people now understand a little bit about just how complicated the metals jewelry industry is. I mean, you've given a good idea about that, but it's amazing how many things that are going on that people don't really understand.
+**[[30:31]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1831s) [Pete Rinato](https://www.rinatolaw.com/):** I'm going to catch you the video when I get off here and you could share with the team.
 
-**[30:58] [Pete Rinato](https://www.rinatolaw.com/):** The main thing I'll repeat is there's very few assets that could give you the growth that we've experienced in the last year that really has a ton, a ton, a ton of downside protection. It's just the bottom just doesn't drop out of it and make up, you know, make up that a little bit. But the trend is up, and it's always got value.
+**[[30:35]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1835s) [Victor Wong](/people/victor-wong):** Absolutely, absolutely. Well, thanks again, [Pete](/people/pete-rinato), and thank you for being our guide through this. I think the thing is that people now understand a little bit about just how complicated the metals jewelry industry is. I mean, you've given a good idea about that, but it's amazing how many things that are going on that people don't really understand.
 
-**[31:23] [Victor Wong](/people/victor-wong):** Awesome. Thanks again.
+**[[30:58]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1858s) [Pete Rinato](https://www.rinatolaw.com/):** The main thing I'll repeat is there's very few assets that could give you the growth that we've experienced in the last year that really has a ton, a ton, a ton of downside protection. It's just the bottom just doesn't drop out of it and make up, you know, make up that a little bit. But the trend is up, and it's always got value.
 
-**[31:25] [Jeffry Powell](/people/jeffry-powell):** All right, thanks. Thanks, [Pete](/people/pete-rinato).
+**[[31:23]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1883s) [Victor Wong](/people/victor-wong):** Awesome. Thanks again.
 
-**[31:28] [Kieren James-Lubin](/people/kieren-james-lubin):** Thank you.
+**[[31:25]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1885s) [Jeffry Powell](/people/jeffry-powell):** All right, thanks. Thanks, [Pete](/people/pete-rinato).
 
-**[31:28] [Pete Rinato](https://www.rinatolaw.com/):** Thanks, everyone.
+**[[31:28]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1888s) [Kieren James-Lubin](/people/kieren-james-lubin):** Thank you.
+
+**[[31:28]](https://www.youtube.com/watch?v=mrS9u_Z7vLQ&t=1888s) [Pete Rinato](https://www.rinatolaw.com/):** Thanks, everyone.
