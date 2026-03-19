@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Poppins } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
-import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from 'next/script'
 import './globals.css'
 
@@ -32,7 +31,18 @@ export default function RootLayout({
       <body className={`${poppins.variable} font-sans antialiased`}>
         {children}
         <Analytics />
-        <GoogleAnalytics gaId="G-HZMGT8Q60M" />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-729761438"
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-729761438');
+          `}
+        </Script>
         <Script
           src="https://tools.luckyorange.com/core/lo.js?site-id=74ce1a8e"
           strategy="afterInteractive"
