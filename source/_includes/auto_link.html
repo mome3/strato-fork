@@ -24,6 +24,39 @@ while ensuring clean, valid HTML output.
 {%- comment -%}Start with original content - normalize only for matching, not for replacement{%- endcomment -%}
 {%- assign body_content = include.content -%}
 
+{%- comment -%}Protect existing heading blocks before any markdown-link rewriting{%- endcomment -%}
+{%- assign protected_headings = "" | split: "" -%}
+{%- assign heading_counter = 0 -%}
+{%- for level in (1..6) -%}
+  {%- assign heading_open = '<h' | append: level -%}
+  {%- assign heading_close = '</h' | append: level | append: '>' -%}
+  {%- assign heading_parts = body_content | split: heading_open -%}
+  {%- if heading_parts.size > 1 -%}
+    {%- assign new_body = heading_parts[0] -%}
+    {%- for part in heading_parts offset: 1 -%}
+      {%- assign end_parts = part | split: heading_close -%}
+      {%- if end_parts.size > 1 -%}
+        {%- assign placeholder = '___PROTECTED_HEADING_' | append: heading_counter | append: '___' -%}
+        {%- assign original_heading = heading_open | append: end_parts[0] | append: heading_close -%}
+        {%- assign heading_pair = placeholder | append: '|||' | append: original_heading -%}
+        {%- assign protected_headings = protected_headings | push: heading_pair -%}
+        {%- assign new_body = new_body | append: placeholder -%}
+        {%- assign heading_counter = heading_counter | plus: 1 -%}
+        {%- for remaining in end_parts offset: 1 -%}
+          {%- if forloop.first -%}
+            {%- assign new_body = new_body | append: remaining -%}
+          {%- else -%}
+            {%- assign new_body = new_body | append: heading_close | append: remaining -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- assign new_body = new_body | append: heading_open | append: part -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- assign body_content = new_body -%}
+  {%- endif -%}
+{%- endfor -%}
+
 {%- comment -%}Convert markdown-style links [text](url) to HTML{%- endcomment -%}
 {%- assign converted = body_content -%}
 {%- comment -%}Process markdown links iteratively with a simpler, more robust approach{%- endcomment -%}
@@ -252,6 +285,35 @@ while ensuring clean, valid HTML output.
     {%- assign body_content = new_content -%}
   {%- endif -%}
 {%- endfor -%}
+
+{%- comment -%}Protect existing anchors so auto-linking never creates nested links{%- endcomment -%}
+{%- assign protected_anchors = "" | split: "" -%}
+{%- assign anchor_counter = 0 -%}
+{%- assign anchor_parts = body_content | split: '<a ' -%}
+{%- if anchor_parts.size > 1 -%}
+  {%- assign new_body = anchor_parts[0] -%}
+  {%- for part in anchor_parts offset: 1 -%}
+    {%- assign end_parts = part | split: '</a>' -%}
+    {%- if end_parts.size > 1 -%}
+      {%- assign placeholder = '___PROTECTED_ANCHOR_' | append: anchor_counter | append: '___' -%}
+      {%- assign original_anchor = '<a ' | append: end_parts[0] | append: '</a>' -%}
+      {%- assign anchor_pair = placeholder | append: '|||' | append: original_anchor -%}
+      {%- assign protected_anchors = protected_anchors | push: anchor_pair -%}
+      {%- assign new_body = new_body | append: placeholder -%}
+      {%- assign anchor_counter = anchor_counter | plus: 1 -%}
+      {%- for remaining in end_parts offset: 1 -%}
+        {%- if forloop.first -%}
+          {%- assign new_body = new_body | append: remaining -%}
+        {%- else -%}
+          {%- assign new_body = new_body | append: '</a>' | append: remaining -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      {%- assign new_body = new_body | append: '<a ' | append: part -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- assign body_content = new_body -%}
+{%- endif -%}
 
 {%- comment -%}Protect HTML attributes AFTER hidden content processing but BEFORE name replacements{%- endcomment -%}
 {%- assign protected_attributes = "" | split: "" -%}
@@ -500,6 +562,22 @@ while ensuring clean, valid HTML output.
   {%- assign placeholder = parts[0] -%}
   {%- assign original_content = parts[1] -%}
   {%- assign body_content = body_content | replace: placeholder, original_content -%}
+{%- endfor -%}
+
+{%- comment -%}Restore protected anchors{%- endcomment -%}
+{%- for pair in protected_anchors -%}
+  {%- assign parts = pair | split: '|||' -%}
+  {%- assign placeholder = parts[0] -%}
+  {%- assign original_anchor = parts[1] -%}
+  {%- assign body_content = body_content | replace: placeholder, original_anchor -%}
+{%- endfor -%}
+
+{%- comment -%}Restore protected headings{%- endcomment -%}
+{%- for pair in protected_headings -%}
+  {%- assign parts = pair | split: '|||' -%}
+  {%- assign placeholder = parts[0] -%}
+  {%- assign original_heading = parts[1] -%}
+{%- assign body_content = body_content | replace: placeholder, original_heading -%}
 {%- endfor -%}
 
 {{ body_content }}
