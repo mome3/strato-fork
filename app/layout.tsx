@@ -26,6 +26,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const enableLuckyOrange =
+    process.env.NODE_ENV === 'production' &&
+    process.env.NEXT_PUBLIC_ENABLE_LUCKY_ORANGE === 'true'
+
   return (
     <html lang="en">
       <body className={`${poppins.variable} font-sans antialiased`}>
@@ -43,12 +47,13 @@ export default function RootLayout({
             gtag('config', 'AW-729761438');
           `}
         </Script>
-        <Script
-          src="https://tools.luckyorange.com/core/lo.js?site-id=74ce1a8e"
-          strategy="afterInteractive"
-        />
+        {enableLuckyOrange ? (
+          <Script
+            src="https://tools.luckyorange.com/core/lo.js?site-id=74ce1a8e"
+            strategy="afterInteractive"
+          />
+        ) : null}
       </body>
     </html>
   )
 }
-

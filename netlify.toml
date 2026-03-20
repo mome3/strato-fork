@@ -6,6 +6,9 @@
   NODE_VERSION = "22"
   PNPM_VERSION = "10"
 
+[context.production.environment]
+  NEXT_PUBLIC_ENABLE_LUCKY_ORANGE = "true"
+
 [[headers]]
   for = "/*.svg"
   [headers.values]
