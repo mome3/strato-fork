@@ -1,12 +1,12 @@
-# Strato Nexus
+# STRATO
 
-The marketing and content website for **Strato Nexus** — a multi-asset DeFi platform that combines hard asset stability with on-chain efficiency. The site covers the product, team, blog, and legal pages, and is deployed on Vercel.
+The marketing and content website for **STRATO** — a multi-asset DeFi platform that combines hard asset stability with on-chain efficiency. The site covers the product, team, blog, and legal pages, and is deployed on Vercel.
 
 ---
 
 ## About This Project
 
-Strato Nexus is a consumer DeFi product built on the STRATO blockchain. This repository is the public-facing website, providing:
+STRATO is a consumer DeFi product built on the STRATO blockchain. This repository is the public-facing website, providing:
 
 - A product landing page with animated hero, feature cards, stats, and partner sections
 - A blog with category filtering, full-text post pages, and a featured carousel
@@ -276,7 +276,7 @@ const BANNER_CONFIG = {
   enabled: true,
 
   // Main heading — renders with an animated dark-blue-to-mint gradient
-  title: "Strato Nexus is Live",
+  title: "STRATO is Live",
 
   // Secondary line shown below the title (mobile) or inline (desktop)
   subtitle: "Start hedging with hard assets today",

@@ -104,7 +104,7 @@ export function HardMoneySection() {
             className="mt-2 w-full text-sm leading-relaxed text-white/70 md:text-base lg:text-lg"
             style={revealStyle(visible, 100)}
           >
-            Stop choosing between safety and growth. STRATO Nexus combines the
+            Stop choosing between safety and growth. STRATO combines the
             stability of hard assets with the efficiency of DeFi.
           </p>
         </div>
