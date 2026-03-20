@@ -8,6 +8,7 @@ export type { Category, Post }
 export { categories } from "./blog-constants"
 
 const postsDirectory = path.join(process.cwd(), "content/blog")
+const videosDirectory = path.join(process.cwd(), "content/video")
 
 /** Parse key="value" or key='value' pairs from a liquid tag body */
 function parseLiquidAttrs(body: string): Record<string, string> {
@@ -76,13 +77,14 @@ function sanitizeContent(content: string): string {
   return withResolvedUrls.replace(/<!--[\s\S]*?-->/g, "")
 }
 
-export function getAllPosts(): Post[] {
-  const fileNames = fs.readdirSync(postsDirectory)
+function parsePostsFromDirectory(directory: string): Post[] {
+  if (!fs.existsSync(directory)) return []
+  const fileNames = fs.readdirSync(directory)
   const posts = fileNames
     .filter((fileName) => fileName.endsWith(".mdx") || fileName.endsWith(".md"))
     .map((fileName) => {
       const slug = fileName.replace(/\.(mdx|md)$/, "")
-      const fullPath = path.join(postsDirectory, fileName)
+      const fullPath = path.join(directory, fileName)
       const fileContents = fs.readFileSync(fullPath, "utf8")
       const { data, content } = matter(fileContents)
 
@@ -106,6 +108,14 @@ export function getAllPosts(): Post[] {
   )
 }
 
+export function getAllPosts(): Post[] {
+  const blogPosts = parsePostsFromDirectory(postsDirectory)
+  const videoPosts = parsePostsFromDirectory(videosDirectory)
+  return [...blogPosts, ...videoPosts].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  )
+}
+
 export function getFeaturedPosts(): Post[] {
   return getAllPosts().filter((post) => post.featured)
 }
@@ -119,9 +129,9 @@ export function getPostsByCategory(category: Category): Post[] {
 }
 
 export function getVideoPosts(): Post[] {
-  return getAllPosts().filter((post) => post.categories === "Videos")
+  return parsePostsFromDirectory(videosDirectory)
 }
 
 export function getNonVideoPosts(): Post[] {
-  return getAllPosts().filter((post) => post.categories !== "Videos")
+  return parsePostsFromDirectory(postsDirectory)
 }
