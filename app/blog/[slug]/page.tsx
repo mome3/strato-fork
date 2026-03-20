@@ -22,7 +22,7 @@ export async function generateMetadata({
   const post = getPostBySlug(slug)
   if (!post) return { title: "Post Not Found" }
   return {
-    title: `${post.title} - Strato Nexus Blog`,
+    title: `${post.title} - STRATO Blog`,
     description: post.description,
   }
 }
