@@ -10,8 +10,8 @@ import { ArrowRight, X } from "lucide-react"
 const BANNER_CONFIG = {
   enabled: true,
 
-  title: "STRATO is Live",
-  subtitle: "Explore and experience the future of DeFi",
+  title: "TGE upcoming.",
+  subtitle: "Join the whitelist and latest news",
 
   /** The URL the entire banner links to */
   href: "https://app.strato.nexus/",

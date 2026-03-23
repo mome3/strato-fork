@@ -1,64 +1,64 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import lottie, { type AnimationItem } from "lottie-web"
-import { Navbar } from "./navbar"
-import { HighlightBanner } from "./highlight-banner"
-import { revealStyle } from "@/hooks/use-reveal"
-import { EXTERNAL_LINKS } from "@/lib/external-links"
+import { useEffect, useRef, useState } from "react";
+import lottie, { type AnimationItem } from "lottie-web";
+import { Navbar } from "./navbar";
+import { HighlightBanner } from "./highlight-banner";
+import { revealStyle } from "@/hooks/use-reveal";
+import { EXTERNAL_LINKS } from "@/lib/external-links";
 
 function isIPhone() {
-  if (typeof navigator === "undefined") return false
-  return /iPhone|iPod/i.test(navigator.userAgent)
+  if (typeof navigator === "undefined") return false;
+  return /iPhone|iPod/i.test(navigator.userAgent);
 }
 
 export function HeroSection() {
-  const [visible, setVisible] = useState(false)
-  const [heroHeight, setHeroHeight] = useState<string>("100dvh")
-  const lottieRef = useRef<HTMLDivElement>(null)
-  const animRef = useRef<AnimationItem | null>(null)
+  const [visible, setVisible] = useState(false);
+  const [heroHeight, setHeroHeight] = useState<string>("100dvh");
+  const lottieRef = useRef<HTMLDivElement>(null);
+  const animRef = useRef<AnimationItem | null>(null);
 
   useEffect(() => {
-    if (!lottieRef.current) return
+    if (!lottieRef.current) return;
     animRef.current = lottie.loadAnimation({
       container: lottieRef.current,
       renderer: "svg",
       loop: true,
       autoplay: true,
       path: "/lotties/hero.json",
-    })
+    });
     return () => {
       if (animRef.current) {
-        animRef.current.destroy()
-        animRef.current = null
+        animRef.current.destroy();
+        animRef.current = null;
       }
-    }
-  }, [])
+    };
+  }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => setVisible(true), 50)
-    return () => clearTimeout(timer)
-  }, [])
+    const timer = setTimeout(() => setVisible(true), 50);
+    return () => clearTimeout(timer);
+  }, []);
 
   // iPhone-only: lock hero height to window.outerHeight (covers glass chrome area)
   // Elsewhere: use 100dvh.
   useEffect(() => {
     if (!isIPhone()) {
-      setHeroHeight("100dvh")
-      return
+      setHeroHeight("100dvh");
+      return;
     }
 
-    const update = () => setHeroHeight(`${window.outerHeight}px`)
+    const update = () => setHeroHeight(`${window.outerHeight}px`);
 
-    update()
-    window.addEventListener("resize", update)
-    window.addEventListener("orientationchange", update)
+    update();
+    window.addEventListener("resize", update);
+    window.addEventListener("orientationchange", update);
 
     return () => {
-      window.removeEventListener("resize", update)
-      window.removeEventListener("orientationchange", update)
-    }
-  }, [])
+      window.removeEventListener("resize", update);
+      window.removeEventListener("orientationchange", update);
+    };
+  }, []);
 
   return (
     <section
@@ -113,18 +113,17 @@ export function HeroSection() {
             style={revealStyle(visible, 100)}
           >
             <h1 className="text-balance text-6xl font-bold leading-[1.05] tracking-tight text-[#243486] sm:text-6xl lg:text-8xl">
-              Stability
+              DeFi Powered
               <br />
-              Meets
-              <br />
-              Opportunity
+              by Precious Metals
             </h1>
 
             <p
               className="mt-4 max-w-lg font-regular text-lg text-[#000000] lg:max-w-lg"
               style={revealStyle(visible, 200)}
             >
-              Diverse asset classes, one platform. From crypto to precious metals to tokenized securities—investing made simple for everyone.
+              Gold, silver, and top-tier crypto assets all on one chain. Built
+              by Ethereum OGs.
             </p>
 
             <a
@@ -134,7 +133,7 @@ export function HeroSection() {
               className="mt-6 inline-flex rounded-full bg-[#243486] px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-[#1a276a]"
               style={revealStyle(visible, 300)}
             >
-              Go to App
+              Explore
             </a>
           </div>
 
@@ -166,5 +165,5 @@ export function HeroSection() {
       {/* Floating highlight banner at bottom of hero */}
       <HighlightBanner />
     </section>
-  )
+  );
 }

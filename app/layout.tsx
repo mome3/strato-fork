@@ -11,7 +11,7 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: 'STRATO - Stability Meets Opportunity',
+  title: 'STRATO - DeFi Powered by Precious Metals',
   description:
     'Diverse asset classes, one platform. From crypto to precious metals to tokenized securities—investing made simple for everyone.',
 }
