@@ -4,7 +4,7 @@ import { useReveal, revealStyle } from "@/hooks/use-reveal"
 import { useEffect, useRef, useState } from "react"
 
 const stats = [
-  { value: "$8.5M+", label: "Secured on-chain", numericValue: 8.5 },
+  { value: "$10M+", label: "Total Value Locked", numericValue: 10 },
   { value: "$1.7M+", label: "Loans Originated", numericValue: 1.7 },
   { value: "2M+", label: "Campaign Points Issued", numericValue: 2 },
 ]
