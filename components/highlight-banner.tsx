@@ -10,8 +10,8 @@ import { ArrowRight, X } from "lucide-react"
 const BANNER_CONFIG = {
   enabled: true,
 
-  title: "STRATO is Live",
-  subtitle: "Explore and experience the future of DeFi",
+  title: "TGE upcoming.",
+  subtitle: "Join the whitelist and latest news",
 
   /** The URL the entire banner links to */
   href: "https://app.strato.nexus/",
@@ -119,7 +119,7 @@ export function HighlightBanner() {
           className="group flex min-w-0 flex-1 items-center gap-3 md:gap-4"
         >
           {/* Text content */}
-          <div className="flex min-w-0 flex-1 flex-col gap-0.5 md:flex-row md:items-center md:gap-3">
+          <div className="flex min-w-0 flex-1 flex-col items-center gap-0.5 text-center md:flex-row md:items-center md:justify-center md:gap-3">
             <span
               className="shrink-0 text-sm font-semibold"
               style={{

@@ -7,12 +7,12 @@ import { useReveal, revealStyle } from "@/hooks/use-reveal"
  *  Adjust `height` per logo to achieve optical balance at larger sizes.
  * ────────────────────────────────────────────────────────────────────── */
 const partners = [
-  { name: "Galaxy", logo: "/partners/Galaxy logo.svg", height: 48 },
-  { name: "Morgan Creek", logo: "/partners/Morgan Creek Logo.svg", height: 52 },
-  { name: "Consensys", logo: "/partners/Consensys Logo.svg", height: 48 },
-  { name: "Fenbushi", logo: "/partners/Fenbushi Logo.svg", height: 54 },
-  { name: "Liberty City", logo: "/partners/Liberty City Logo.svg", height: 72 },
-  { name: "Bloccelerate", logo: "/partners/Bloccelerate Logo.svg", height: 48 },
+  { name: "Galaxy", logo: "/partners/Galaxy logo.svg", height: 48, href: "https://www.galaxy.com/" },
+  { name: "Morgan Creek", logo: "/partners/Morgan Creek Logo.svg", height: 52, href: "https://www.morgancreekcap.com/" },
+  { name: "Consensys", logo: "/partners/Consensys Logo.svg", height: 48, href: "https://consensys.io/" },
+  { name: "Fenbushi", logo: "/partners/Fenbushi Logo.svg", height: 54, href: "https://fenbushi.vc/" },
+  { name: "Liberty City", logo: "/partners/Liberty City Logo.svg", height: 72, href: "https://www.libertycityventures.com/" },
+  { name: "Bloccelerate", logo: "/partners/Bloccelerate Logo.svg", height: 48, href: "https://bloccelerate.vc/" },
 ]
 
 export function PartnersSection() {
@@ -52,9 +52,12 @@ export function PartnersSection() {
             }}
           >
             {logos.map((partner, i) => (
-              <div
+              <a
                 key={`${partner.name}-${i}`}
-                className="flex shrink-0 items-center justify-center brightness-0 invert"
+                href={partner.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex shrink-0 items-center justify-center brightness-0 invert transition-opacity hover:opacity-70"
               >
                 <Image
                   src={partner.logo}
@@ -63,7 +66,7 @@ export function PartnersSection() {
                   height={partner.height}
                   style={{ height: partner.height, width: "auto" }}
                 />
-              </div>
+              </a>
             ))}
           </div>
         </div>
