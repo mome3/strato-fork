@@ -30,6 +30,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  verification: {
+    google: 'bsSj0bVLBITxA5ts0NsJlm2RlIfhD3KRUE1C4KDJnU8',
+  },
 }
 
 export const viewport: Viewport = {
@@ -52,15 +55,15 @@ export default function RootLayout({
         {children}
         <Analytics />
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-729761438"
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
           strategy="afterInteractive"
         />
-        <Script id="google-ads" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'AW-729761438');
+            gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
           `}
         </Script>
         {enableLuckyOrange ? (
