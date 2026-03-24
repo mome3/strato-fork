@@ -2,8 +2,11 @@ import { LegalPage } from "@/components/legal-page"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Privacy Policy - STRATO",
+  title: "Privacy Policy",
   description: "Privacy Policy for STRATO describing how we collect, use, and protect your information.",
+  alternates: {
+    canonical: "/privacy",
+  },
 }
 
 export default function PrivacyPolicyPage() {

@@ -2,8 +2,11 @@ import { LegalPage } from "@/components/legal-page"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "API Terms of Use - STRATO",
+  title: "API Terms of Use",
   description: "API Terms of Use for STRATO governing access to and use of BlockApps developer APIs and services.",
+  alternates: {
+    canonical: "/api-terms",
+  },
 }
 
 export default function ApiTermsPage() {

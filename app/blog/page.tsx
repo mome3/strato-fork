@@ -10,9 +10,16 @@ import type { Post } from "@/lib/blog-constants"
 const blogCategories = ["All", ...categories.filter((c) => c !== "Videos")] as const
 
 export const metadata = {
-  title: "Blog - STRATO",
+  title: "Blog",
   description:
     "Latest updates, guides, and community news from the STRATO team.",
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    title: "Blog - STRATO",
+    description: "Latest updates, guides, and community news from the STRATO team.",
+  },
 }
 
 async function withBlur(posts: Post[]): Promise<Post[]> {

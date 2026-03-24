@@ -4,13 +4,44 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import { JsonLd } from "@/components/json-ld"
 import { getMemberBySlug, teamMembers } from "@/lib/team-data"
 import { getMemberMdxBySlug } from "@/lib/team-content"
+import { personJsonLd, breadcrumbJsonLd } from "@/lib/seo"
 import { ArrowLeft } from "lucide-react"
 import { MDXRemote } from "next-mdx-remote/rsc"
 
 export async function generateStaticParams() {
   return teamMembers.map((m) => ({ slug: m.slug }))
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const member = getMemberBySlug(slug)
+  if (!member) return { title: "Member Not Found" }
+  return {
+    title: `${member.name} - ${member.jobTitle}`,
+    description: member.summary,
+    alternates: {
+      canonical: `/team/${member.slug}`,
+    },
+    openGraph: {
+      type: "profile" as const,
+      title: `${member.name} - ${member.jobTitle}`,
+      description: member.summary,
+      images: member.image ? [{ url: member.image }] : undefined,
+    },
+    twitter: {
+      card: "summary" as const,
+      title: `${member.name} - ${member.jobTitle}`,
+      description: member.summary,
+      images: member.image ? [member.image] : undefined,
+    },
+  }
 }
 
 // Social icon SVGs inline to avoid extra deps
@@ -117,6 +148,12 @@ export default async function MemberPage({
 
   return (
     <div className="relative min-h-screen bg-[#f9f9f9]">
+      <JsonLd data={personJsonLd(member)} />
+      <JsonLd data={breadcrumbJsonLd([
+        { name: "Home", url: "/" },
+        { name: "Team", url: "/team" },
+        { name: member.name, url: `/team/${member.slug}` },
+      ])} />
       {/* Background artwork */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden opacity-80">
         <img

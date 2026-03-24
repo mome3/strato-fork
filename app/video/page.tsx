@@ -7,9 +7,16 @@ import { getBlurDataURL } from "@/lib/blur"
 import type { Post } from "@/lib/blog-constants"
 
 export const metadata = {
-  title: "Videos - STRATO",
+  title: "Videos",
   description:
     "Watch the latest videos, talks, and discussions from the STRATO team.",
+  alternates: {
+    canonical: "/video",
+  },
+  openGraph: {
+    title: "Videos - STRATO",
+    description: "Watch the latest videos, talks, and discussions from the STRATO team.",
+  },
 }
 
 async function withBlur(posts: Post[]): Promise<Post[]> {

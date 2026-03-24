@@ -6,7 +6,9 @@ import remarkGfm from "remark-gfm"
 import { ArrowLeft } from "lucide-react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import { JsonLd } from "@/components/json-ld"
 import { getNonVideoPosts, getPostBySlug } from "@/lib/posts"
+import { articleJsonLd, breadcrumbJsonLd } from "@/lib/seo"
 
 export async function generateStaticParams() {
   const posts = getNonVideoPosts()
@@ -22,8 +24,27 @@ export async function generateMetadata({
   const post = getPostBySlug(slug)
   if (!post) return { title: "Post Not Found" }
   return {
-    title: `${post.title} - STRATO Blog`,
+    title: post.title,
     description: post.description,
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+    },
+    openGraph: {
+      type: "article" as const,
+      title: post.title,
+      description: post.description,
+      images: post.img ? [{ url: post.img }] : undefined,
+      article: {
+        publishedTime: post.date,
+        authors: [post.author],
+      },
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title: post.title,
+      description: post.description,
+      images: post.img ? [post.img] : undefined,
+    },
   }
 }
 
@@ -39,6 +60,12 @@ export default async function BlogPostPage({
 
   return (
     <div className="relative min-h-screen bg-[#f9f9f9]">
+      <JsonLd data={articleJsonLd(post, "/blog")} />
+      <JsonLd data={breadcrumbJsonLd([
+        { name: "Home", url: "/" },
+        { name: "Blog", url: "/blog" },
+        { name: post.title, url: `/blog/${post.slug}` },
+      ])} />
       {/* Background artwork */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden opacity-80">
         <img

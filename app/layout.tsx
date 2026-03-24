@@ -11,9 +11,25 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: 'STRATO - DeFi Powered by Precious Metals',
+  metadataBase: new URL('https://strato.nexus'),
+  title: {
+    default: 'STRATO - DeFi Powered by Precious Metals',
+    template: '%s | STRATO',
+  },
   description:
     'Diverse asset classes, one platform. From crypto to precious metals to tokenized securities—investing made simple for everyone.',
+  openGraph: {
+    type: 'website',
+    siteName: 'STRATO',
+    images: [{ url: '/strato-logo.svg' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@strato_net',
+  },
+  alternates: {
+    canonical: '/',
+  },
 }
 
 export const viewport: Viewport = {

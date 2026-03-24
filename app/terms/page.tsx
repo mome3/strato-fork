@@ -2,8 +2,11 @@ import { LegalPage } from "@/components/legal-page"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Terms of Service - STRATO",
+  title: "Terms of Service",
   description: "STRATO's Terms of Service Agreement governing your access to and use of our products and services.",
+  alternates: {
+    canonical: "/terms",
+  },
 }
 
 export default function TermsOfServicePage() {

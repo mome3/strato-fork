@@ -1,7 +1,21 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { departments, getMembersByDepartment, TeamMember } from "@/lib/team-data"
+
+export const metadata: Metadata = {
+  title: "Team",
+  description:
+    "Meet the team behind STRATO — building DeFi powered by precious metals.",
+  alternates: {
+    canonical: "/team",
+  },
+  openGraph: {
+    title: "Team - STRATO",
+    description: "Meet the team behind STRATO — building DeFi powered by precious metals.",
+  },
+}
 
 function MemberCard({ member }: { member: TeamMember }) {
   return (
