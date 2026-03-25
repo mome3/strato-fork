@@ -2,7 +2,7 @@
 title: "Verified and Vaulted: Q1 2026 Precious Metals Audit Results"
 date: "2026-03-25"
 description: "Independent CPA audit and vaulting confirmation verify over 711 ounces of gold and 46,000 ounces of silver backing tokenized metals on STRATO."
-categories: "Updates"
+categories: "Audits"
 img: /blog/precious-metals-audit-march-2026.jpg
 featured: true
 author: "Michael Tan"
