@@ -1,4 +1,4 @@
-export type Category = "Updates" | "Guides" | "Community" | "Videos"
+export type Category = "Updates" | "Guides" | "Community" | "Videos" | "Audits"
 
 export interface Post {
   slug: string
@@ -20,4 +20,5 @@ export const categories: Category[] = [
   "Guides",
   "Community",
   "Videos",
+  "Audits",
 ]
