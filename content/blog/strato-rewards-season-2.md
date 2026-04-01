@@ -48,8 +48,6 @@ Each pool earns points continuously based on your share of total staked value. T
 
 Every activity has a defined **emission rate** — the number of points distributed daily across all participants. Your share depends on your stake relative to the pool. Here's a snapshot of current rates:
 
-![Season 2 Reward Activities](/blog/season-2-rewards-activities.png)
-
 Activities like Direct Mint USDST and the USDC-USDT-USDST Swap LP each emit **1,111.11 points per day**, while saveUSDST Stake and GOLDST-USDST Swap LP each emit **555.56 points per day**. Estimated Incentive APY varies by pool and total stake — early participants benefit from higher rates.
 
 ## How to Start Earning
