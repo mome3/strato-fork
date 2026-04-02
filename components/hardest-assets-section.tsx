@@ -112,7 +112,7 @@ export function HardestAssetsSection() {
         {/* CTA */}
         <div className="flex justify-center" style={revealStyle(visible, 400)}>
           <Link
-            href="#"
+            href="https://app.strato.nexus/dashboard/deposits"
             className="group inline-flex items-center gap-2 rounded-full bg-[#243486] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1a2766]"
           >
             Buy Precious Metals
