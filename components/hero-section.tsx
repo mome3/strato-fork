@@ -20,6 +20,7 @@ export function HeroSection() {
 
   useEffect(() => {
     if (!lottieRef.current) return;
+
     animRef.current = lottie.loadAnimation({
       container: lottieRef.current,
       renderer: "svg",
@@ -27,6 +28,7 @@ export function HeroSection() {
       autoplay: true,
       path: "/lotties/hero.json",
     });
+
     return () => {
       if (animRef.current) {
         animRef.current.destroy();
@@ -62,50 +64,29 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative z-[5] w-full overflow-hidden rounded-b-[32px] bg-[#f9f9f9] pb-[32px]"
+      className="relative w-full overflow-hidden"
       style={{ height: heroHeight }}
     >
-      {/* Background Artwork */}
-      <div className="pointer-events-none absolute right-0 top-0 h-full w-auto overflow-hidden rounded-b-[32px] opacity-100">
-        <img
-          src="/background-artwork-mobile.svg"
-          alt=""
-          className="h-full w-auto object-cover md:hidden"
-        />
-        <img
-          src="/background-artwork.svg"
-          alt=""
-          className="hidden h-full w-auto object-cover md:block"
-        />
-      </div>
-
       <div className="relative mx-auto flex h-full max-w-[1280px] flex-col px-4 md:px-8 lg:px-12">
-        {/* Navbar */}
         <div className="relative z-10 pt-4 md:pt-6 lg:pt-8">
           <Navbar />
         </div>
 
-        {/* Hero Layout */}
         <div
           className="
             flex flex-1 flex-col
-
             lg:flex-row lg:items-center lg:justify-between
-
             [@media(min-aspect-ratio:1/1)_and_(min-height:500px)]:flex-row
             [@media(min-aspect-ratio:1/1)_and_(min-height:500px)]:items-center
             [@media(min-aspect-ratio:1/1)_and_(min-height:500px)]:justify-between
           "
         >
-          {/* Hero Copy */}
           <div
             className="
               flex-none
               pt-16 md:pt-16
               flex flex-col items-center text-center
-
               lg:pt-0 lg:items-start lg:text-left
-
               [@media(min-aspect-ratio:1/1)_and_(min-height:500px)]:pt-0
               [@media(min-aspect-ratio:1/1)_and_(min-height:500px)]:items-start
               [@media(min-aspect-ratio:1/1)_and_(min-height:500px)]:text-left
@@ -119,7 +100,7 @@ export function HeroSection() {
             </h1>
 
             <p
-              className="mt-4 max-w-lg font-regular text-lg text-[#000000] lg:max-w-lg"
+              className="mt-4 max-w-lg text-lg text-[#000000] lg:max-w-lg"
               style={revealStyle(visible, 200)}
             >
               Gold, silver, and top-tier crypto assets all on one chain. Built
@@ -137,20 +118,16 @@ export function HeroSection() {
             </a>
           </div>
 
-          {/* Hero Media */}
           <div
             className="
               pointer-events-none flex-1 min-h-0
               flex items-center justify-center
-
               lg:flex-initial
               [@media(min-aspect-ratio:1/1)_and_(min-height:500px)]:flex-initial
             "
             style={revealStyle(visible, 200)}
           >
-            {/* Container size stays fixed per breakpoint */}
             <div className="relative flex h-[280px] w-[280px] items-center justify-center overflow-visible rounded-2xl md:h-[360px] md:w-[360px] lg:h-[440px] lg:w-[440px]">
-              {/* Always-centered scaled layer */}
               <div
                 ref={lottieRef}
                 aria-hidden="true"
@@ -162,7 +139,6 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Floating highlight banner at bottom of hero */}
       <HighlightBanner />
     </section>
   );

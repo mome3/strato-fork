@@ -24,25 +24,25 @@ export function PartnersSection() {
   return (
     <section
       ref={ref}
-      className="relative z-[4] -mt-[32px] w-full rounded-b-[32px] bg-[#243486] pb-[32px]"
+      className="relative w-full"
     >
-      <div className="mx-auto max-w-[1280px] px-4 pt-16 md:px-8 lg:px-12">
+      <div className="mx-auto max-w-[1280px] px-4 pb-16 pt-8 md:px-8 lg:px-12 lg:pb-24">
         <h3
-          className="mb-6 text-center font-sans text-sm font-medium uppercase tracking-[0.2em] text-white"
+          className="mb-6 font-sans text-sm font-medium uppercase tracking-[0.2em] text-[#243486]/70"
           style={revealStyle(visible, 0)}
         >
           Backed By
         </h3>
 
-        {/* Carousel wrapper with fade masks */}
+        {/* Carousel wrapper with fade masks using CSS mask for transparency */}
         <div
           className="relative -mx-4 overflow-hidden md:-mx-8 lg:-mx-12"
-          style={revealStyle(visible, 100)}
+          style={{
+            ...revealStyle(visible, 100),
+            maskImage: "linear-gradient(to right, transparent, black 80px, black calc(100% - 80px), transparent)",
+            WebkitMaskImage: "linear-gradient(to right, transparent, black 80px, black calc(100% - 80px), transparent)",
+          }}
         >
-          {/* Left fade */}
-          <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-[#243486] to-transparent md:w-32" />
-          {/* Right fade */}
-          <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-[#243486] to-transparent md:w-32" />
 
           {/* Scrolling track */}
           <div
@@ -57,7 +57,8 @@ export function PartnersSection() {
                 href={partner.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex shrink-0 items-center justify-center brightness-0 invert transition-opacity hover:opacity-70"
+                className="flex shrink-0 items-center justify-center transition-opacity hover:opacity-70"
+                style={{ filter: "brightness(0) saturate(100%) invert(18%) sepia(45%) saturate(1800%) hue-rotate(213deg) brightness(90%) contrast(95%)" }}
               >
                 <Image
                   src={partner.logo}
@@ -71,7 +72,6 @@ export function PartnersSection() {
           </div>
         </div>
 
-        <div className="mt-12 h-px w-full bg-white/20" />
       </div>
     </section>
   )

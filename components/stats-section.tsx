@@ -60,12 +60,8 @@ export function StatsSection() {
   const { ref, visible } = useReveal()
 
   return (
-    <section ref={ref} className="relative z-[3] -mt-[32px] w-full rounded-b-[32px] bg-[#f9f9f9] pb-[32px]">
+    <section ref={ref} className="relative w-full">
       <div className="mx-auto max-w-[1280px] px-4 py-16 md:px-8 lg:px-12 lg:py-24">
-        <h2 className="mb-10 text-3xl font-bold text-[#1a1a2e] md:text-4xl lg:text-5xl" style={revealStyle(visible, 0)}>
-          The Ledger In Motion
-        </h2>
-
         {/* Stats Cards Group */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-stretch">
           {/* Left card (stretches to match right column total height) */}

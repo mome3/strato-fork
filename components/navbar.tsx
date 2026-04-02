@@ -1,9 +1,181 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Menu, X } from "lucide-react"
+import { ChevronDown, ArrowRight, Menu, X } from "lucide-react"
 import Link from "next/link"
+import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu"
+import { cn } from "@/lib/utils"
 import { EXTERNAL_LINKS } from "@/lib/external-links"
+
+// ─── Nav structure ────────────────────────────────────────────────────────────
+
+const NAV_ITEMS = [
+  {
+    label: "Team",
+    href: "/team",
+  },
+  {
+    label: "Get Started",
+    items: [
+      { label: "Onboarding Guide", href: "https://docs.strato.nexus/scenarios/first-time-user/", external: true },
+      { label: "STRATO Strategies", href: "https://docs.strato.nexus/scenarios/maximize-yield/", external: true },
+      { label: "Bridge to STRATO", href: "https://docs.strato.nexus/guides/bridge/", external: true },
+    ],
+  },
+  {
+    label: "Explore",
+    items: [
+      { label: "CATA Rewards", href: "https://strato.nexus/blog/introducing-strato-rewards", external: true },
+      { label: "Build on Strato", href: "https://docs.strato.nexus/build-apps/overview/", external: true },
+    ],
+  },
+  {
+    label: "Products",
+    items: [
+      { label: "Buy Metals", href: "https://app.strato.nexus/dashboard/deposits", external: true },
+      { label: "MetaMask Card", href: "https://strato.nexus/blog/metamask-card-integration", external: true },
+      { label: "Vaults", href: "https://app.strato.nexus/dashboard/vault", external: true },
+    ],
+  },
+  {
+    label: "Resources",
+    items: [
+      { label: "FAQ", href: "https://docs.strato.nexus/faq/", external: true },
+      { label: "Blog", href: "/blog", external: false },
+      { label: "Video", href: "/video", external: false },
+    ],
+  },
+] as const
+
+// ─── Dropdown item ─────────────────────────────────────────────────────────────
+
+function DropdownItem({
+  label,
+  href,
+  external,
+}: {
+  label: string
+  href: string
+  external: boolean
+}) {
+  const linkProps = external ? { target: "_blank", rel: "noopener noreferrer" } : {}
+  return (
+    <NavigationMenuPrimitive.Link asChild>
+      <a
+        href={href}
+        className="group/item flex w-full items-center justify-between rounded-full px-4 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-[#1a2761]"
+        {...linkProps}
+      >
+        <span>{label}</span>
+        <ArrowRight className="h-4 w-4 shrink-0 opacity-0 transition-opacity group-hover/item:opacity-100" />
+      </a>
+    </NavigationMenuPrimitive.Link>
+  )
+}
+
+// ─── Desktop nav ───────────────────────────────────────────────────────────────
+
+function DesktopNav() {
+  return (
+    <NavigationMenuPrimitive.Root className="relative hidden items-center md:flex">
+      <NavigationMenuPrimitive.List className="flex items-center gap-1">
+        {NAV_ITEMS.map((item) => {
+          if ("href" in item) {
+            // Plain link (Team)
+            return (
+              <NavigationMenuPrimitive.Item key={item.label}>
+                <NavigationMenuPrimitive.Link asChild>
+                  <Link
+                    href={item.href}
+                    className="inline-flex items-center rounded-full px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#1a2761]"
+                  >
+                    {item.label}
+                  </Link>
+                </NavigationMenuPrimitive.Link>
+              </NavigationMenuPrimitive.Item>
+            )
+          }
+
+          // Dropdown
+          return (
+            <NavigationMenuPrimitive.Item key={item.label} className="relative">
+              <NavigationMenuPrimitive.Trigger
+                className={cn(
+                  "group/trigger inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium text-white transition-colors",
+                  "hover:bg-[#1a2761] data-[state=open]:bg-[#1a2761]",
+                  "focus:outline-none"
+                )}
+              >
+                {item.label}
+                <ChevronDown
+                  className="h-3.5 w-3.5 transition-transform duration-200 group-data-[state=open]/trigger:rotate-180"
+                  aria-hidden
+                />
+              </NavigationMenuPrimitive.Trigger>
+
+              <NavigationMenuPrimitive.Content className="absolute top-full z-50 pt-4 data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out">
+                <div className="w-[280px] rounded-2xl bg-[#243486] p-2 shadow-xl">
+                  {item.items.map((child) => (
+                    <DropdownItem key={child.label} {...child} />
+                  ))}
+                </div>
+              </NavigationMenuPrimitive.Content>
+            </NavigationMenuPrimitive.Item>
+          )
+        })}
+      </NavigationMenuPrimitive.List>
+    </NavigationMenuPrimitive.Root>
+  )
+}
+
+// ─── Mobile accordion item ─────────────────────────────────────────────────────
+
+function MobileAccordionItem({
+  label,
+  items,
+  onClose,
+}: {
+  label: string
+  items: readonly { label: string; href: string; external: boolean }[]
+  onClose: () => void
+}) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div>
+      <button
+        className="flex w-full items-center justify-between py-1 text-3xl font-semibold text-[#1a1a2e] hover:text-[#243486]"
+        onClick={() => setOpen((o) => !o)}
+      >
+        {label}
+        <ChevronDown
+          className={cn("h-6 w-6 transition-transform duration-200", open && "rotate-180")}
+        />
+      </button>
+      {open && (
+        <div className="mt-2 flex flex-col gap-1 pl-2">
+          {items.map((child) => {
+            const linkProps = child.external
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {}
+            return (
+              <a
+                key={child.label}
+                href={child.href}
+                className="text-xl font-medium text-[#243486]/80 hover:text-[#243486]"
+                onClick={onClose}
+                {...linkProps}
+              >
+                {child.label}
+              </a>
+            )
+          })}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ─── Root Navbar ───────────────────────────────────────────────────────────────
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -21,34 +193,26 @@ export function Navbar() {
     const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
 
     if (mobileOpen) {
-      // Save current theme color once, then force Safari chrome to match the menu (white)
       if (meta && prevThemeColorRef.current === null) {
         prevThemeColorRef.current = meta.getAttribute("content")
       }
       setThemeColor("#ffffff")
-
-      // Lock scroll (your original approach)
       scrollPositionRef.current = window.scrollY
       document.body.style.position = "fixed"
       document.body.style.top = `-${scrollPositionRef.current}px`
       document.body.style.width = "100%"
       document.body.style.overflow = "hidden"
     } else {
-      // Unlock scroll
       const scrollY = scrollPositionRef.current
       document.body.style.position = ""
       document.body.style.top = ""
       document.body.style.width = ""
       document.body.style.overflow = ""
       window.scrollTo(0, scrollY)
-
-      // Restore theme color so Safari chrome goes back to what it was before opening
       if (prevThemeColorRef.current) {
         setThemeColor(prevThemeColorRef.current)
         prevThemeColorRef.current = null
       }
-
-      // Nudge a repaint (helps iOS Safari update the top/bottom chrome immediately)
       requestAnimationFrame(() => window.scrollTo(0, scrollY))
     }
 
@@ -72,6 +236,8 @@ export function Navbar() {
     }
   }
 
+  const closeMenu = () => toggleMenu()
+
   return (
     <>
       <nav className="flex items-center justify-between rounded-full bg-[#243486] px-4 py-3 md:px-6 md:py-2">
@@ -80,41 +246,8 @@ export function Navbar() {
           <img src="/strato-logo.svg" alt="STRATO" className="h-6 w-auto md:h-7" />
         </Link>
 
-        {/* Desktop Links */}
-        <div className="hidden items-center gap-6 md:flex">
-          <Link
-            href="/blog"
-            className="text-sm font-medium text-white transition-colors hover:text-white/80"
-          >
-            Blog
-          </Link>
-          <Link
-            href="/video"
-            className="text-sm font-medium text-white transition-colors hover:text-white/80"
-          >
-            Videos
-          </Link>
-          <Link
-            href="/team"
-            className="text-sm font-medium text-white transition-colors hover:text-white/80"
-          >
-            Team
-          </Link>
-          <Link
-            href="/contact"
-            className="text-sm font-medium text-white transition-colors hover:text-white/80"
-          >
-            Contact
-          </Link>
-          <a
-            href={EXTERNAL_LINKS.docs}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden text-sm font-medium text-white transition-colors hover:text-white/80 lg:block"
-          >
-            Docs
-          </a>
-        </div>
+        {/* Desktop nav */}
+        <DesktopNav />
 
         {/* CTA */}
         <a
@@ -126,39 +259,38 @@ export function Navbar() {
           Launch App
         </a>
 
-        {/* Mobile Hamburger */}
+        {/* Mobile hamburger */}
         <button className="text-white md:hidden" onClick={toggleMenu} aria-label="Toggle menu">
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </nav>
 
-      {/* Full Screen Mobile Menu Overlay (white so Safari chrome doesn't darken) */}
+      {/* Mobile overlay */}
       {mobileOpen && (
         <div
-          className={`fixed left-0 top-0 z-[9998] h-[100dvh] w-screen bg-white md:hidden ${isClosing ? "animate-out fade-out duration-150" : "animate-in fade-in duration-150"
-            }`}
+          className={`fixed left-0 top-0 z-[9998] h-[100dvh] w-screen bg-white md:hidden ${
+            isClosing ? "animate-out fade-out duration-150" : "animate-in fade-in duration-150"
+          }`}
         />
       )}
 
-      {/* Full Screen Mobile Menu Panel */}
+      {/* Mobile panel */}
       {mobileOpen && (
         <div
           className={`fixed left-0 top-0 z-[9999] flex h-[100dvh] w-screen flex-col bg-white md:hidden
             pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]
-            ${isClosing
-              ? "animate-out slide-out-to-right duration-150"
-              : "animate-in slide-in-from-right duration-150"
+            ${
+              isClosing
+                ? "animate-out slide-out-to-right duration-150"
+                : "animate-in slide-in-from-right duration-150"
             }`}
         >
           <div className="flex items-center justify-between px-6 py-4">
-            <div className="flex items-center">
-              <Link href="/">
-                <img src="/strato-logo-black.svg" alt="STRATO" className="h-6 w-auto" />
-              </Link>
-            </div>
-
+            <Link href="/" onClick={closeMenu}>
+              <img src="/strato-logo-black.svg" alt="STRATO" className="h-6 w-auto" />
+            </Link>
             <button
-              className="rounded-lg p-2 -mr-2 text-[#1a1a2e] hover:bg-gray-100"
+              className="-mr-2 rounded-lg p-2 text-[#1a1a2e] hover:bg-gray-100"
               onClick={toggleMenu}
               aria-label="Close menu"
             >
@@ -166,54 +298,37 @@ export function Navbar() {
             </button>
           </div>
 
-          <nav className="flex flex-1 flex-col px-6 py-8">
-            <div className="flex flex-col gap-8">
-              <Link
-                href="/blog"
-                className="text-3xl font-semibold text-[#1a1a2e] hover:text-[#243486]"
-                onClick={toggleMenu}
-              >
-                Blog
-              </Link>
-              <Link
-                href="/video"
-                className="text-3xl font-semibold text-[#1a1a2e] hover:text-[#243486]"
-                onClick={toggleMenu}
-              >
-                Videos
-              </Link>
-              <Link
-                href="/team"
-                className="text-3xl font-semibold text-[#1a1a2e] hover:text-[#243486]"
-                onClick={toggleMenu}
-              >
-                Team
-              </Link>
-              <Link
-                href="/contact"
-                className="text-3xl font-semibold text-[#1a1a2e] hover:text-[#243486]"
-                onClick={toggleMenu}
-              >
-                Contact
-              </Link>
-              <a
-                href={EXTERNAL_LINKS.docs}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-3xl font-semibold text-[#1a1a2e] hover:text-[#243486]"
-                onClick={toggleMenu}
-              >
-                Docs
-              </a>
-            </div>
+          <nav className="flex flex-1 flex-col gap-8 overflow-y-auto px-6 py-8">
+            {NAV_ITEMS.map((item) => {
+              if ("href" in item) {
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className="text-3xl font-semibold text-[#1a1a2e] hover:text-[#243486]"
+                    onClick={closeMenu}
+                  >
+                    {item.label}
+                  </Link>
+                )
+              }
+              return (
+                <MobileAccordionItem
+                  key={item.label}
+                  label={item.label}
+                  items={item.items}
+                  onClose={closeMenu}
+                />
+              )
+            })}
 
             <div className="mt-auto pt-8">
               <a
                 href={EXTERNAL_LINKS.app}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block w-full rounded-full bg-[#243486] px-6 py-4 text-center text-lg font-semibold text-white transition-colors hover:bg-[#1a1a2e]"
-                onClick={toggleMenu}
+                className="block w-full rounded-full bg-[#243486] px-6 py-4 text-center text-lg font-semibold text-white transition-colors hover:bg-[#1a2761]"
+                onClick={closeMenu}
               >
                 Launch App
               </a>
