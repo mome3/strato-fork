@@ -38,8 +38,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: '#f9f9f9',
   viewportFit: 'cover',
-  maximumScale: 1,
-  userScalable: false,
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({
