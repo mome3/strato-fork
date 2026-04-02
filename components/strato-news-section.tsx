@@ -17,7 +17,7 @@ export function StratoNewsSection({ posts }: StratoNewsSectionProps) {
       <div className="mx-auto max-w-[1280px] px-4 md:px-8 lg:px-12">
         {/* Header */}
         <div
-          className="mb-10 flex items-center justify-between"
+          className="mb-10 flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between"
           style={revealStyle(visible, 0)}
         >
           <h2 className="text-4xl font-semibold leading-tight text-[#1d2e86] lg:text-5xl">
