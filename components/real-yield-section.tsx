@@ -18,7 +18,7 @@ export function RealYieldSection() {
               sleep.
             </p>
             <a
-              href="#"
+              href="https://strato.nexus/blog/how-trading-bot-generates-yield"
               className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/60 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-white/10"
             >
               How it Works &rarr;
