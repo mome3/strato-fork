@@ -152,7 +152,7 @@ function MobileAccordionItem({
         />
       </button>
       {open && (
-        <div className="mt-2 flex flex-col gap-1 pl-2">
+        <div className="mt-4 flex flex-col gap-4 pl-2">
           {items.map((child) => {
             const linkProps = child.external
               ? { target: "_blank", rel: "noopener noreferrer" }
