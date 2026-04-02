@@ -26,12 +26,12 @@ export function RealYieldSection() {
           </div>
 
           {/* Right: robot artwork */}
-          <div className="w-full max-w-[480px] flex-shrink-0 md:w-1/2">
+          <div className="group w-full max-w-[480px] flex-shrink-0 md:w-1/2">
             <div className="overflow-hidden rounded-2xl bg-[#2a3fa0]">
               <img
                 src="/trading-bot-artwork.png"
                 alt="Autonomous trading bot working at a laptop"
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
               />
             </div>
           </div>
