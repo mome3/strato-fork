@@ -9,15 +9,15 @@ import { useReveal, revealStyle } from "@/hooks/use-reveal"
 const teamMembers = [
   {
     name: "Kieren James-Lubin",
-    image: "/team/kieren-james-lubin.png",
+    image: "/team/kieren-james-lubin-clear.png",
   },
   {
     name: "Victor Wong",
-    image: "/team/victor-wong.png",
+    image: "/team/victor-wong-clear.png",
   },
   {
     name: "Joe Lubin",
-    image: "/team/joe-lubin.png",
+    image: "/team/joe-lubin-clear.png",
   },
 ]
 
