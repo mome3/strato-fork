@@ -62,23 +62,9 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative z-[5] w-full overflow-hidden rounded-b-[32px] bg-[#f9f9f9] pb-[32px]"
+      className="relative w-full overflow-hidden"
       style={{ height: heroHeight }}
     >
-      {/* Background Artwork */}
-      <div className="pointer-events-none absolute right-0 top-0 h-full w-auto overflow-hidden rounded-b-[32px] opacity-100">
-        <img
-          src="/background-artwork-mobile.svg"
-          alt=""
-          className="h-full w-auto object-cover md:hidden"
-        />
-        <img
-          src="/background-artwork.svg"
-          alt=""
-          className="hidden h-full w-auto object-cover md:block"
-        />
-      </div>
-
       <div className="relative mx-auto flex h-full max-w-[1280px] flex-col px-4 md:px-8 lg:px-12">
         {/* Navbar */}
         <div className="relative z-10 pt-4 md:pt-6 lg:pt-8">
@@ -126,7 +112,7 @@ export function HeroSection() {
               by Ethereum OGs.
             </p>
 
-            <a
+            
               href={EXTERNAL_LINKS.app}
               target="_blank"
               rel="noopener noreferrer"
