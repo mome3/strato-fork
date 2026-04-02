@@ -8,31 +8,31 @@ const earningMethods = [
   {
     label: "Deposit & Lend",
     description: "Earn points continuously while your USDST powers lending markets",
-    img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/deposit%20icon%403x-dsdASkwvAjm3RJ7X7iliUaoC00kemc.png",
+    img: "/icons/deposit-icon.png",
     alt: "Deposit and lend icon",
   },
   {
     label: "Borrow",
     description: "Take out a loan against your assets and earn points as you borrow.",
-    img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/borrow%20icon%403x-Jdp8lhbqQpWP59DwZ7h1fPskHSBcDv.png",
+    img: "/icons/borrow-icon.png",
     alt: "Borrow icon",
   },
   {
     label: "Swap & Mint",
     description: "Earn points every time you trade or mint USDST through a CDP.",
-    img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/swap%20icon%403x-F2I9QH7c8Rcmsz5miZzsaka19JqXhF.png",
+    img: "/icons/swap-icon.png",
     alt: "Swap and mint icon",
   },
   {
     label: "Provide Liquidity",
     description: "Supply liquidity to the ecosystem and unlock the highest point rewards.",
-    img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/liquidity%20icon%403x-ikI5jhPrDZyHWthv3D6PrmMmInXoNy.png",
+    img: "/icons/liquidity-icon.png",
     alt: "Provide liquidity icon",
   },
   {
     label: "Refer Friends",
     description: "Invite others to join Strato and earn a share of the points they generate.",
-    img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/refer%20icon%403x-2jE03srop71CIcm5VfPuASn6HjqhZ0.png",
+    img: "/icons/refer-icon.png",
     alt: "Refer friends icon",
   },
 ]
