@@ -63,7 +63,7 @@ function DropdownItem({
     <NavigationMenuPrimitive.Link asChild>
       <a
         href={href}
-        className="group/item flex w-full items-center justify-between rounded-full px-4 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-[#1a2761]"
+        className="group/item flex w-full items-center justify-between rounded-full px-4 py-3 text-sm font-medium text-white transition-all hover:bg-[#1a2761] hover:font-semibold"
         {...linkProps}
       >
         <span>{label}</span>
