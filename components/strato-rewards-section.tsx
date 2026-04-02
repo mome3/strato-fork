@@ -111,7 +111,7 @@ export function StratoRewardsSection() {
             {/* CTA */}
             <div className="flex justify-center" style={revealStyle(visible, 500)}>
               <Link
-                href="#"
+                href="https://app.strato.nexus/dashboard/"
                 className="group inline-flex items-center gap-2 rounded-full bg-[#243486] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1a2766]"
               >
                 Start Earning Rewards
