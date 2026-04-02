@@ -207,7 +207,7 @@ export function HighlightBanner() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder={messages.placeholder}
-              className="min-w-0 flex-1 bg-transparent text-sm text-[#243486] placeholder:text-[#243486]/40 focus:outline-none"
+              className="min-w-0 flex-1 bg-transparent text-base text-[#243486] placeholder:text-[#243486]/40 focus:outline-none"
               required
             />
             <button

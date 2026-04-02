@@ -160,7 +160,7 @@ export function JoinCommunitySection() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={messages.placeholder}
-                    className="w-48 bg-transparent text-sm text-white placeholder:text-white/50 focus:outline-none md:w-64"
+                    className="w-48 bg-transparent text-base text-white placeholder:text-white/50 focus:outline-none md:w-64"
                     required
                   />
                   <button
