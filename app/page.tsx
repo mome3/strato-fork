@@ -14,7 +14,7 @@ import { JsonLd } from "@/components/json-ld"
 import { organizationJsonLd, webSiteJsonLd } from "@/lib/seo"
 
 const FEATURED_SLUGS = [
-  "vaulting-precious-metals-on-mercata",
+  "precious-metals-audit-march-2026",
   "open-sourcing-strato",
   "how-trading-bot-generates-yield",
 ]
