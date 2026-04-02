@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
+import { motion, useMotionValue, useSpring } from "framer-motion"
 import { useReveal, revealStyle } from "@/hooks/use-reveal"
 
 const features = [
@@ -27,6 +28,54 @@ const features = [
   },
 ]
 
+function FeatureCard({
+  feature,
+  visible,
+  delay,
+}: {
+  feature: (typeof features)[number]
+  visible: boolean
+  delay: number
+}) {
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+  const springX = useSpring(mouseX, { stiffness: 150, damping: 30, mass: 1 })
+  const springY = useSpring(mouseY, { stiffness: 150, damping: 30, mass: 1 })
+
+  return (
+    <div
+      className="flex w-36 flex-col items-center text-center"
+      style={revealStyle(visible, delay)}
+    >
+      <motion.div
+        className="mb-4 h-24 w-24"
+        style={{ x: springX, y: springY }}
+        onMouseMove={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect()
+          const centerX = rect.left + rect.width / 2
+          const centerY = rect.top + rect.height / 2
+          mouseX.set(((e.clientX - centerX) / rect.width) * 12)
+          mouseY.set(((e.clientY - centerY) / rect.height) * 12)
+        }}
+        onMouseLeave={() => {
+          mouseX.set(0)
+          mouseY.set(0)
+        }}
+        whileHover={{ scale: 1.01, transition: { duration: 0.15, ease: "easeOut" } }}
+      >
+        <img
+          src={feature.img}
+          alt={feature.alt}
+          className="h-full w-full object-contain"
+        />
+      </motion.div>
+      <span className="text-sm font-medium leading-snug text-[#1a1a2e]">
+        {feature.label}
+      </span>
+    </div>
+  )
+}
+
 export function HardestAssetsSection() {
   const { ref, visible } = useReveal()
 
@@ -51,22 +100,12 @@ export function HardestAssetsSection() {
           style={revealStyle(visible, 100)}
         >
           {features.map((feature, index) => (
-            <div
+            <FeatureCard
               key={feature.label}
-              className="flex w-36 flex-col items-center text-center"
-              style={revealStyle(visible, 150 + index * 60)}
-            >
-              <div className="mb-4 h-24 w-24">
-                <img
-                  src={feature.img}
-                  alt={feature.alt}
-                  className="h-full w-full object-contain"
-                />
-              </div>
-              <span className="text-sm font-medium leading-snug text-[#1a1a2e]">
-                {feature.label}
-              </span>
-            </div>
+              feature={feature}
+              visible={visible}
+              delay={150 + index * 60}
+            />
           ))}
         </div>
 
