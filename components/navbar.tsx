@@ -152,7 +152,7 @@ function MobileAccordionItem({
         />
       </button>
       {open && (
-        <div className="mt-2 flex flex-col gap-1 pl-2">
+        <div className="mt-4 flex flex-col gap-4 pl-2">
           {items.map((child) => {
             const linkProps = child.external
               ? { target: "_blank", rel: "noopener noreferrer" }
@@ -161,7 +161,7 @@ function MobileAccordionItem({
               <a
                 key={child.label}
                 href={child.href}
-                className="text-xl font-medium text-[#243486]/80 hover:text-[#243486]"
+                className="text-3xl font-normal text-[#243486]/80 hover:text-[#243486]"
                 onClick={onClose}
                 {...linkProps}
               >
