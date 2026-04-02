@@ -3,6 +3,7 @@
 import { useRef, useEffect } from "react"
 import { ArrowUpRight, Loader2, RotateCcw } from "lucide-react"
 import { useNewsletter } from "@/hooks/use-newsletter"
+import { EXTERNAL_LINKS } from "@/lib/external-links"
 
 const CTA_CONFIG = {
   /** The URL the CTA links to (used when newsletterMode is false) */
@@ -14,7 +15,7 @@ const CTA_CONFIG = {
 const socialLinks = [
   {
     label: "Telegram",
-    href: "#",
+    href: EXTERNAL_LINKS.telegram,
     icon: (
       <svg viewBox="0 0 62.9921 62.985" className="h-full w-full" aria-hidden="true">
         <path
@@ -26,7 +27,7 @@ const socialLinks = [
   },
   {
     label: "X (Twitter)",
-    href: "#",
+    href: EXTERNAL_LINKS.twitter,
     icon: (
       <svg viewBox="0 0 62.9921 62.9815" className="h-full w-full" aria-hidden="true">
         <path
@@ -42,7 +43,7 @@ const socialLinks = [
   },
   {
     label: "YouTube",
-    href: "#",
+    href: EXTERNAL_LINKS.youtube,
     icon: (
       <svg viewBox="0 0 62.9921 62.9929" className="h-full w-full" aria-hidden="true">
         <path
@@ -58,7 +59,7 @@ const socialLinks = [
   },
   {
     label: "GitHub",
-    href: "#",
+    href: EXTERNAL_LINKS.github,
     icon: (
       <svg viewBox="0 0 62.9921 61.4735" className="h-full w-full" aria-hidden="true">
         <path
@@ -210,6 +211,8 @@ export function JoinCommunitySection() {
                 <a
                   key={social.label}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
                   className="block h-12 w-12 text-white transition-colors hover:text-white/60"
                 >
