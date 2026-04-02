@@ -13,8 +13,17 @@ import { Footer } from "@/components/footer"
 import { JsonLd } from "@/components/json-ld"
 import { organizationJsonLd, webSiteJsonLd } from "@/lib/seo"
 
+const FEATURED_SLUGS = [
+  "vaulting-precious-metals-on-mercata",
+  "open-sourcing-strato",
+  "how-trading-bot-generates-yield",
+]
+
 export default function Home() {
-  const latestPosts = getNonVideoPosts().slice(0, 3)
+  const allPosts = getNonVideoPosts()
+  const latestPosts = FEATURED_SLUGS.map((slug) =>
+    allPosts.find((post) => post.slug === slug)
+  ).filter(Boolean)
   return (
     <div className="min-h-screen bg-[#f9f9f9]">
       <JsonLd data={organizationJsonLd()} />
