@@ -31,7 +31,7 @@ const earningMethods = [
   },
   {
     label: "Refer Friends",
-    description: "Invite others to join Strato and earn a share of the points they generate.",
+    description: "Invite others to join STRATO and earn a share of the points they generate.",
     img: "/icons/refer-icon.png",
     alt: "Refer friends icon",
   },
