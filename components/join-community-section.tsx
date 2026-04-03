@@ -9,7 +9,7 @@ const CTA_CONFIG = {
   /** The URL the CTA links to (used when newsletterMode is false) */
   href: "https://app.strato.nexus/",
   openInNewTab: true,
-  label: "Enter the Stratosphere",
+  label: "Enter the STRATOsphere",
 }
 
 const socialLinks = [

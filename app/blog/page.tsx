@@ -2,12 +2,12 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { FeaturedCarousel } from "@/components/blog/featured-carousel"
 import { RecentPosts } from "@/components/blog/recent-posts"
-import { getNonVideoPosts } from "@/lib/posts"
+import { getAllPosts } from "@/lib/posts"
 import { getBlurDataURL } from "@/lib/blur"
 import { categories } from "@/lib/blog-constants"
 import type { Post } from "@/lib/blog-constants"
 
-const blogCategories = ["All", ...categories.filter((c) => c !== "Videos")] as const
+const blogCategories = ["All", ...categories] as const
 
 export const metadata = {
   title: "Blog",
@@ -32,7 +32,7 @@ async function withBlur(posts: Post[]): Promise<Post[]> {
 }
 
 export default async function BlogPage() {
-  const allPosts = await withBlur(getNonVideoPosts())
+  const allPosts = await withBlur(await getAllPosts())
   const featuredPosts = allPosts.slice(0, 3)
 
   return (

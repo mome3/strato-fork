@@ -13,6 +13,7 @@ export interface Post {
   authorTitle: string
   videoUrl?: string
   content: string
+  contentFormat?: "markdown" | "html"
 }
 
 export const categories: Category[] = [
