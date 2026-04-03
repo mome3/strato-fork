@@ -16,18 +16,8 @@ const NAV_ITEMS = [
   },
   {
     label: "Get Started",
-    items: [
-      { label: "Onboarding Guide", href: "https://docs.strato.nexus/scenarios/first-time-user/", external: true },
-      { label: "STRATO Strategies", href: "https://docs.strato.nexus/scenarios/maximize-yield/", external: true },
-      { label: "Bridge to STRATO", href: "https://docs.strato.nexus/guides/bridge/", external: true },
-    ],
-  },
-  {
-    label: "Explore",
-    items: [
-      { label: "CATA Rewards", href: "https://strato.nexus/blog/introducing-strato-rewards", external: true },
-      { label: "Build on Strato", href: "https://docs.strato.nexus/build-apps/overview/", external: true },
-    ],
+    href: "https://docs.strato.nexus/scenarios/first-time-user/",
+    external: true,
   },
   {
     label: "Products",
@@ -40,6 +30,8 @@ const NAV_ITEMS = [
   {
     label: "Resources",
     items: [
+      { label: "Rewards", href: "https://strato.nexus/blog/introducing-strato-rewards", external: true },
+      { label: "Build on STRATO", href: "https://docs.strato.nexus/build-apps/overview/", external: true },
       { label: "FAQ", href: "https://docs.strato.nexus/faq/", external: true },
       { label: "Blog", href: "/blog", external: false },
       { label: "Video", href: "/video", external: false },
@@ -81,16 +73,20 @@ function DesktopNav() {
       <NavigationMenuPrimitive.List className="flex items-center gap-1">
         {NAV_ITEMS.map((item) => {
           if ("href" in item) {
-            // Plain link (Team)
+            // Plain link (Team, Get Started)
+            const linkProps = "external" in item && item.external
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {}
             return (
               <NavigationMenuPrimitive.Item key={item.label}>
                 <NavigationMenuPrimitive.Link asChild>
-                  <Link
+                  <a
                     href={item.href}
                     className="inline-flex items-center rounded-full px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#1a2761]"
+                    {...linkProps}
                   >
                     {item.label}
-                  </Link>
+                  </a>
                 </NavigationMenuPrimitive.Link>
               </NavigationMenuPrimitive.Item>
             )
@@ -301,15 +297,19 @@ export function Navbar() {
           <nav className="flex flex-1 flex-col gap-8 overflow-y-auto px-6 py-8">
             {NAV_ITEMS.map((item) => {
               if ("href" in item) {
+                const linkProps = "external" in item && item.external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {}
                 return (
-                  <Link
+                  <a
                     key={item.label}
                     href={item.href}
                     className="text-3xl font-semibold text-[#1a1a2e] hover:text-[#243486]"
                     onClick={closeMenu}
+                    {...linkProps}
                   >
                     {item.label}
-                  </Link>
+                  </a>
                 )
               }
               return (
