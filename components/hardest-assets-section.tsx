@@ -88,7 +88,7 @@ export function HardestAssetsSection() {
             The Hardest Assets in DeFi
           </h2>
           <p className="text-sm leading-relaxed text-[#6b7280] md:text-base">
-            Every gram of gold and silver on Strato is backed 1:1 by physical metal stored in a
+            Every gram of gold and silver on STRATO is backed 1:1 by physical metal stored in a
             secure vault in New York City, operated by our vaulting partner BA Gold Enterprises
             Inc. Monthly third-party audits verify supply. Redeem your physical gold anytime.
           </p>

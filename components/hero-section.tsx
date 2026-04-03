@@ -93,7 +93,7 @@ export function HeroSection() {
             "
             style={revealStyle(visible, 100)}
           >
-            <h1 className="text-balance text-6xl font-bold leading-[1.05] tracking-tight text-[#243486] sm:text-6xl lg:text-8xl">
+            <h1 className="text-balance text-5xl font-bold leading-[1.05] tracking-tight text-[#243486] sm:text-5xl lg:text-7xl">
               DeFi Powered
               <br />
               by Precious Metals

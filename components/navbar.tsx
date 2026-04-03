@@ -11,10 +11,6 @@ import { EXTERNAL_LINKS } from "@/lib/external-links"
 
 const NAV_ITEMS = [
   {
-    label: "Team",
-    href: "/team",
-  },
-  {
     label: "Get Started",
     href: "https://docs.strato.nexus/scenarios/first-time-user/",
     external: true,
@@ -28,11 +24,16 @@ const NAV_ITEMS = [
     ],
   },
   {
+    label: "Team",
+    href: "/team",
+  },
+  {
     label: "Resources",
     items: [
       { label: "Rewards", href: "https://strato.nexus/blog/introducing-strato-rewards", external: true },
       { label: "Build on STRATO", href: "https://docs.strato.nexus/build-apps/overview/", external: true },
       { label: "FAQ", href: "https://docs.strato.nexus/faq/", external: true },
+      { label: "Blockexplorer", href: "https://stratoscan.strato.nexus/", external: true },
       { label: "Blog", href: "/blog", external: false },
       { label: "Video", href: "/video", external: false },
     ],

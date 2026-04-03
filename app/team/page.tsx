@@ -131,9 +131,11 @@ export default function TeamPage() {
 
         {/* Department sections */}
         <div className="flex flex-col gap-16 pb-16">
-          {departments.map((dept) => (
-            <DepartmentSection key={dept} department={dept} />
-          ))}
+          {departments
+            .filter((dept) => dept !== "Team Members")
+            .map((dept) => (
+              <DepartmentSection key={dept} department={dept} />
+            ))}
         </div>
       </div>
 

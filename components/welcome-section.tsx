@@ -11,7 +11,7 @@ const cards = [
     image: "/images/welcome-card-1.png",
     title: "Ultra-low fees",
     description:
-      "Gas on Strato costs only ~$0.01 per transaction, and get 10 free transactions through vouchers every time you bridge assets from Ethereum.",
+      "Gas on STRATO costs only ~$0.01 per transaction, and get 10 free transactions through vouchers every time you bridge assets from Ethereum.",
     cta: "Start Earning",
     href: EXTERNAL_LINKS.app,
   },

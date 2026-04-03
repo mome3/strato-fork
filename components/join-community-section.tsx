@@ -131,7 +131,7 @@ export function JoinCommunitySection() {
               Never Miss a Thing
             </h2>
             <p className="max-w-xl text-base leading-relaxed text-blue-200">
-              Whether you&apos;re ready to start using Strato or want to be the first to hear major announcements,
+              Whether you&apos;re ready to start using STRATO or want to be the first to hear major announcements,
               sign up for the newsletter to stay up-to-date.
             </p>
 
