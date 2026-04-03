@@ -135,3 +135,60 @@ export function getVideoPosts(): Post[] {
 export function getNonVideoPosts(): Post[] {
   return parsePostsFromDirectory(postsDirectory)
 }
+
+// ── Async variants with Ghost content source toggle ─────────────────────
+// These check CONTENT_SOURCE env var and delegate to markdown or Ghost.
+// "markdown" (default) = existing filesystem, "ghost" = Ghost API,
+// "hybrid" = merge both (Ghost wins on slug collision).
+
+import { getGhostPosts } from "./ghost-client"
+import { mapGhostPosts } from "./ghost-mapper"
+
+type ContentSource = "markdown" | "ghost" | "hybrid"
+
+function getContentSource(): ContentSource {
+  const src = process.env.CONTENT_SOURCE || "markdown"
+  if (src === "ghost" || src === "hybrid") return src
+  return "markdown"
+}
+
+export async function getAllPostsAsync(): Promise<Post[]> {
+  const source = getContentSource()
+
+  if (source === "markdown") return getAllPosts()
+
+  if (source === "ghost") {
+    const ghostPosts = await getGhostPosts()
+    return mapGhostPosts(ghostPosts)
+  }
+
+  // hybrid — merge both, Ghost wins on slug collision
+  const mdPosts = getAllPosts()
+  const ghostPosts = await getGhostPosts()
+  const ghostMapped = mapGhostPosts(ghostPosts)
+  const ghostSlugs = new Set(ghostMapped.map((p) => p.slug))
+  return [
+    ...ghostMapped,
+    ...mdPosts.filter((p) => !ghostSlugs.has(p.slug)),
+  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+}
+
+export async function getNonVideoPostsAsync(): Promise<Post[]> {
+  const posts = await getAllPostsAsync()
+  return posts.filter((p) => p.categories !== "Videos")
+}
+
+export async function getVideoPostsAsync(): Promise<Post[]> {
+  const posts = await getAllPostsAsync()
+  return posts.filter((p) => p.categories === "Videos")
+}
+
+export async function getPostBySlugAsync(slug: string): Promise<Post | undefined> {
+  const posts = await getAllPostsAsync()
+  return posts.find((p) => p.slug === slug)
+}
+
+export async function getFeaturedPostsAsync(): Promise<Post[]> {
+  const posts = await getAllPostsAsync()
+  return posts.filter((p) => p.featured)
+}
