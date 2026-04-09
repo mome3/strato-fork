@@ -1,3 +1,5 @@
+export const revalidate = 60
+
 import { HeroSection } from "@/components/hero-section"
 import { WelcomeSection } from "@/components/welcome-section"
 import { TeamHighlightSection } from "@/components/team-highlight-section"

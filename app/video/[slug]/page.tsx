@@ -1,6 +1,9 @@
 import { redirect } from "next/navigation"
 import { getAllPosts } from "@/lib/posts"
 
+export const revalidate = 60
+export const dynamicParams = true
+
 export async function generateStaticParams() {
   const posts = await getAllPosts()
   return posts

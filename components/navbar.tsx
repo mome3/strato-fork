@@ -35,7 +35,7 @@ const NAV_ITEMS = [
       { label: "FAQ", href: "https://docs.strato.nexus/faq/", external: true },
       { label: "Blockexplorer", href: "https://stratoscan.strato.nexus/", external: true },
       { label: "Blog", href: "/blog", external: false },
-      { label: "Audits", href: "/audits", external: false },
+      { label: "Vaults", href: "/vaults", external: false },
     ],
   },
 ] as const

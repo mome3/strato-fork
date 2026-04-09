@@ -63,7 +63,7 @@ function ghostUrl(endpoint: string, params: Record<string, string> = {}): string
 
 async function ghostFetch<T>(endpoint: string, params: Record<string, string> = {}): Promise<T> {
   const url = ghostUrl(endpoint, params)
-  const res = await fetch(url)
+  const res = await fetch(url, { next: { revalidate: 60 } })
   if (!res.ok) {
     throw new Error(`Ghost API error: ${res.status} ${res.statusText} — ${url}`)
   }

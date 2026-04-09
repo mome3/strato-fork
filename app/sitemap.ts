@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next"
 import { getAllPosts } from "@/lib/posts"
 import { teamMembers } from "@/lib/team-data"
 
-export const dynamic = "force-static"
+export const revalidate = 60
 
 const SITE_URL = "https://strato.nexus"
 

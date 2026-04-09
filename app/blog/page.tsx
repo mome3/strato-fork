@@ -7,6 +7,8 @@ import { getBlurDataURL } from "@/lib/blur"
 import { categories } from "@/lib/blog-constants"
 import type { Post } from "@/lib/blog-constants"
 
+export const revalidate = 60
+
 const blogCategories = ["All", ...categories] as const
 
 export const metadata = {
