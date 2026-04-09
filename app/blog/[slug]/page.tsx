@@ -10,9 +10,6 @@ import { JsonLd } from "@/components/json-ld"
 import { getAllPosts, getPostBySlug } from "@/lib/posts"
 import { articleJsonLd, videoObjectJsonLd, breadcrumbJsonLd } from "@/lib/seo"
 
-export const revalidate = 60
-export const dynamicParams = true
-
 export async function generateStaticParams() {
   const posts = await getAllPosts()
   return posts.map((post) => ({ slug: post.slug }))
