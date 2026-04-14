@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { useReveal, revealStyle } from "@/hooks/use-reveal"
+import { useTranslation } from "@/lib/i18n"
 import type { Post } from "@/lib/blog-constants"
 
 interface StratoNewsSectionProps {
@@ -11,6 +12,7 @@ interface StratoNewsSectionProps {
 
 export function StratoNewsSection({ posts }: StratoNewsSectionProps) {
   const { ref, visible } = useReveal()
+  const { t } = useTranslation()
 
   return (
     <section ref={ref} className="w-full bg-white pt-12 md:pt-16">
@@ -21,13 +23,13 @@ export function StratoNewsSection({ posts }: StratoNewsSectionProps) {
           style={revealStyle(visible, 0)}
         >
           <h2 className="text-4xl font-semibold leading-tight text-[#1d2e86] lg:text-5xl">
-            STRATO News
+            {t("news.heading")}
           </h2>
           <Link
             href="/blog"
             className="group flex items-center gap-1 text-sm font-medium text-[#1a1a2e] transition-colors hover:text-[#1d2e86]"
           >
-            View All Posts
+            {t("news.viewAll")}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>

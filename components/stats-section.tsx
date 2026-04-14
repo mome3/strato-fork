@@ -2,11 +2,13 @@
 
 import { useReveal, revealStyle } from "@/hooks/use-reveal"
 import { useEffect, useRef, useState } from "react"
+import { useTranslation } from "@/lib/i18n"
+import type { TranslationKey } from "@/lib/translations"
 
-const stats = [
-  { value: "$10M+", label: "Total Value Locked", numericValue: 10 },
-  { value: "$1.7M+", label: "Loans Originated", numericValue: 1.7 },
-  { value: "2M+", label: "Campaign Points Issued", numericValue: 2 },
+const stats: { value: string; labelKey: TranslationKey; numericValue: number }[] = [
+  { value: "$10M+", labelKey: "stats.tvl", numericValue: 10 },
+  { value: "$1.7M+", labelKey: "stats.loans", numericValue: 1.7 },
+  { value: "2M+", labelKey: "stats.points", numericValue: 2 },
 ]
 
 function CountUpNumber({ target, suffix, visible }: { target: number; suffix: string; visible: boolean }) {
@@ -58,6 +60,7 @@ function CountUpNumber({ target, suffix, visible }: { target: number; suffix: st
 
 export function StatsSection() {
   const { ref, visible } = useReveal()
+  const { t } = useTranslation()
 
   return (
     <section ref={ref} className="relative w-full">
@@ -72,14 +75,14 @@ export function StatsSection() {
             <p className="text-5xl font-medium text-[#1a1a2e]">
               $<CountUpNumber target={stats[0].numericValue} suffix="M+" visible={visible} />
             </p>
-            <p className="mt-1 text-lg font-normal text-[#6b6b7b]">{stats[0].label}</p>
+            <p className="mt-1 text-lg font-normal text-[#6b6b7b]">{t(stats[0].labelKey)}</p>
           </div>
 
           {/* Right column becomes a 2-row grid so its total height is well-defined */}
           <div className="grid h-full gap-4 md:grid-rows-2">
             {stats.slice(1).map((stat, i) => (
               <div
-                key={stat.label}
+                key={stat.labelKey}
                 className="rounded-2xl bg-[#EFF3FA] bg-opacity-80 p-6 backdrop-blur-md"
                 style={revealStyle(visible, 100 + i * 100)}
               >
@@ -87,7 +90,7 @@ export function StatsSection() {
                   {i === 0 ? "$" : ""}
                   <CountUpNumber target={stat.numericValue} suffix="M+" visible={visible} />
                 </p>
-                <p className="mt-1 text-lg font-normal text-[#6b6b7b]">{stat.label}</p>
+                <p className="mt-1 text-lg font-normal text-[#6b6b7b]">{t(stat.labelKey)}</p>
               </div>
             ))}
           </div>

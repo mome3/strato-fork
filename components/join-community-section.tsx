@@ -4,12 +4,12 @@ import { useRef, useEffect } from "react"
 import { ArrowUpRight, Loader2, RotateCcw } from "lucide-react"
 import { useNewsletter } from "@/hooks/use-newsletter"
 import { EXTERNAL_LINKS } from "@/lib/external-links"
+import { useTranslation } from "@/lib/i18n"
 
 const CTA_CONFIG = {
   /** The URL the CTA links to (used when newsletterMode is false) */
   href: "https://app.strato.nexus/",
   openInNewTab: true,
-  label: "Enter the STRATOsphere",
 }
 
 const socialLinks = [
@@ -73,6 +73,7 @@ const socialLinks = [
 
 export function JoinCommunitySection() {
   const inputRef = useRef<HTMLInputElement>(null)
+  const { t } = useTranslation()
   const {
     mode,
     setMode,
@@ -128,11 +129,10 @@ export function JoinCommunitySection() {
           {/* Content */}
           <div className="relative z-10 flex flex-col items-center gap-6">
             <h2 className="text-balance text-4xl font-semibold text-white lg:text-5xl">
-              Never Miss a Thing
+              {t("community.heading")}
             </h2>
             <p className="max-w-xl text-base leading-relaxed text-blue-200">
-              Whether you&apos;re ready to start using STRATO or want to be the first to hear major announcements,
-              sign up for the newsletter to stay up-to-date.
+              {t("community.description")}
             </p>
 
             {/* CTA / Newsletter Input */}
@@ -145,7 +145,7 @@ export function JoinCommunitySection() {
                   onClick={handleCtaClick}
                   className="inline-flex items-center gap-2 rounded-full bg-[#3d55c5] px-7 py-3 text-sm font-medium text-white transition-colors hover:bg-[#4a64d8]"
                 >
-                  {CTA_CONFIG.label} &rarr;
+                  {t("community.cta")} &rarr;
                 </a>
               )}
 
@@ -178,7 +178,7 @@ export function JoinCommunitySection() {
               {mode === "loading" && (
                 <div className="flex items-center gap-2 rounded-full bg-white/10 px-6 py-3 text-sm text-white/80">
                   <Loader2 size={16} className="animate-spin" />
-                  <span>Subscribing...</span>
+                  <span>{t("community.subscribing")}</span>
                 </div>
               )}
 
@@ -199,7 +199,7 @@ export function JoinCommunitySection() {
                     className="flex h-8 items-center gap-1.5 rounded-full bg-white/10 px-4 text-xs font-medium text-white transition-colors hover:bg-white/20"
                   >
                     <RotateCcw size={12} />
-                    Retry
+                    {t("community.retry")}
                   </button>
                 </div>
               )}

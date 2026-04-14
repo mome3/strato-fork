@@ -6,39 +6,51 @@ import Link from "next/link"
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu"
 import { cn } from "@/lib/utils"
 import { EXTERNAL_LINKS } from "@/lib/external-links"
+import { useTranslation } from "@/lib/i18n"
+import { LanguageSwitcher } from "./language-switcher"
+import type { TranslationKey } from "@/lib/translations"
 
 // ─── Nav structure ────────────────────────────────────────────────────────────
 
-const NAV_ITEMS = [
+type NavLink = { labelKey: TranslationKey; href: string; external: boolean }
+type NavDropdown = { labelKey: TranslationKey; items: readonly NavLink[] }
+type NavPlainLink = { labelKey: TranslationKey; href: string; external?: boolean }
+type NavItem = NavPlainLink | NavDropdown
+
+const NAV_ITEMS: NavItem[] = [
   {
-    label: "Get Started",
+    labelKey: "nav.getStarted",
     href: "https://docs.strato.nexus/scenarios/first-time-user/",
     external: true,
   },
   {
-    label: "Products",
+    labelKey: "nav.products",
     items: [
-      { label: "Buy Metals", href: "https://app.strato.nexus/dashboard/deposits", external: true },
-      { label: "MetaMask Card", href: "https://strato.nexus/blog/metamask-card-integration", external: true },
-      { label: "Vaults", href: "https://app.strato.nexus/dashboard/vault", external: true },
+      { labelKey: "nav.buyMetals", href: "https://app.strato.nexus/dashboard/deposits", external: true },
+      { labelKey: "nav.metamaskCard", href: "https://strato.nexus/blog/metamask-card-integration", external: true },
+      { labelKey: "nav.vaults", href: "https://app.strato.nexus/dashboard/vault", external: true },
     ],
   },
   {
-    label: "Team",
+    labelKey: "nav.team",
     href: "/team",
   },
   {
-    label: "Resources",
+    labelKey: "nav.resources",
     items: [
-      { label: "Rewards", href: "https://strato.nexus/blog/introducing-strato-rewards", external: true },
-      { label: "Build on STRATO", href: "https://docs.strato.nexus/build-apps/overview/", external: true },
-      { label: "FAQ", href: "https://docs.strato.nexus/faq/", external: true },
-      { label: "Blockexplorer", href: "https://stratoscan.strato.nexus/", external: true },
-      { label: "Blog", href: "/blog", external: false },
-      { label: "Vaults", href: "/vaults", external: false },
+      { labelKey: "nav.rewards", href: "https://strato.nexus/blog/introducing-strato-rewards", external: true },
+      { labelKey: "nav.buildOnStrato", href: "https://docs.strato.nexus/build-apps/overview/", external: true },
+      { labelKey: "nav.faq", href: "https://docs.strato.nexus/faq/", external: true },
+      { labelKey: "nav.blockexplorer", href: "https://stratoscan.strato.nexus/", external: true },
+      { labelKey: "nav.blog", href: "/blog", external: false },
+      { labelKey: "nav.vaults", href: "/vaults", external: false },
     ],
   },
-] as const
+]
+
+function isDropdown(item: NavItem): item is NavDropdown {
+  return "items" in item
+}
 
 // ─── Dropdown item ─────────────────────────────────────────────────────────────
 
@@ -69,24 +81,26 @@ function DropdownItem({
 // ─── Desktop nav ───────────────────────────────────────────────────────────────
 
 function DesktopNav() {
+  const { t } = useTranslation()
+
   return (
     <NavigationMenuPrimitive.Root className="relative hidden items-center md:flex">
       <NavigationMenuPrimitive.List className="flex items-center gap-1">
         {NAV_ITEMS.map((item) => {
-          if ("href" in item) {
+          if (!isDropdown(item)) {
             // Plain link (Team, Get Started)
-            const linkProps = "external" in item && item.external
+            const linkProps = item.external
               ? { target: "_blank", rel: "noopener noreferrer" }
               : {}
             return (
-              <NavigationMenuPrimitive.Item key={item.label}>
+              <NavigationMenuPrimitive.Item key={item.labelKey}>
                 <NavigationMenuPrimitive.Link asChild>
                   <a
                     href={item.href}
                     className="inline-flex items-center rounded-full px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#1a2761]"
                     {...linkProps}
                   >
-                    {item.label}
+                    {t(item.labelKey)}
                   </a>
                 </NavigationMenuPrimitive.Link>
               </NavigationMenuPrimitive.Item>
@@ -95,7 +109,7 @@ function DesktopNav() {
 
           // Dropdown
           return (
-            <NavigationMenuPrimitive.Item key={item.label} className="relative">
+            <NavigationMenuPrimitive.Item key={item.labelKey} className="relative">
               <NavigationMenuPrimitive.Trigger
                 className={cn(
                   "group/trigger inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium text-white transition-colors",
@@ -103,7 +117,7 @@ function DesktopNav() {
                   "focus:outline-none"
                 )}
               >
-                {item.label}
+                {t(item.labelKey)}
                 <ChevronDown
                   className="h-3.5 w-3.5 transition-transform duration-200 group-data-[state=open]/trigger:rotate-180"
                   aria-hidden
@@ -113,7 +127,7 @@ function DesktopNav() {
               <NavigationMenuPrimitive.Content className="absolute top-full z-50 pt-4 data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out data-[motion^=from-]:fade-in data-[motion^=to-]:fade-out">
                 <div className="w-[280px] rounded-2xl bg-[#243486] p-2 shadow-xl">
                   {item.items.map((child) => (
-                    <DropdownItem key={child.label} {...child} />
+                    <DropdownItem key={child.labelKey} label={t(child.labelKey)} href={child.href} external={child.external} />
                   ))}
                 </div>
               </NavigationMenuPrimitive.Content>
@@ -133,7 +147,7 @@ function MobileAccordionItem({
   onClose,
 }: {
   label: string
-  items: readonly { label: string; href: string; external: boolean }[]
+  items: { label: string; href: string; external: boolean }[]
   onClose: () => void
 }) {
   const [open, setOpen] = useState(false)
@@ -177,6 +191,7 @@ function MobileAccordionItem({
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
+  const { t } = useTranslation()
 
   const scrollPositionRef = useRef(0)
   const prevThemeColorRef = useRef<string | null>(null)
@@ -246,15 +261,18 @@ export function Navbar() {
         {/* Desktop nav */}
         <DesktopNav />
 
-        {/* CTA */}
-        <a
-          href={EXTERNAL_LINKS.app}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden rounded-full bg-white px-4 py-1.5 text-sm font-semibold text-[#243486] transition-colors hover:bg-white/90 md:block"
-        >
-          Launch App
-        </a>
+        {/* Desktop right side: language switcher + CTA */}
+        <div className="hidden items-center gap-2 md:flex">
+          <LanguageSwitcher variant="light" />
+          <a
+            href={EXTERNAL_LINKS.app}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full bg-white px-4 py-1.5 text-sm font-semibold text-[#243486] transition-colors hover:bg-white/90"
+          >
+            {t("nav.launchApp")}
+          </a>
+        </div>
 
         {/* Mobile hamburger */}
         <button className="text-white md:hidden" onClick={toggleMenu} aria-label="Toggle menu">
@@ -286,38 +304,45 @@ export function Navbar() {
             <Link href="/" onClick={closeMenu}>
               <img src="/strato-logo-black.svg" alt="STRATO" className="h-6 w-auto" />
             </Link>
-            <button
-              className="-mr-2 rounded-lg p-2 text-[#1a1a2e] hover:bg-gray-100"
-              onClick={toggleMenu}
-              aria-label="Close menu"
-            >
-              <X size={24} strokeWidth={2.5} />
-            </button>
+            <div className="flex items-center gap-2">
+              <LanguageSwitcher variant="dark" />
+              <button
+                className="-mr-2 rounded-lg p-2 text-[#1a1a2e] hover:bg-gray-100"
+                onClick={toggleMenu}
+                aria-label="Close menu"
+              >
+                <X size={24} strokeWidth={2.5} />
+              </button>
+            </div>
           </div>
 
           <nav className="flex flex-1 flex-col gap-8 overflow-y-auto px-6 py-8">
             {NAV_ITEMS.map((item) => {
-              if ("href" in item) {
-                const linkProps = "external" in item && item.external
+              if (!isDropdown(item)) {
+                const linkProps = item.external
                   ? { target: "_blank", rel: "noopener noreferrer" }
                   : {}
                 return (
                   <a
-                    key={item.label}
+                    key={item.labelKey}
                     href={item.href}
                     className="text-3xl font-semibold text-[#1a1a2e] hover:text-[#243486]"
                     onClick={closeMenu}
                     {...linkProps}
                   >
-                    {item.label}
+                    {t(item.labelKey)}
                   </a>
                 )
               }
               return (
                 <MobileAccordionItem
-                  key={item.label}
-                  label={item.label}
-                  items={item.items}
+                  key={item.labelKey}
+                  label={t(item.labelKey)}
+                  items={item.items.map((child) => ({
+                    label: t(child.labelKey),
+                    href: child.href,
+                    external: child.external,
+                  }))}
                   onClose={closeMenu}
                 />
               )
@@ -331,7 +356,7 @@ export function Navbar() {
                 className="block w-full rounded-full bg-[#243486] px-6 py-4 text-center text-lg font-semibold text-white transition-colors hover:bg-[#1a2761]"
                 onClick={closeMenu}
               >
-                Launch App
+                {t("nav.launchApp")}
               </a>
             </div>
           </nav>

@@ -5,38 +5,42 @@ import { ArrowRight } from "lucide-react"
 import { motion, useMotionValue, useSpring } from "framer-motion"
 import { useReveal, revealStyle } from "@/hooks/use-reveal"
 import { EXTERNAL_LINKS } from "@/lib/external-links"
+import { useTranslation } from "@/lib/i18n"
+import type { TranslationKey } from "@/lib/translations"
 
-const cards = [
+const cards: {
+  image: string
+  titleKey: TranslationKey
+  descriptionKey: TranslationKey
+  ctaKey: TranslationKey
+  href: string
+}[] = [
   {
     image: "/images/welcome-card-1.png",
-    title: "Ultra-low fees",
-    description:
-      "Gas on STRATO costs only ~$0.01 per transaction, and get 10 free transactions through vouchers every time you bridge assets from Ethereum.",
-    cta: "Start Earning",
+    titleKey: "welcome.card1Title",
+    descriptionKey: "welcome.card1Description",
+    ctaKey: "welcome.card1Cta",
     href: EXTERNAL_LINKS.app,
   },
   {
     image: "/images/welcome-card-2.png",
-    title: "Gold & silver, onchain",
-    description:
-      "Own tokenized precious metals backed 1:1 by physical reserves in New York City vaults. Audited monthly, redeemable for real metal, and built for onchain utility.",
-    cta: "Buy Metals",
+    titleKey: "welcome.card2Title",
+    descriptionKey: "welcome.card2Description",
+    ctaKey: "welcome.card2Cta",
     href: EXTERNAL_LINKS.app,
   },
   {
     image: "/images/welcome-card-3.png",
-    title: "Borrow without selling",
-    description:
-      "Use your gold, silver, BTC, ETH, and other crypto assets as collateral and borrow USDST instantly with up to 80% LTV. Keep your position while unlocking liquidity.",
-    cta: "Start Borrowing",
+    titleKey: "welcome.card3Title",
+    descriptionKey: "welcome.card3Description",
+    ctaKey: "welcome.card3Cta",
     href: EXTERNAL_LINKS.app,
   },
   {
     image: "/images/welcome-card-4.png",
-    title: "Built on trust",
-    description:
-      "STRATO is a non-custodial, fully audited, open-source chain built by the team behind some of Ethereum's earliest infrastructure.",
-    cta: "Learn More",
+    titleKey: "welcome.card4Title",
+    descriptionKey: "welcome.card4Description",
+    ctaKey: "welcome.card4Cta",
     href: EXTERNAL_LINKS.docs,
   },
 ]
@@ -46,6 +50,7 @@ function WelcomeCard({ card, index, visible }: { card: typeof cards[number]; ind
   const mouseY = useMotionValue(0)
   const springX = useSpring(mouseX, { stiffness: 150, damping: 30, mass: 1 })
   const springY = useSpring(mouseY, { stiffness: 150, damping: 30, mass: 1 })
+  const { t } = useTranslation()
 
   return (
     <div
@@ -71,7 +76,7 @@ function WelcomeCard({ card, index, visible }: { card: typeof cards[number]; ind
       >
         <Image
           src={card.image}
-          alt={card.title}
+          alt={t(card.titleKey)}
           width={300}
           height={188}
           className="h-4/5 w-auto object-contain"
@@ -80,10 +85,10 @@ function WelcomeCard({ card, index, visible }: { card: typeof cards[number]; ind
 
       {/* Card Content */}
       <h3 className="mb-2 text-xl font-semibold leading-snug text-[#7dd3fc]">
-        {card.title}
+        {t(card.titleKey)}
       </h3>
       <p className="mb-4 flex-1 text-sm leading-snug text-white/80">
-        {card.description}
+        {t(card.descriptionKey)}
       </p>
       <a
         href={card.href}
@@ -91,7 +96,7 @@ function WelcomeCard({ card, index, visible }: { card: typeof cards[number]; ind
         rel="noopener noreferrer"
         className="group inline-flex items-center gap-1 text-sm font-medium text-white transition-colors hover:text-[#7dd3fc]"
       >
-        {card.cta}
+        {t(card.ctaKey)}
         <ArrowRight className="h-4 w-4 text-[#7dd3fc] transition-transform group-hover:translate-x-1 group-hover:text-[#7dd3fc]" />
       </a>
     </div>
@@ -100,6 +105,7 @@ function WelcomeCard({ card, index, visible }: { card: typeof cards[number]; ind
 
 export function WelcomeSection() {
   const { ref, visible } = useReveal()
+  const { t } = useTranslation()
 
   return (
     <section
@@ -110,13 +116,13 @@ export function WelcomeSection() {
         {/* Header */}
         <div className="mb-12" style={revealStyle(visible, 0)}>
           <p className="mb-2 text-sm font-medium uppercase leading-snug tracking-widest text-[#7dd3fc]">
-            Welcome to STRATO
+            {t("welcome.label")}
           </p>
           <h2 className="mb-5 text-4xl font-semibold leading-tight text-white md:text-4xl lg:text-5xl">
-            Gold and Silver Meet DeFi.
+            {t("welcome.heading")}
           </h2>
           <p className="max-w-4xl text-base leading-snug text-white/80 md:text-lg">
-            When times get hard, people turn to gold and silver. Traditional finance makes it nearly impossible to earn on gold and silver, borrow against them, or move them quickly. STRATO puts vaulted precious metals onchain and builds a full-stack DeFi platform around them, so you can earn, borrow, and provide liquidity using metals, BTC, ETH, and stablecoins.
+            {t("welcome.description")}
           </p>
         </div>
 
@@ -126,7 +132,7 @@ export function WelcomeSection() {
           style={revealStyle(visible, 100)}
         >
           {cards.map((card, index) => (
-            <WelcomeCard key={card.title} card={card} index={index} visible={visible} />
+            <WelcomeCard key={card.titleKey} card={card} index={index} visible={visible} />
           ))}
         </div>
       </div>

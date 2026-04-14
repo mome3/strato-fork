@@ -5,6 +5,7 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { motion, useMotionValue, useSpring } from "framer-motion"
 import { useReveal, revealStyle } from "@/hooks/use-reveal"
+import { useTranslation } from "@/lib/i18n"
 
 const teamMembers = [
   {
@@ -67,33 +68,29 @@ function TeamHeadshot({
 }
 
 function CtaButton({ className = "" }: { className?: string }) {
+  const { t } = useTranslation()
   return (
     <Link
       href="/team"
       className={`group inline-flex items-center gap-2 rounded-full border border-white bg-white px-6 py-3 text-sm font-semibold text-[#243486] transition-colors hover:bg-transparent hover:text-white ${className}`}
     >
-      Meet the Team
+      {t("teamHighlight.cta")}
       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
     </Link>
   )
 }
 
 function TextBlock({ visible, className = "" }: { visible: boolean; className?: string }) {
+  const { t } = useTranslation()
   return (
     <div className={className} style={revealStyle(visible, 100)}>
       <h2 className="mb-5 text-4xl font-semibold leading-tight text-white md:text-4xl lg:text-5xl">
-        Built by Ethereum Veterans
+        {t("teamHighlight.heading")}
       </h2>
       <div className="space-y-4 text-base leading-snug text-white/80 md:text-lg">
-        <p>
-          The STRATO Core team has been battle-tested for 10 years — since the earliest days of Ethereum.
-        </p>
-        <p>
-          The team built one of Ethereum&apos;s six original mainnet-compatible clients in 2014, the Haskell client that still powers the chain today. They launched the first Blockchain-as-a-Service on Microsoft Azure at DEVCON1 in 2015, and co-founded the Enterprise Ethereum Alliance.
-        </p>
-        <p>
-          Advised by Joe Lubin, co-founder of Ethereum and founder of ConsenSys.
-        </p>
+        <p>{t("teamHighlight.p1")}</p>
+        <p>{t("teamHighlight.p2")}</p>
+        <p>{t("teamHighlight.p3")}</p>
       </div>
     </div>
   )
@@ -101,6 +98,7 @@ function TextBlock({ visible, className = "" }: { visible: boolean; className?: 
 
 export function TeamHighlightSection() {
   const { ref, visible } = useReveal()
+  const { t } = useTranslation()
 
   return (
     <section
@@ -225,18 +223,12 @@ export function TeamHighlightSection() {
 
           <div className="flex-1" style={revealStyle(visible, 100)}>
             <h2 className="mb-5 text-4xl font-semibold leading-tight text-white md:text-4xl lg:text-5xl">
-              Built by Ethereum Veterans
+              {t("teamHighlight.heading")}
             </h2>
             <div className="space-y-4 text-base leading-snug text-white/80 md:text-lg">
-              <p>
-                The STRATO Core team has been battle-tested for 10 years — since the earliest days of Ethereum.
-              </p>
-              <p>
-                The team built one of Ethereum&apos;s six original mainnet-compatible clients in 2014, the Haskell client that still powers the chain today. They launched the first Blockchain-as-a-Service on Microsoft Azure at DEVCON1 in 2015, and co-founded the Enterprise Ethereum Alliance.
-              </p>
-              <p>
-                Advised by Joe Lubin, co-founder of Ethereum and founder of ConsenSys.
-              </p>
+              <p>{t("teamHighlight.p1")}</p>
+              <p>{t("teamHighlight.p2")}</p>
+              <p>{t("teamHighlight.p3")}</p>
             </div>
             <div className="mt-8">
               <CtaButton />

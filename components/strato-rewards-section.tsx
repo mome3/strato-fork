@@ -3,41 +3,49 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { useReveal, revealStyle } from "@/hooks/use-reveal"
+import { useTranslation } from "@/lib/i18n"
+import type { TranslationKey } from "@/lib/translations"
 
-const earningMethods = [
+const earningMethods: {
+  labelKey: TranslationKey
+  descriptionKey: TranslationKey
+  img: string
+  alt: string
+}[] = [
   {
-    label: "Deposit & Lend",
-    description: "Earn points continuously while your USDST powers lending markets",
+    labelKey: "rewards.method1Label",
+    descriptionKey: "rewards.method1Description",
     img: "/icons/deposit-icon.png",
     alt: "Deposit and lend icon",
   },
   {
-    label: "Borrow",
-    description: "Take out a loan against your assets and earn points as you borrow.",
+    labelKey: "rewards.method2Label",
+    descriptionKey: "rewards.method2Description",
     img: "/icons/borrow-icon.png",
     alt: "Borrow icon",
   },
   {
-    label: "Swap & Mint",
-    description: "Earn points every time you trade or mint USDST through a CDP.",
+    labelKey: "rewards.method3Label",
+    descriptionKey: "rewards.method3Description",
     img: "/icons/swap-icon.png",
     alt: "Swap and mint icon",
   },
   {
-    label: "Provide Liquidity",
-    description: "Supply liquidity to the ecosystem and unlock the highest point rewards.",
+    labelKey: "rewards.method4Label",
+    descriptionKey: "rewards.method4Description",
     img: "/icons/liquidity-icon.png",
     alt: "Provide liquidity icon",
   },
   {
-    label: "Refer Friends",
-    description: "Invite others to join STRATO and earn a share of the points they generate.",
+    labelKey: "rewards.method5Label",
+    descriptionKey: "rewards.method5Description",
     img: "/icons/refer-icon.png",
     alt: "Refer friends icon",
   },
 ]
 
 function EarnItem({ method, delay, visible }: { method: typeof earningMethods[0]; delay: number; visible: boolean }) {
+  const { t } = useTranslation()
   return (
     <div
       className="flex flex-col items-center text-center"
@@ -46,9 +54,9 @@ function EarnItem({ method, delay, visible }: { method: typeof earningMethods[0]
       <div className="mb-3 h-16 w-16">
         <img src={method.img} alt={method.alt} className="h-full w-full object-contain" />
       </div>
-      <h3 className="mb-1.5 text-sm font-semibold text-[#1d2e86]">{method.label}</h3>
+      <h3 className="mb-1.5 text-sm font-semibold text-[#1d2e86]">{t(method.labelKey)}</h3>
       <p className="max-w-[180px] text-xs leading-relaxed text-[#4b5563]">
-        {method.description}
+        {t(method.descriptionKey)}
       </p>
     </div>
   )
@@ -56,6 +64,7 @@ function EarnItem({ method, delay, visible }: { method: typeof earningMethods[0]
 
 export function StratoRewardsSection() {
   const { ref, visible } = useReveal()
+  const { t } = useTranslation()
 
   return (
     <section ref={ref} className="relative z-10 w-full rounded-b-[32px] bg-white pb-16 md:pb-24">
@@ -69,18 +78,16 @@ export function StratoRewardsSection() {
             {/* Heading */}
             <div className="mx-auto mb-8 max-w-3xl text-center" style={revealStyle(visible, 0)}>
               <h2 className="mb-4 text-4xl font-semibold leading-tight text-[#1d2e86] lg:text-5xl">
-                Earn STRATO Rewards Before TGE
+                {t("rewards.heading")}
               </h2>
               <p className="text-sm leading-relaxed text-[#4b5563] md:text-base">
-                Every meaningful action on STRATO earns you STRATO reward points: lending, borrowing,
-                swapping, minting, and providing liquidity. These points are your stake in what comes
-                next.
+                {t("rewards.description")}
               </p>
             </div>
 
             {/* How you earn label */}
             <p className="mb-10 text-center text-sm font-semibold text-[#1a1a2e]" style={revealStyle(visible, 60)}>
-              How you earn:
+              {t("rewards.howYouEarn")}
             </p>
 
             {/* Top row — 3 items (desktop) / 2+2+1 (mobile) */}
@@ -88,7 +95,7 @@ export function StratoRewardsSection() {
               {/* Mobile: 2+2+1 grid */}
               <div className="grid grid-cols-2 gap-8 sm:hidden">
                 {earningMethods.slice(0, 4).map((method, i) => (
-                  <EarnItem key={method.label} method={method} delay={160 + i * 60} visible={visible} />
+                  <EarnItem key={method.labelKey} method={method} delay={160 + i * 60} visible={visible} />
                 ))}
               </div>
               <div className="mt-8 flex justify-center sm:hidden">
@@ -98,12 +105,12 @@ export function StratoRewardsSection() {
               {/* Desktop: 3 top + 2 centred bottom */}
               <div className="hidden sm:grid sm:grid-cols-3 sm:gap-8">
                 {earningMethods.slice(0, 3).map((method, i) => (
-                  <EarnItem key={method.label} method={method} delay={160 + i * 60} visible={visible} />
+                  <EarnItem key={method.labelKey} method={method} delay={160 + i * 60} visible={visible} />
                 ))}
               </div>
               <div className="mt-10 hidden justify-center gap-24 sm:flex">
                 {earningMethods.slice(3).map((method, i) => (
-                  <EarnItem key={method.label} method={method} delay={340 + i * 60} visible={visible} />
+                  <EarnItem key={method.labelKey} method={method} delay={340 + i * 60} visible={visible} />
                 ))}
               </div>
             </div>
@@ -114,7 +121,7 @@ export function StratoRewardsSection() {
                 href="https://strato.nexus/blog/announcing-strato-rewards-season-2"
                 className="group inline-flex items-center gap-2 rounded-full bg-[#243486] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1a2766]"
               >
-                Start Earning Rewards
+                {t("rewards.cta")}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
@@ -123,7 +130,7 @@ export function StratoRewardsSection() {
           {/* Banner strip — flush to bottom of panel, no bottom radius */}
           <div className="bg-[#1d2e86] px-6 py-4 text-center" style={revealStyle(visible, 560)}>
             <p className="text-sm font-semibold text-white">
-              2M+ STRATO points have already been earned across the ecosystem and TGE is fast approaching.
+              {t("rewards.banner")}
             </p>
           </div>
 
