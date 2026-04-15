@@ -18,7 +18,7 @@ const ko = {
   "hero.title1": "귀금속이 이끄는",
   "hero.title2": "탈중앙화 금융",
   "hero.description":
-    "금, 은 그리고 최고 수준의 암호화폐 자산을 하나의 체인에서. 이더리움 선구자들이 구축했습니다.",
+    "금, 은, 그리고 최고의 암호화폐 자산을 하나의 체인에서 만나보세요. 이더리움 OG들이 구축했습니다.",
   "hero.cta": "탐색하기",
 
   // Banner
@@ -30,7 +30,7 @@ const ko = {
   "stats.points": "캠페인 포인트 발행량",
 
   // Partners
-  "partners.backedBy": "투자자",
+  "partners.backedBy": "후원사",
 
   // Welcome
   "welcome.label": "STRATO에 오신 것을 환영합니다",
@@ -55,7 +55,7 @@ const ko = {
   "welcome.card4Cta": "자세히 보기",
 
   // Team Highlight
-  "teamHighlight.heading": "이더리움 베테랑이 구축",
+  "teamHighlight.heading": "이더리움 베테랑들이 구축한 프로젝트",
   "teamHighlight.p1":
     "STRATO 핵심 팀은 이더리움 초창기부터 10년간 실전에서 검증되었습니다.",
   "teamHighlight.p2":
@@ -81,29 +81,29 @@ const ko = {
   // Rewards
   "rewards.heading": "TGE 전에 STRATO 리워드 획득",
   "rewards.description":
-    "STRATO에서의 모든 의미 있는 활동으로 STRATO 리워드 포인트를 획득하세요: 대출, 차입, 스왑, 민트, 유동성 제공. 이 포인트는 다음에 올 것에 대한 여러분의 지분입니다.",
+    "STRATO에서의 모든 의미 있는 활동으로 STRATO 리워드 포인트를 획득하세요: 대출, 차입, 스왑, 민트, 유동성 제공. 이 포인트는 앞으로 다가올 기회의 지분입니다.",
   "rewards.howYouEarn": "획득 방법:",
   "rewards.method1Label": "예치 & 대출",
   "rewards.method1Description":
-    "USDST가 대출 시장을 지원하는 동안 지속적으로 포인트 획득",
+    "USDST를 예치하여 대출 시장에 기여하면서 포인트를 지속적으로 획득하세요",
   "rewards.method2Label": "차입",
   "rewards.method2Description":
-    "자산을 담보로 대출을 받고 차입하면서 포인트를 획득하세.",
+    "자산을 담보로 대출을 받고 차입하면서 포인트를 획득하세요.",
   "rewards.method3Label": "스왑 & 민트",
   "rewards.method3Description":
     "CDP를 통해 거래하거나 USDST를 민트할 때마다 포인트 획득.",
   "rewards.method4Label": "유동성 제공",
   "rewards.method4Description":
-    "생태계에 유동성을 공급하고 최고 포인트 리워드를 해제하세.",
+    "생태계에 유동성을 공급하고 최고 포인트 리워드를 해제하세요.",
   "rewards.method5Label": "친구 추천",
   "rewards.method5Description":
-    "다른 사람을 STRATO에 초대하고 그들이 생성한 포인트의 일부를 획득하세.",
+    "다른 사람을 STRATO에 초대하고 그들이 생성한 포인트의 일부를 획득하세요.",
   "rewards.cta": "리워드 획득 시작",
   "rewards.banner":
     "생태계 전체에서 이미 200만 이상의 STRATO 포인트가 획득되었으며 TGE가 빠르게 다가오고 있습니다.",
 
   // Real Yield
-  "realYield.heading": "리얼 수익. 정말 간단.",
+  "realYield.heading": "실질 수익. 정말 간단.",
   "realYield.description":
     "STRATO의 수익은 토큰 배출이 아닌 자동화된 차익거래 볼트가 생성하는 실제 경제 활동에서 나옵니다. 볼트에 예치하면 자율 봇이 대신 거래하여 금, 은, ETH, BTC, 스테이블코인 풀 간의 가격을 지속적으로 교정합니다. 여러분이 잠자는 동안에도.",
   "realYield.cta": "작동 방식",
@@ -112,7 +112,7 @@ const ko = {
   "community.heading": "아무것도 놓치지 마세요",
   "community.description":
     "STRATO 사용을 시작할 준비가 되었든, 주요 발표를 가장 먼저 듣고 싶든, 뉴스레터에 가입하여 최신 정보를 받아보세요.",
-  "community.cta": "STRATOsphere 진입",
+  "community.cta": "STRATOsphere 합류하기",
   "community.subscribing": "구독 중...",
   "community.retry": "재시도",
 

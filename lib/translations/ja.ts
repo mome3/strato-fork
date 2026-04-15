@@ -55,7 +55,7 @@ const ja = {
   "welcome.card4Cta": "詳しく見る",
 
   // Team Highlight
-  "teamHighlight.heading": "Ethereum ベテランが構築",
+  "teamHighlight.heading": "Ethereum ベテランが構築したプロジェクト",
   "teamHighlight.p1":
     "STRATO コアチームは Ethereum の最初期から 10 年間、実戦で鍛えられてきました。",
   "teamHighlight.p2":
@@ -81,11 +81,11 @@ const ja = {
   // Rewards
   "rewards.heading": "TGE 前に STRATO リワードを獲得",
   "rewards.description":
-    "STRATO での意味のあるすべてのアクションで STRATO リワードポイントを獲得：レンディング、ボローイング、スワップ、ミント、流動性提供。これらのポイントは次に来るものへのあなたのステークです。",
+    "STRATO での意味のあるすべてのアクションで STRATO リワードポイントを獲得：レンディング、ボローイング、スワップ、ミント、流動性提供。これらのポイントは今後の展開におけるあなたのステークです。",
   "rewards.howYouEarn": "獲得方法：",
   "rewards.method1Label": "預入 & レンド",
   "rewards.method1Description":
-    "あなたの USDST がレンディングマーケットを支える間、継続的にポイントを獲得",
+    "USDST を預け入れてレンディングマーケットに貢献しながら、継続的にポイントを獲得",
   "rewards.method2Label": "ボロー",
   "rewards.method2Description":
     "資産を担保にローンを組み、借入中にポイントを獲得。",
@@ -100,7 +100,7 @@ const ja = {
     "他の人を STRATO に招待し、彼らが生成するポイントの一部を獲得。",
   "rewards.cta": "リワード獲得を開始",
   "rewards.banner":
-    "エコシステム全体で 200 万以上の STRATO ポイントがすでに獲得されており、TGE が急速に近づいています。",
+    "エコシステム全体で 200 万以上の STRATO ポイントがすでに獲得されており、TGE が間近に迫っています。",
 
   // Real Yield
   "realYield.heading": "リアルイールド。シンプルに。",
@@ -112,7 +112,7 @@ const ja = {
   "community.heading": "何も見逃さない",
   "community.description":
     "STRATO の利用を始める準備ができている方も、重要な発表を最初に聞きたい方も、ニュースレターに登録して最新情報を入手してください。",
-  "community.cta": "STRATOsphere に入る",
+  "community.cta": "STRATOsphere に参加しよう",
   "community.subscribing": "登録中...",
   "community.retry": "再試行",
 

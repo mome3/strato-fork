@@ -81,7 +81,7 @@ const zh = {
   // Rewards
   "rewards.heading": "在 TGE 之前赚取 STRATO 奖励",
   "rewards.description":
-    "在 STRATO 上的每一个有意义的操作都能为您赚取 STRATO 奖励积分：借出、借入、兑换、铸造和提供流动性。这些积分是您在即将到来之事中的权益。",
+    "在 STRATO 上的每一个有意义的操作都能为您赚取 STRATO 奖励积分：借出、借入、兑换、铸造和提供流动性。这些积分代表您在未来发展中的权益。",
   "rewards.howYouEarn": "赚取方式：",
   "rewards.method1Label": "存入并借出",
   "rewards.method1Description":
@@ -100,7 +100,7 @@ const zh = {
     "邀请他人加入 STRATO，赚取他们产生积分的一部分。",
   "rewards.cta": "开始赚取奖励",
   "rewards.banner":
-    "已有超过 200 万 STRATO 积分在生态系统中被赚取，TGE 正在快速临近。",
+    "已有超过 200 万 STRATO 积分在生态系统中被赚取，TGE 日益临近。",
 
   // Real Yield
   "realYield.heading": "真实收益，简单明了。",
