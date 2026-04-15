@@ -15,10 +15,10 @@ const zh = {
   "nav.launchApp": "启动应用",
 
   // Hero
-  "hero.title1": "贵金属驱动的",
-  "hero.title2": "去中心化金融",
+  "hero.title1": "以贵金属在去中心化",
+  "hero.title2": "中做交易",
   "hero.description":
-    "黄金、白银和顶级加密资产，汇聚于同一条链上。由以太坊先驱团队打造。",
+    "用以太坊DeFi, 将金、银与其他主要的加密资产联成一线来运作。",
   "hero.cta": "开始探索",
 
   // Banner
@@ -36,10 +36,10 @@ const zh = {
   "welcome.label": "欢迎来到 STRATO",
   "welcome.heading": "黄金白银遇见 DeFi",
   "welcome.description":
-    "当经济困难时，人们转向黄金和白银。传统金融几乎不可能让你从黄金和白银中获得收益、进行借贷或快速转移。STRATO 将保险库中的贵金属上链，并围绕它们构建全栈 DeFi 平台，让你可以使用贵金属、BTC、ETH 和稳定币进行收益获取、借贷和提供流动性。",
+    "当经济低迷，传统的投资方式，人们无法快速的投资或转移资产，从中获取最大的利益。此全面性的一线DeFi的一线平台，让您以金银等贵金属、BTC、ETH及其他稳定的主要虚拟货币，借贷投资流畅。",
   "welcome.card1Title": "超低手续费",
   "welcome.card1Description":
-    "STRATO 上的 Gas 费用仅约 $0.01 每笔交易，每次从以太坊桥接资产时还可获得 10 笔免费交易券。",
+    "STRATO的GAS费用每笔交易仅约$0.01元。而每次从以太坊桥来交易还可获得10次的免费交易优惠。",
   "welcome.card1Cta": "开始赚取",
   "welcome.card2Title": "链上黄金与白银",
   "welcome.card2Description":
@@ -57,11 +57,11 @@ const zh = {
   // Team Highlight
   "teamHighlight.heading": "由以太坊老兵打造",
   "teamHighlight.p1":
-    "STRATO 核心团队已经历了 10 年的实战考验——从以太坊的最早期开始。",
+    "STRATO核心的三位成员为以太坊始祖，有着10多年的经营经验。",
   "teamHighlight.p2":
-    "该团队于 2014 年构建了以太坊六个原始主网兼容客户端之一——Haskell 客户端，至今仍在为链提供动力。他们在 2015 年的 DEVCON1 上推出了微软 Azure 上的首个区块链即服务，并联合创立了企业以太坊联盟。",
+    "从2014年建立六个主要的网容客户端。如，受欢迎的Haskell,仍持续为客户提供服务。2015年，他们在DEVCON1上推出了在微软上首个提供服务区块链的Azure，并联合创立企业以太坊联盟(Enterprise Ethereum Alliance)。",
   "teamHighlight.p3":
-    "由以太坊联合创始人、ConsenSys 创始人 Joe Lubin 担任顾问。",
+    "以太坊联合创始人及ConsenSys创始人Joe Lubin为此公司之顾问。",
   "teamHighlight.cta": "认识团队",
 
   // News
@@ -81,7 +81,7 @@ const zh = {
   // Rewards
   "rewards.heading": "在 TGE 之前赚取 STRATO 奖励",
   "rewards.description":
-    "在 STRATO 上的每一个有意义的操作都能为您赚取 STRATO 奖励积分：借出、借入、兑换、铸造和提供流动性。这些积分是您在即将到来之事中的权益。",
+    "在 STRATO 上的每一个有意义的操作都能为您赚取 STRATO 奖励积分：借出、借入、兑换、铸造和提供流动性。这些积分代表您在未来发展中的权益。",
   "rewards.howYouEarn": "赚取方式：",
   "rewards.method1Label": "存入并借出",
   "rewards.method1Description":
@@ -100,7 +100,7 @@ const zh = {
     "邀请他人加入 STRATO，赚取他们产生积分的一部分。",
   "rewards.cta": "开始赚取奖励",
   "rewards.banner":
-    "已有超过 200 万 STRATO 积分在生态系统中被赚取，TGE 正在快速临近。",
+    "已有超过 200 万 STRATO 积分在生态系统中被赚取，TGE 日益临近。",
 
   // Real Yield
   "realYield.heading": "真实收益，简单明了。",
