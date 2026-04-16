@@ -15,7 +15,7 @@ import { organizationJsonLd, webSiteJsonLd } from "@/lib/seo"
 
 const FEATURED_SLUGS = [
   "precious-metals-audit-march-2026",
-  "open-sourcing-strato",
+  "announcing-strato-rewards-season-2",
   "how-trading-bot-generates-yield",
 ]
 
