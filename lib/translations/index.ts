@@ -26,4 +26,4 @@ export const localeNames: Record<Locale, string> = {
   es: "ES",
 }
 
-export const locales: Locale[] = ["en", "zh", "ja", "ko", "fr", "es"]
+export const locales: Locale[] = ["en", "es", "fr", "zh", "ja", "ko"]

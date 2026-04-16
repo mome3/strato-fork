@@ -44,12 +44,12 @@ export function StratoNewsSection({ posts }: StratoNewsSectionProps) {
               style={revealStyle(visible, 100 + index * 60)}
             >
               {/* Thumbnail */}
-              <div className="aspect-[3/2] w-full overflow-hidden rounded-2xl bg-[#d1d5db]">
+              <div className="aspect-[3/2] w-full overflow-hidden rounded-2xl bg-[#f3f4f6]">
                 {article.img && (
                   <img
                     src={article.img}
                     alt={article.title}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                    className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
                   />
                 )}
               </div>
