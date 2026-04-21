@@ -3,11 +3,9 @@
 import Link from "next/link"
 import { useReveal, revealStyle } from "@/hooks/use-reveal"
 import { EXTERNAL_LINKS } from "@/lib/external-links"
-import { useTranslation } from "@/lib/i18n"
 
 export function Footer() {
   const { ref, visible } = useReveal()
-  const { t } = useTranslation()
 
   const socialLinks = [
     { name: "X", icon: "twitter-x", href: EXTERNAL_LINKS.twitter },
@@ -59,36 +57,36 @@ export function Footer() {
           <div className="flex gap-16" style={revealStyle(visible, 100)}>
             <div>
               <h4 className="mb-3 text-sm font-bold text-[#1a1a2e]">
-                {t("footer.resources")}
+                Resources
               </h4>
               <ul className="flex flex-col gap-2">
                 <li>
-                  <Link href="/blog" className="text-sm text-[#6b6b7b] hover:text-[#243486]">{t("footer.blog")}</Link>
+                  <Link href="/blog" className="text-sm text-[#6b6b7b] hover:text-[#243486]">Blog</Link>
                 </li>
                 <li>
-                  <a href={EXTERNAL_LINKS.docs} target="_blank" rel="noopener noreferrer" className="text-sm text-[#6b6b7b] hover:text-[#243486]">{t("footer.docs")}</a>
+                  <a href={EXTERNAL_LINKS.docs} target="_blank" rel="noopener noreferrer" className="text-sm text-[#6b6b7b] hover:text-[#243486]">Docs</a>
                 </li>
                 <li>
-                  <Link href="/contact" className="text-sm text-[#6b6b7b] hover:text-[#243486]">{t("footer.contact")}</Link>
+                  <Link href="/contact" className="text-sm text-[#6b6b7b] hover:text-[#243486]">Contact</Link>
                 </li>
                 <li>
-                  <Link href="/team" className="text-sm text-[#6b6b7b] hover:text-[#243486]">{t("footer.team")}</Link>
+                  <Link href="/team" className="text-sm text-[#6b6b7b] hover:text-[#243486]">Team</Link>
                 </li>
               </ul>
             </div>
             <div>
               <h4 className="mb-3 text-sm font-bold text-[#1a1a2e]">
-                {t("footer.company")}
+                Company
               </h4>
               <ul className="flex flex-col gap-2">
                 <li>
-                  <Link href="/privacy" className="text-sm text-[#6b6b7b] hover:text-[#243486]">{t("footer.privacyPolicy")}</Link>
+                  <Link href="/privacy" className="text-sm text-[#6b6b7b] hover:text-[#243486]">Privacy Policy</Link>
                 </li>
                 <li>
-                  <Link href="/terms" className="text-sm text-[#6b6b7b] hover:text-[#243486]">{t("footer.termsOfService")}</Link>
+                  <Link href="/terms" className="text-sm text-[#6b6b7b] hover:text-[#243486]">Terms of Service</Link>
                 </li>
                 <li>
-                  <Link href="/api-terms" className="text-sm text-[#6b6b7b] hover:text-[#243486]">{t("footer.apiTerms")}</Link>
+                  <Link href="/api-terms" className="text-sm text-[#6b6b7b] hover:text-[#243486]">API Terms of Use</Link>
                 </li>
               </ul>
             </div>

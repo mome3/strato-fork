@@ -15,12 +15,12 @@ import { organizationJsonLd, webSiteJsonLd } from "@/lib/seo"
 
 const FEATURED_SLUGS = [
   "precious-metals-audit-march-2026",
-  "announcing-strato-rewards-season-2",
+  "open-sourcing-strato",
   "how-trading-bot-generates-yield",
 ]
 
-export default async function Home() {
-  const allPosts = await getNonVideoPosts()
+export default function Home() {
+  const allPosts = getNonVideoPosts()
   const latestPosts = FEATURED_SLUGS.map((slug) =>
     allPosts.find((post) => post.slug === slug)
   ).filter(Boolean)

@@ -3,7 +3,6 @@
 import { Fragment, useEffect, useState, useRef } from "react"
 import { ArrowRight, ArrowUpRight, X, Loader2, RotateCcw } from "lucide-react"
 import { useNewsletter } from "@/hooks/use-newsletter"
-import { useTranslation } from "@/lib/i18n"
 
 /* ─── Banner Configuration ──────────────────────────────────────────────
  *  Edit the values below to control the banner content and visibility.
@@ -11,6 +10,7 @@ import { useTranslation } from "@/lib/i18n"
  * ────────────────────────────────────────────────────────────────────── */
 const BANNER_CONFIG = {
   enabled: true,
+  title: "TGE upcoming. Join the whitelist and latest news.",
   subtitle: "",
 
   /** The URL the entire banner links to (used when newsletterMode is false) */
@@ -85,14 +85,13 @@ function getCountdownUnits(
 /* ─── Component ────────────────────────────────────────────────────── */
 
 export function HighlightBanner() {
-  const { enabled, subtitle, href, openInNewTab, countdownTarget } =
+  const { enabled, title, subtitle, href, openInNewTab, countdownTarget } =
     BANNER_CONFIG
   const countdown = useCountdown(countdownTarget)
   const units = getCountdownUnits(countdown)
   const [dismissed, setDismissed] = useState(false)
   const [mounted, setMounted] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
-  const { t } = useTranslation()
 
   const {
     mode,
@@ -173,7 +172,7 @@ export function HighlightBanner() {
                   animation: "gradient-shift 4s linear infinite",
                 }}
               >
-                {t("banner.title")}
+                {title}
               </span>
               <span className="truncate text-xs text-[#243486]/50 md:text-sm">
                 {subtitle}
@@ -225,7 +224,7 @@ export function HighlightBanner() {
         {mode === "loading" && (
           <div className="flex min-w-0 flex-1 items-center justify-center gap-2 text-sm text-[#243486]/60">
             <Loader2 size={16} className="animate-spin" />
-            <span>{t("community.subscribing")}</span>
+            <span>Subscribing...</span>
           </div>
         )}
 
@@ -246,7 +245,7 @@ export function HighlightBanner() {
               className="flex h-7 items-center gap-1 rounded-full bg-red-100 px-3 text-xs font-medium text-red-600 transition-colors hover:bg-red-200"
             >
               <RotateCcw size={12} />
-              {t("community.retry")}
+              Retry
             </button>
           </div>
         )}

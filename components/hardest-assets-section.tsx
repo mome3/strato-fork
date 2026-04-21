@@ -4,31 +4,25 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { motion, useMotionValue, useSpring } from "framer-motion"
 import { useReveal, revealStyle } from "@/hooks/use-reveal"
-import { useTranslation } from "@/lib/i18n"
-import type { TranslationKey } from "@/lib/translations"
 
-const features: {
-  labelKey: TranslationKey
-  img: string
-  alt: string
-}[] = [
+const features = [
   {
-    labelKey: "hardestAssets.feature1",
+    label: "1:1 Physical Backing",
     img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Physical%20Backing%20Graphic%403x-uv3rfppXvaZzbvVTL9C17g8P8Zsba4.png",
     alt: "Smartphone displaying gold and silver bars with a 1:1 badge",
   },
   {
-    labelKey: "hardestAssets.feature2",
+    label: "Monthly Audits",
     img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Monthly%20Audits%20Graphic%403x-blyUuyzc3c5jMBM8wRiX9aerVr0XhO.png",
     alt: "Blue calendar with a white checkmark",
   },
   {
-    labelKey: "hardestAssets.feature3",
+    label: "NYC Vault Partner",
     img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/NYV%20Vault%20Graphic%403x-v8RSGW6kMK9RHghX0vaNsxF3DJLJK6.png",
     alt: "Orange vault door with white X lock mechanism",
   },
   {
-    labelKey: "hardestAssets.feature4",
+    label: "Redeemable for Physical",
     img: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Redeemable%20for%20Physical%20Graphic%403x-ZpejIgx6gcKexo7ksAqWLrbE9o2b2u.png",
     alt: "Blue hand holding an orange card",
   },
@@ -47,7 +41,6 @@ function FeatureCard({
   const mouseY = useMotionValue(0)
   const springX = useSpring(mouseX, { stiffness: 150, damping: 30, mass: 1 })
   const springY = useSpring(mouseY, { stiffness: 150, damping: 30, mass: 1 })
-  const { t } = useTranslation()
 
   return (
     <div
@@ -77,7 +70,7 @@ function FeatureCard({
         />
       </motion.div>
       <span className="text-sm font-medium leading-snug text-[#1a1a2e]">
-        {t(feature.labelKey)}
+        {feature.label}
       </span>
     </div>
   )
@@ -85,7 +78,6 @@ function FeatureCard({
 
 export function HardestAssetsSection() {
   const { ref, visible } = useReveal()
-  const { t } = useTranslation()
 
   return (
     <section ref={ref} className="w-full bg-white py-20 md:py-28">
@@ -93,10 +85,12 @@ export function HardestAssetsSection() {
         {/* Heading */}
         <div className="mx-auto mb-12 max-w-3xl text-center" style={revealStyle(visible, 0)}>
           <h2 className="mb-4 text-4xl font-semibold leading-tight text-[#1d2e86] md:text-4xl lg:text-5xl">
-            {t("hardestAssets.heading")}
+            The Hardest Assets in DeFi
           </h2>
           <p className="text-sm leading-relaxed text-[#6b7280] md:text-base">
-            {t("hardestAssets.description")}
+            Every gram of gold and silver on Strato is backed 1:1 by physical metal stored in a
+            secure vault in New York City, operated by our vaulting partner BA Gold Enterprises
+            Inc. Monthly third-party audits verify supply. Redeem your physical gold anytime.
           </p>
         </div>
 
@@ -107,7 +101,7 @@ export function HardestAssetsSection() {
         >
           {features.map((feature, index) => (
             <FeatureCard
-              key={feature.labelKey}
+              key={feature.label}
               feature={feature}
               visible={visible}
               delay={150 + index * 60}
@@ -121,7 +115,7 @@ export function HardestAssetsSection() {
             href="https://app.strato.nexus/dashboard/deposits"
             className="group inline-flex items-center gap-2 rounded-full bg-[#243486] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1a2766]"
           >
-            {t("hardestAssets.cta")}
+            Buy Precious Metals
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>

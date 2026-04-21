@@ -6,7 +6,6 @@ import { Navbar } from "./navbar";
 import { HighlightBanner } from "./highlight-banner";
 import { revealStyle } from "@/hooks/use-reveal";
 import { EXTERNAL_LINKS } from "@/lib/external-links";
-import { useTranslation } from "@/lib/i18n";
 
 function isIPhone() {
   if (typeof navigator === "undefined") return false;
@@ -18,7 +17,6 @@ export function HeroSection() {
   const [heroHeight, setHeroHeight] = useState<string>("100dvh");
   const lottieRef = useRef<HTMLDivElement>(null);
   const animRef = useRef<AnimationItem | null>(null);
-  const { t } = useTranslation();
 
   useEffect(() => {
     if (!lottieRef.current) return;
@@ -95,17 +93,18 @@ export function HeroSection() {
             "
             style={revealStyle(visible, 100)}
           >
-            <h1 className="text-balance text-5xl font-bold leading-[1.05] tracking-tight text-[#243486] sm:text-5xl lg:text-7xl">
-              {t("hero.title1")}
+            <h1 className="text-balance text-6xl font-bold leading-[1.05] tracking-tight text-[#243486] sm:text-6xl lg:text-8xl">
+              DeFi Powered
               <br />
-              {t("hero.title2")}
+              by Precious Metals
             </h1>
 
             <p
               className="mt-4 max-w-lg text-lg text-[#000000] lg:max-w-lg"
               style={revealStyle(visible, 200)}
             >
-              {t("hero.description")}
+              Gold, silver, and top-tier crypto assets all on one chain. Built
+              by Ethereum OGs.
             </p>
 
             <a
@@ -115,7 +114,7 @@ export function HeroSection() {
               className="mt-6 inline-flex rounded-full bg-[#243486] px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-[#1a276a]"
               style={revealStyle(visible, 300)}
             >
-              {t("hero.cta")}
+              Explore
             </a>
           </div>
 

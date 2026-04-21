@@ -2,7 +2,6 @@
 
 import Image from "next/image"
 import { useReveal, revealStyle } from "@/hooks/use-reveal"
-import { useTranslation } from "@/lib/i18n"
 
 /* ─── Partner Configuration ─────────────────────────────────────────────
  *  Adjust `height` per logo to achieve optical balance at larger sizes.
@@ -18,7 +17,6 @@ const partners = [
 
 export function PartnersSection() {
   const { ref, visible } = useReveal()
-  const { t } = useTranslation()
 
   // Duplicate for seamless infinite scroll
   const logos = [...partners, ...partners]
@@ -33,7 +31,7 @@ export function PartnersSection() {
           className="mb-6 font-sans text-sm font-medium uppercase tracking-[0.2em] text-[#243486]/70"
           style={revealStyle(visible, 0)}
         >
-          {t("partners.backedBy")}
+          Backed By
         </h3>
 
         {/* Carousel wrapper with fade masks using CSS mask for transparency */}

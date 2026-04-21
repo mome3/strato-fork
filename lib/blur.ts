@@ -18,21 +18,12 @@ export async function getBlurDataURL(
   if (cached) return cached
 
   try {
-    let buffer: Buffer
+    const filePath = path.join(process.cwd(), "public", src)
+    if (!fs.existsSync(filePath)) return undefined
 
-    if (src.startsWith("http://") || src.startsWith("https://")) {
-      // Remote image (e.g. from Ghost CDN)
-      const res = await fetch(src)
-      if (!res.ok) return undefined
-      buffer = Buffer.from(await res.arrayBuffer())
-    } else {
-      // Local image in public/
-      const filePath = path.join(process.cwd(), "public", src)
-      if (!fs.existsSync(filePath)) return undefined
-      buffer = fs.readFileSync(filePath)
-    }
-
+    const buffer = fs.readFileSync(filePath)
     const { base64 } = await getPlaiceholder(buffer, { size: 10 })
+
     cache.set(src, base64)
     return base64
   } catch {
