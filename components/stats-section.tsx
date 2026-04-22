@@ -6,7 +6,7 @@ import { useTranslation } from "@/lib/i18n"
 import type { TranslationKey } from "@/lib/translations"
 
 const stats: { value: string; labelKey: TranslationKey; numericValue: number }[] = [
-  { value: "$10M+", labelKey: "stats.tvl", numericValue: 10 },
+  { value: "$15.2M+", labelKey: "stats.tvl", numericValue: 15.2 },
   { value: "$1.7M+", labelKey: "stats.loans", numericValue: 1.7 },
   { value: "2M+", labelKey: "stats.points", numericValue: 2 },
 ]
