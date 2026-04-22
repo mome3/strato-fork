@@ -303,7 +303,7 @@ export function CommunityRewardsPageContent() {
                 Email Us <ArrowRight size={14} />
               </CtaLink>
               <CtaLink
-                href="https://t.me/c/strato_net/1"
+                href="https://t.me/strato_net"
                 className="border border-[rgba(91,108,249,0.12)] bg-transparent"
                 style={{ color: NAVY }}
               >
