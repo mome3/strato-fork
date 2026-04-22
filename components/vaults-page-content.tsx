@@ -159,6 +159,13 @@ export function VaultsPageContent() {
             secured vaults. Below is the latest treasury report and independent audit documents
             that verify our reserves.
           </p>
+          <a
+            href="/tokenization-terms"
+            className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#243486] transition-colors hover:text-[#1a1a2e]"
+          >
+            Asset Deposit &amp; Tokenization Terms
+            <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
 
         {/* ── Treasury Report ──────────────────────────────────── */}
