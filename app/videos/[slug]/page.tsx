@@ -7,6 +7,7 @@ import { ArrowLeft } from "lucide-react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { JsonLd } from "@/components/json-ld"
+import { ContentEmbedCard } from "@/components/content-embed-card"
 import { TwitterEmbedLoader } from "@/components/twitter-embed-loader"
 import { getLocalVideoPostBySlug, getLocalVideoPosts } from "@/lib/local-video-posts"
 import { articleJsonLd, videoObjectJsonLd, breadcrumbJsonLd } from "@/lib/seo"
@@ -61,6 +62,9 @@ export default async function VideoPostPage({
   if (!post) notFound()
 
   const hasTwitterEmbeds = post.content.includes('class="twitter-tweet"')
+  const markdownComponents = {
+    "content-embed-card": ContentEmbedCard,
+  }
 
   return (
     <div className="relative min-h-screen bg-[#f9f9f9]">
@@ -148,7 +152,11 @@ export default async function VideoPostPage({
           )}
 
           <div className="mdx-content max-w-none text-[#444] leading-relaxed [&_h1]:mt-10 [&_h1]:mb-4 [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:text-[#1a1a2e] [&_h2]:mt-8 [&_h2]:mb-3 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-[#1a1a2e] [&_h3]:mt-6 [&_h3]:mb-2 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-[#1a1a2e] [&_p]:mb-4 [&_a]:text-[#243486] [&_a]:underline hover:[&_a]:text-[#1a1a2e] [&_strong]:font-semibold [&_strong]:text-[#1a1a2e] [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:mb-4 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:mb-1 [&_blockquote]:border-l-4 [&_blockquote]:border-[#243486] [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:my-4 [&_code]:rounded [&_code]:bg-[#f0f1f5] [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-sm [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-[#1a1a2e] [&_pre]:p-4 [&_pre]:text-sm [&_pre]:text-white [&_pre_code]:bg-transparent [&_pre_code]:p-0">
-            <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
+            <ReactMarkdown
+              rehypePlugins={[rehypeRaw]}
+              remarkPlugins={[remarkGfm]}
+              components={markdownComponents as any}
+            >
               {post.content}
             </ReactMarkdown>
           </div>

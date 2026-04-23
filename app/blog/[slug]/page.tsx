@@ -7,6 +7,9 @@ import { ArrowLeft } from "lucide-react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { JsonLd } from "@/components/json-ld"
+import { ContentEmbedCard } from "@/components/content-embed-card"
+import { TwitterEmbedLoader } from "@/components/twitter-embed-loader"
+import { preprocessMarkdownEmbeds } from "@/lib/markdown-embeds"
 import { getAllPosts, getPostBySlug } from "@/lib/posts"
 import { articleJsonLd, videoObjectJsonLd, breadcrumbJsonLd } from "@/lib/seo"
 
@@ -58,8 +61,16 @@ export default async function BlogPostPage({
 
   if (!post) notFound()
 
+  const renderedMarkdown =
+    post.contentFormat === "markdown" ? preprocessMarkdownEmbeds(post.content) : post.content
+  const hasTwitterEmbeds = renderedMarkdown.includes('class="twitter-tweet"')
+  const markdownComponents = {
+    "content-embed-card": ContentEmbedCard,
+  }
+
   return (
     <div className="relative min-h-screen bg-[#f9f9f9]">
+      {hasTwitterEmbeds && <TwitterEmbedLoader />}
       <JsonLd data={articleJsonLd(post, "/blog")} />
       {post.categories === "Videos" && <JsonLd data={videoObjectJsonLd(post)} />}
       <JsonLd data={breadcrumbJsonLd([
@@ -153,8 +164,12 @@ export default async function BlogPostPage({
             {post.contentFormat === "html" ? (
               <div dangerouslySetInnerHTML={{ __html: post.content }} />
             ) : (
-              <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
-                {post.content}
+              <ReactMarkdown
+                rehypePlugins={[rehypeRaw]}
+                remarkPlugins={[remarkGfm]}
+                components={markdownComponents as any}
+              >
+                {renderedMarkdown}
               </ReactMarkdown>
             )}
           </div>
