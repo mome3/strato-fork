@@ -3,6 +3,7 @@ import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
 import type { Post } from "./blog-constants"
+import { preprocessMarkdownEmbeds } from "./markdown-embeds"
 
 const videoPostsDirectory = path.join(process.cwd(), "content/video")
 
@@ -23,7 +24,7 @@ function readVideoPostFile(fileName: string): Post {
     author: data.author || "",
     authorTitle: data.authorTitle || "",
     videoUrl: data.videoUrl || data.embed?.url || undefined,
-    content,
+    content: preprocessMarkdownEmbeds(content),
     contentFormat: "markdown",
   }
 }

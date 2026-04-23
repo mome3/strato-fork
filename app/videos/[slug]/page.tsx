@@ -7,6 +7,7 @@ import { ArrowLeft } from "lucide-react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { JsonLd } from "@/components/json-ld"
+import { TwitterEmbedLoader } from "@/components/twitter-embed-loader"
 import { getLocalVideoPostBySlug, getLocalVideoPosts } from "@/lib/local-video-posts"
 import { articleJsonLd, videoObjectJsonLd, breadcrumbJsonLd } from "@/lib/seo"
 
@@ -59,8 +60,11 @@ export default async function VideoPostPage({
 
   if (!post) notFound()
 
+  const hasTwitterEmbeds = post.content.includes('class="twitter-tweet"')
+
   return (
     <div className="relative min-h-screen bg-[#f9f9f9]">
+      {hasTwitterEmbeds && <TwitterEmbedLoader />}
       <JsonLd data={articleJsonLd(post, "/videos")} />
       <JsonLd data={videoObjectJsonLd(post)} />
       <JsonLd
