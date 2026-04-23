@@ -35,7 +35,7 @@ Today I'll be introducing three of the projects we built, starting with the titu
 
 ## Gary: Your Surprisingly Helpful Terminal Assistant
 
-![Gary AI assistant]({{ site.baseurl }}/images/strato.nexus/2025.10.13/gary-chatgpt-image.jpg)
+![Gary AI assistant](/images/strato.nexus/2025.10.13/gary-chatgpt-image.jpg)
 
 _(thanks for the photo, ChatGPT!)_
 
@@ -47,15 +47,15 @@ _(thanks for the photo, ChatGPT!)_
 
 It's easier to demonstrate than to describe. Here are some screenshots of Gary in action:
 
-![Gary demo 1]({{ site.baseurl }}/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-15-14-59-08.png)
+![Gary demo 1](/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-15-14-59-08.png)
 
-![Gary demo 2]({{ site.baseurl }}/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-15-15-03-20.png)
+![Gary demo 2](/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-15-15-03-20.png)
 
-![Gary demo 3]({{ site.baseurl }}/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-15-15-05-48.png)
+![Gary demo 3](/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-15-15-05-48.png)
 
 Of course, you're not constrained to asking Gary for help with coding:
 
-![Gary general questions]({{ site.baseurl }}/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-15-15-14-38.png)
+![Gary general questions](/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-15-15-14-38.png)
 
 ## Gripbook: Claude MCP Integration with Mercata Marketplace
 
@@ -65,13 +65,13 @@ Meet [Griphook](https://github.com/blockapps/griphook), with the cultural refere
 
 Here we are using the Claude desktop client, which is available in official releases for Windows and macOS.
 
-![Claude desktop]({{ site.baseurl }}/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-16-14-45-49.png)
+![Claude desktop](/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-16-14-45-49.png)
 
 ### How Model Context Protocol (MCP) Powers Marketplace Integration
 
 So how does this work? Our MCP server is a straightforward nodejs application containing a number of "tools" whose functionality is then available within the Claude desktop. The real magic here is that Claude just works out what these tools are and how to use them based purely on the text they are returning and its own intuition and training set.
 
-![MCP tools]({{ site.baseurl }}/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-16-14-50-15.png)
+![MCP tools](/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-16-14-50-15.png)
 
 Within Claude's Developer settings you point to the server's build directory and also need to specify a few environment variables to configure the server appropriately for your own username/password and client ID/secret.
 
@@ -79,7 +79,7 @@ Within Claude's Developer settings you point to the server's build directory and
 
 Then Claude has been "taught" about STRATO Mercata and you can ask it questions about reserves, about your own balance and details, and can ask it to borrow, purchase or stake assets:
 
-![Claude interacting with Mercata]({{ site.baseurl }}/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-16-14-26-58.png)
+![Claude interacting with Mercata](/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-16-14-26-58.png)
 
 At the time of writing there is some bug related to the user login in my own use of it, but funnily enough, the way that plays out is even more impressive, because the AI is able to find its own workaround to the problem!
 
@@ -91,7 +91,7 @@ Having this kind of conversational interface wrapping a platform is really power
 
 The final project was written by David Nallapu and has a mouthful of a name – [mercata-multi-hop-rag-llm](https://github.com/blockapps/mercata-multi-hop-rag-llm) 🙂
 
-![RAG LLM interface]({{ site.baseurl }}/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-16-15-04-34.png)
+![RAG LLM interface](/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-16-15-04-34.png)
 
 Again, like Gary and Griphook, this project is making contextual information available to an LLM so that you can interact with it in a conversational form. In this instance the information about STRATO Mercata being incorporated is detailed information about the codebase itself to assist developers to work on the platform.
 
@@ -103,7 +103,7 @@ As you can see in the output, we're indexing Haskell files, Solidity and DOCX do
 
 This step of the process takes several minutes. Then we launch the frontend:
 
-![RAG LLM frontend]({{ site.baseurl }}/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-16-15-42-23.jpg)
+![RAG LLM frontend](/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-16-15-42-23.jpg)
 
 ### RAG vs Traditional IDE: Superior Results for Large Codebases
 
@@ -113,11 +113,11 @@ Coding questions about well known projects and codebases can work quite well wit
 
 The results from this approach are very impressive, showing deep understanding of the codebase and generating documentation of comparable quality to a good technical, but with the huge advantage of not just being static content. You can ask it whatever you like, and dig into deeper detail as you go. If we can find a good means of hosting a public instance of this project then we should certainly do so. In the meantime, you can follow the instructions on the repository to run your own instance.
 
-![RAG query example 1]({{ site.baseurl }}/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-21-14-31-09.jpg)
+![RAG query example 1](/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-21-14-31-09.jpg)
 
-![RAG query example 2]({{ site.baseurl }}/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-21-14-36-58.jpg)
+![RAG query example 2](/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-21-14-36-58.jpg)
 
-![RAG query example 3]({{ site.baseurl }}/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-21-14-41-08.jpg)
+![RAG query example 3](/images/strato.nexus/2025.10.13/Screenshot-from-2025-05-21-14-41-08.jpg)
 
 ## Key Insights: Common Themes and Experimental Success
 

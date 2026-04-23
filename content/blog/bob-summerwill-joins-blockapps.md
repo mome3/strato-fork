@@ -11,7 +11,7 @@ authorTitle: ""
 
 BlockApps is excited to announce that Bob Summerwill has joined the team as Head of Ecosystem, bringing with him a wealth of experience in blockchain technology, software development and community building.
 
-![headshot]({{ site.baseurl }}/images/blockapps.net/2025.10.13/bob_summerwill.jpg)
+![headshot](/images/blockapps.net/2025.10.13/bob_summerwill.jpg)
 
 ## Table of Contents
 
@@ -28,13 +28,13 @@ BlockApps is excited to announce that Bob Summerwill has joined the team as Head
 
 Bob started his blockchain journey in early 2014, first meeting [Vitalik Buterin](https://x.com/VitalikButerin) in the summer of that year. In 2015 he started work on Ethereum for smart watches, mobile Linux and single board computers. In 2016 he joined the [Ethereum Foundation](https://ethereum.foundation/) to work full-time on the C++ Ethereum client software. He joined [Consensys](https://consensys.io/) to contribute to the launch of the [Enterprise Ethereum Alliance](https://entethalliance.com) in 2017 where he was co-lead Architect at launch and then Vice-Chair of the Technical Steering Committee. He worked to build bridges between Ethereum and [Hyperledger](https://www.hyperledger.org/) for many years. Bob is a regular speaker at [DEVCON](https://devcon.org), [Ethereum Community Conference](https://ethcc.io/) (ETHCC), [ETH Denver](https://www.ethdenver.com/) and other major blockchain conferences.
 
-![Enterprise Ethereum Alliance Launch]({{ site.baseurl }}/images/blockapps.net/2025.10.13/enteth20170110_withv.jpg)
+![Enterprise Ethereum Alliance Launch](/images/blockapps.net/2025.10.13/enteth20170110_withv.jpg)
 
 ## Leading the Ethereum Classic Cooperative
 
 In 2019 he joined the [Ethereum Classic Cooperative](https://etccooperative.org) where he served as Executive Director for the last six years, fostering collaboration and development work in the ETC ecosystem. ETC Cooperative staff are maintainers of both the [Core-Geth](https://github.com/etclabscore/core-geth) and [Hyperledger Besu](https://github.com/hyperledger/besu) Ethereum client software. He also organized and hosted the ETC Summit in 2019 and [POW Summit](https://powsummit.com) in 2023 and 2024, bringing together the major proof of work communities at events in Vancouver, Prague and Frankfurt.
 
-![POW Summit]({{ site.baseurl }}/images/blockapps.net/2025.10.13/pow_summit.jpg)
+![POW Summit](/images/blockapps.net/2025.10.13/pow_summit.jpg)
 
 ## From AAA Video Games to Blockchain Visionary
 

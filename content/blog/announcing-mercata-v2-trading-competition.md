@@ -49,9 +49,9 @@ After logging in, you'll land on your **Portfolio Overview**, which includes:
 - **Borrowing Risk Level**: Visualized in a bar chart for clarity
 - **Pool Participation**: Overview of your activity across liquidity pools
 
-![Portfolio Overview]({{ site.baseurl }}/images/strato.nexus/2025.10.13/Screenshot-from-2025-07-15-14-38-10.png)
+![Portfolio Overview](/images/strato.nexus/2025.10.13/Screenshot-from-2025-07-15-14-38-10.png)
 
-![Portfolio Details]({{ site.baseurl }}/images/strato.nexus/2025.10.13/Screenshot-from-2025-07-15-14-39-41.png)
+![Portfolio Details](/images/strato.nexus/2025.10.13/Screenshot-from-2025-07-15-14-39-41.png)
 
 ## How to Trade and Participate
 
@@ -59,7 +59,7 @@ After logging in, you'll land on your **Portfolio Overview**, which includes:
 
 Use the new swap modal to trade USDST for real-world assets (RWAs) and crypto.
 
-![Swap Modal]({{ site.baseurl }}/images/strato.nexus/2025.10.13/Screenshot-from-2025-07-15-16-26-37.png)
+![Swap Modal](/images/strato.nexus/2025.10.13/Screenshot-from-2025-07-15-16-26-37.png)
 
 Available pairs include:
 
@@ -75,7 +75,7 @@ Swaps update your portfolio and can be used as collateral for borrowing.
 
 Supply assets to increase your borrowing power, then borrow additional USDST or other assets. Your borrowing risk level, available borrowing power, and interest rate are all displayed in the Portfolio Overview.
 
-![Borrow Interface]({{ site.baseurl }}/images/strato.nexus/2025.10.13/Screenshot-from-2025-07-15-16-27-59.png)
+![Borrow Interface](/images/strato.nexus/2025.10.13/Screenshot-from-2025-07-15-16-27-59.png)
 
 ### Participate in Liquidity Pools
 
@@ -84,7 +84,7 @@ Earn simulated yield by participating in:
 - The USDST lending pool
 - Swap pools for USDST paired with WBTC, ETH, GOLDST, or SILVST
 
-![Liquidity Pools]({{ site.baseurl }}/images/strato.nexus/2025.10.13/Screenshot-from-2025-07-15-20-52-00.png)
+![Liquidity Pools](/images/strato.nexus/2025.10.13/Screenshot-from-2025-07-15-20-52-00.png)
 
 ## Strategies to Try
 

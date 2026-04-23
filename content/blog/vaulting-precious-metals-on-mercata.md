@@ -35,7 +35,7 @@ Collecting in gold and silver has always been smart, but STRATO Mercata makes it
 
 To kick off the year, we'd like to share the January metals audit report from BA Gold Enterprises Inc.
 
-![January Audit Report]({{ '/images/strato.nexus/2025.10.14/IMG_8573-300x300.jpg' | relative_url }})
+![January Audit Report](/images/strato.nexus/2025.10.14/IMG_8573-300x300.jpg)
 
 Be sure to check [STRATO Scan](https://stratoscan.strato.nexus/) and [follow us on X](https://x.com/mercata_net) to view the monthly reports.
 

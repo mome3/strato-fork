@@ -7,12 +7,25 @@ import { ArrowLeft } from "lucide-react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { JsonLd } from "@/components/json-ld"
+import { ContentEmbedCard } from "@/components/content-embed-card"
+import { TwitterEmbedLoader } from "@/components/twitter-embed-loader"
+import { isGhostConfigured } from "@/lib/ghost-client"
+import { preprocessMarkdownEmbeds } from "@/lib/markdown-embeds"
 import { getAllPosts, getPostBySlug } from "@/lib/posts"
 import { articleJsonLd, videoObjectJsonLd, breadcrumbJsonLd } from "@/lib/seo"
 
+export const dynamicParams = false
+const GHOST_PLACEHOLDER_SLUG = "__ghost_unconfigured__"
+
 export async function generateStaticParams() {
+  if (!isGhostConfigured()) {
+    return [{ slug: GHOST_PLACEHOLDER_SLUG }]
+  }
+
   const posts = await getAllPosts()
-  return posts.map((post) => ({ slug: post.slug }))
+  return posts.length > 0
+    ? posts.map((post) => ({ slug: post.slug }))
+    : [{ slug: GHOST_PLACEHOLDER_SLUG }]
 }
 
 export async function generateMetadata({
@@ -21,6 +34,16 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
+  if (slug === GHOST_PLACEHOLDER_SLUG) {
+    return {
+      title: "Blog Content Unavailable",
+      description: "Ghost content was not configured for this build.",
+      robots: {
+        index: false,
+        follow: false,
+      },
+    }
+  }
   const post = await getPostBySlug(slug)
   if (!post) return { title: "Post Not Found" }
   return {
@@ -54,12 +77,29 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
+  if (slug === GHOST_PLACEHOLDER_SLUG) {
+    return (
+      <div className="relative min-h-screen bg-[#f9f9f9]">
+        <div className="relative mx-auto flex min-h-screen max-w-3xl items-center justify-center px-6 text-center">
+          <p>No Ghost-backed blog posts were generated for this build.</p>
+        </div>
+      </div>
+    )
+  }
   const post = await getPostBySlug(slug)
 
   if (!post) notFound()
 
+  const renderedMarkdown =
+    post.contentFormat === "markdown" ? preprocessMarkdownEmbeds(post.content) : post.content
+  const hasTwitterEmbeds = renderedMarkdown.includes('class="twitter-tweet"')
+  const markdownComponents = {
+    "content-embed-card": ContentEmbedCard,
+  }
+
   return (
     <div className="relative min-h-screen bg-[#f9f9f9]">
+      {hasTwitterEmbeds && <TwitterEmbedLoader />}
       <JsonLd data={articleJsonLd(post, "/blog")} />
       {post.categories === "Videos" && <JsonLd data={videoObjectJsonLd(post)} />}
       <JsonLd data={breadcrumbJsonLd([
@@ -153,8 +193,12 @@ export default async function BlogPostPage({
             {post.contentFormat === "html" ? (
               <div dangerouslySetInnerHTML={{ __html: post.content }} />
             ) : (
-              <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
-                {post.content}
+              <ReactMarkdown
+                rehypePlugins={[rehypeRaw]}
+                remarkPlugins={[remarkGfm]}
+                components={markdownComponents as any}
+              >
+                {renderedMarkdown}
               </ReactMarkdown>
             )}
           </div>

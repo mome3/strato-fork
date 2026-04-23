@@ -26,7 +26,7 @@ The more friends you successfully refer, the higher you'll climb on the leaderbo
 ## Watch How It Works
 
 <video controls style="width: 100%; max-width: 800px;">
-  <source src="{{ site.baseurl }}/assets/videos/referral-demo.mp4" type="video/mp4">
+  <source src="/assets/videos/referral-demo.mp4" type="video/mp4">
   Your browser does not support the video element.
 </video>
 

@@ -123,7 +123,7 @@ But yeah, like it really started probably at [DEVCON 2](https://www.earlydaysofe
 [[2:56]](https://www.youtube.com/watch?v=CNavXFv3ats&t=176s) **Kieren:**
 There was the kickoff meeting at the [JP Morgan](https://www.jpmorgan.com) office, which was pretty big. And even before, they were the closed door meetings at Microsoft.
 
-![Enterprise Ethereum Alliance Launch]({{ site.baseurl }}/images/blockapps.net/2025.10.13/enteth20170110_withv.jpg)
+![Enterprise Ethereum Alliance Launch](/images/blockapps.net/2025.10.13/enteth20170110_withv.jpg)
 
 [[3:07]](https://www.youtube.com/watch?v=CNavXFv3ats&t=187s) **Bob:**
 Right, so that public launch was February.
@@ -918,7 +918,7 @@ Yeah, they did a channel or something.
 [[43:37]](https://www.youtube.com/watch?v=CNavXFv3ats&t=2515s) **Bob:**
 [fab3.js](https://hyperledger.github.io/fabric-sdk-node/) or whatever, that they did do this munging together. And that was using [Burrow](https://github.com/hyperledger-archives/burrow), right? Because you've got the [Burrow](https://github.com/hyperledger-archives/burrow), [Burrow](https://github.com/hyperledger-archives/burrow) went into [Hyperledger](https://www.lfdecentralizedtrust.org/) before [Besu](https://github.com/hyperledger/besu), and that was the continuation of that, [ErisDB](https://web.archive.org/web/20250903224504/https://erisindustries.com/components/erisdb.html) / [Monax](https://web.archive.org/web/20170321124508/https://monax.io/) / [Hyperledger Burrow](https://github.com/hyperledger-archives/burrow), that was never mainnet compatible though. But there was that Go EVM within [Hyperledger](https://www.lfdecentralimungzedtrust.org/) under the same licensing, so they could wham those together.
 
-![Fabric EVM at Consensus 2018]({{ site.baseurl }}/images/personal/bob-summerwill/photos/2018.05.15/MVIMG_20180515_154836.jpg)
+![Fabric EVM at Consensus 2018](/images/personal/bob-summerwill/photos/2018.05.15/MVIMG_20180515_154836.jpg)
 
 And I mean, that's seven years ago. So yeah, I'm sure that they need to have an even better EVM story these days.
 
@@ -1002,7 +1002,7 @@ Same as my name, [Bob Summerwill](https://x.com/BobSummerwill) with a W-I-L-L, n
 Not the German spelling of it. Yeah.
 
 [[49:24]](https://www.youtube.com/watch?v=CNavXFv3ats&t=2964s) **Victor**:
-[Kieren]({{ '/people/kieren-james-lubin/' | relative_url }})?
+[Kieren](/people/kieren-james-lubin/)?
 
 [[49:25]](https://www.youtube.com/watch?v=CNavXFv3ats&t=2965s) **Kieren**:
 K. James Lubin [on X](https://x.com/kjameslubin), [YouTube](https://www.youtube.com/@KierenJames-Lubin), et cetera.
