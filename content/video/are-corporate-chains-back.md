@@ -49,13 +49,13 @@ Yes, exactly. Okay, we seem to be also live on X, so welcome everyone to another
 Mutual support group.
 
 [[00:34]](https://www.youtube.com/watch?v=2BR6nodzzos&t=34s) **Victor:**
-Yes, exactly.  With the builders from [STRATO](https://strato.nexus), I'm Victor Wong. I am Founder and Chief Product Officer at [STRATO](https://strato.nexus). [Bob]({{ '/people/bob-summerwill/' | relative_url }}), who are you?
+Yes, exactly.  With the builders from [STRATO](https://strato.nexus), I'm Victor Wong. I am Founder and Chief Product Officer at [STRATO](https://strato.nexus). [Bob](/people/bob-summerwill/), who are you?
 
 [[00:45]](https://www.youtube.com/watch?v=2BR6nodzzos&t=45s) **Bob:**
 Hello, I'm Head of Ecosystem.
 
 [[00:48]](https://www.youtube.com/watch?v=2BR6nodzzos&t=48s) **Victor:**
-And [Kieren]({{ '/people/kieren-james-lubin/' | relative_url }}), who are you?
+And [Kieren](/people/kieren-james-lubin/), who are you?
 
 [[00:50]](https://www.youtube.com/watch?v=2BR6nodzzos&t=50s) **Kieren:**
 Kieren James-Lubin, CEO, once a coder, long time off. Code a little again. [Vibe coding](https://en.wikipedia.org/wiki/Vibe_coding) era has been great for making an occasional fix here and there.
@@ -71,7 +71,7 @@ It moves really slow.
 [[01:28]](https://www.youtube.com/watch?v=2BR6nodzzos&t=88s) **Victor:**
 It does. It takes time to do stuff, but you just kind of keep it running in the background. Anyways, today's topic, getting us back to the topic at hand, is basically "are corporate chains back"?
 
-And we obviously have some intimate knowledge about this, having been part of the rise and perhaps fall and maybe the rise again of corporate chains. Hey, Lewis, nice to have you. But maybe you can, maybe [Bob]({{ '/people/bob-summerwill/' | relative_url }}), you can give us an outline of the new corpo chains, like what's happening currently, and then we can look back over the history of corporate chains.
+And we obviously have some intimate knowledge about this, having been part of the rise and perhaps fall and maybe the rise again of corporate chains. Hey, Lewis, nice to have you. But maybe you can, maybe [Bob](/people/bob-summerwill/), you can give us an outline of the new corpo chains, like what's happening currently, and then we can look back over the history of corporate chains.
 
 <a id="the-new-corporate-chains"></a>
 
@@ -246,7 +246,7 @@ I mean, I get it also. I guess, like, I'm kind of a believer in the more permiss
 
 And, you know, the [BSDs](https://en.wikipedia.org/wiki/Berkeley_Software_Distribution) survived basically with [OS X](https://en.wikipedia.org/wiki/MacOS) to some extent, you know. And perhaps, maybe it outcompeted because it had a [benevolent dictator](https://en.wikipedia.org/wiki/Benevolent_dictatorship) genius, but maybe it outcompeted in part because of the virality of the license. And this is not to say, I think there's a mix of licensing regimes.
 
-I know you've worked on this very directly, [Bob]({{ '/people/bob-summerwill/' | relative_url }}), for the [Ethereum](https://ethereum.org) software. Some of it permissive, some not. But, you know, it's sort of...
+I know you've worked on this very directly, [Bob](/people/bob-summerwill/), for the [Ethereum](https://ethereum.org) software. Some of it permissive, some not. But, you know, it's sort of...
 
 Part of it's also, like, a lot of the [Ethereum](https://ethereum.org) people did well enough to either launch the next thing on [Ethereum](https://ethereum.org) or launch the next thing not on [Ethereum](https://ethereum.org) and didn't really have any need for a job, per se, at some point. And so you'd expect something new to come and maybe try to cannibalize the old thing. It's a strange sort of religiosity also.
 
@@ -272,12 +272,12 @@ So we may be partly to blame for this.
 %}
 
 [[11:20]](https://www.youtube.com/watch?v=2BR6nodzzos&t=680s) **Kieren:**
-Partly to blame. And it was barely on purpose. So rolling back in 20, let's say, late 2014, our CTO, [Jim]({{ '/people/jim-hormuzdiar/' | relative_url }}) and I, mostly [Jim]({{ '/people/jim-hormuzdiar/' | relative_url }}), started working on the [Haskell](https://www.haskell.org/) implementation of [Ethereum](https://ethereum.org).
+Partly to blame. And it was barely on purpose. So rolling back in 20, let's say, late 2014, our CTO, [Jim](/people/jim-hormuzdiar/) and I, mostly [Jim](/people/jim-hormuzdiar/), started working on the [Haskell](https://www.haskell.org/) implementation of [Ethereum](https://ethereum.org).
 
 And he pretty quickly got it to the point where it could, like, sync the testnet, you know. And there were some chat groups, a slack. There was a bit of a, the [Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf), I guess, was out at that time.
 
 [[11:53]](https://www.youtube.com/watch?v=2BR6nodzzos&t=713s) **Bob:**
-I found an exact date for this, actually. So [Jim]({{ '/people/jim-hormuzdiar/' | relative_url }})'s first commit was mid-September 2014. The yellow paper had been out that April.
+I found an exact date for this, actually. So [Jim](/people/jim-hormuzdiar/)'s first commit was mid-September 2014. The yellow paper had been out that April.
 
 [Commit 60d4cad - committed on Sep 14, 2014 - First version of ethereumHaskell - jamshidh/ethereum-client-haskell](https://github.com/jamshidh/ethereum-client-haskell/commit/60d4cadb9ebde7b126b80079dede5ca0d5604a99)
 
@@ -290,11 +290,11 @@ Yeah. Gotcha.
 [[12:08]](https://www.youtube.com/watch?v=2BR6nodzzos&t=728s) **Kieren:**
 Yeah. And he might have been working on it for a while before he pushed anything, I think. I would have gotten back.
 
-So we met up. We got introduced by a previous co-founder of [Jim]({{ '/people/jim-hormuzdiar/' | relative_url }})'s, who I had reached out to when I started working on [Ethereum](https://ethereum.org). And we probably spoke the first time June, July, something like that.
+So we met up. We got introduced by a previous co-founder of [Jim](/people/jim-hormuzdiar/)'s, who I had reached out to when I started working on [Ethereum](https://ethereum.org). And we probably spoke the first time June, July, something like that.
 
 (Bob: That previous co-founder was [Steve Hsu](https://www.earlydaysofeth.org/people/steve-hsu/))
 
-And we met up in Berkeley, probably the first time, maybe August or September, or thereabouts. By the way, since then, [Jim]({{ '/people/jim-hormuzdiar/' | relative_url }}) continues to have a client, a habit of building a full client to try to understand a piece of blockchain software. At some point, we were looking into the state of zero-knowledge proofs, and he built a, I believe, full-syncing [ZCash](https://z.cash/) client.
+And we met up in Berkeley, probably the first time, maybe August or September, or thereabouts. By the way, since then, [Jim](/people/jim-hormuzdiar/) continues to have a client, a habit of building a full client to try to understand a piece of blockchain software. At some point, we were looking into the state of zero-knowledge proofs, and he built a, I believe, full-syncing [ZCash](https://z.cash/) client.
 
 It's definitely missing some features, but we still have that somewhere.
 
@@ -307,7 +307,7 @@ As you do, yeah.
 [[13:06]](https://www.youtube.com/watch?v=2BR6nodzzos&t=786s) **Kieren:**
 As one does, as one does. So yeah, we should revisit this at some later date. So yeah, so we met up, he started coding, and it got to the point of functional and syncing with the fairly primitive early testnets pretty quickly.
 
-And we didn't quite intend to turn it into a business right at the beginning. But the three of us, that's [Victor]({{ '/people/victor-wong/' | relative_url }}), [Jim]({{ '/people/jim-hormuzdiar/' | relative_url }}), and I met up. January 2015, had a bunch of conferences that I've done, I've spoken about at other times, we can link people to the [Early Days of Ethereum one](https://www.earlydaysofeth.org/videos/episode001/), perhaps?
+And we didn't quite intend to turn it into a business right at the beginning. But the three of us, that's [Victor](/people/victor-wong/), [Jim](/people/jim-hormuzdiar/), and I met up. January 2015, had a bunch of conferences that I've done, I've spoken about at other times, we can link people to the [Early Days of Ethereum one](https://www.earlydaysofeth.org/videos/episode001/), perhaps?
 
 That helped kind of galvanize the effort. But I think what we had was always like a pragmatic attitude, right? And so shortly after that, one of the first things we built, we found like the API interaction style to be a little odd.
 
@@ -322,7 +322,7 @@ Like the [JSON RPC](https://ethereum.github.io/execution-apis/api-documentation/
 
 And it was a good like talk where it was like, well, we've got these 20 great use cases that people are doing out there in the world. Oh, and they're all on chain. You know, [Chain](https://chain.com/) also fairly soon after that seemed to go a corpo chain direction.
 
-*(Bob: So Chain were indeed sponsors for this event, and their CEO, [Adam Ludwin](https://www.lud.win/) spoke on "Building with Bitcoin: 10 Stories in 10 Minutes".  Here are [the slides](https://web.archive.org/web/20150210170938/http://cdn.oreillystatic.com/en/assets/1/event/130/Building%20with%20Bitcoin_%2010%20Stories%20in%2010%20Minutes%20Presentation.pdf_). The event was mainly organized by [Kieren]({{ '/people/kieren-james-lubin/' | relative_url }}) and [Lorne Lantz](https://x.com/lornestar), who together booked most of the speakers, did the intermissions and created the content arc.)*
+*(Bob: So Chain were indeed sponsors for this event, and their CEO, [Adam Ludwin](https://www.lud.win/) spoke on "Building with Bitcoin: 10 Stories in 10 Minutes".  Here are [the slides](https://web.archive.org/web/20150210170938/http://cdn.oreillystatic.com/en/assets/1/event/130/Building%20with%20Bitcoin_%2010%20Stories%20in%2010%20Minutes%20Presentation.pdf_). The event was mainly organized by [Kieren](/people/kieren-james-lubin/) and [Lorne Lantz](https://x.com/lornestar), who together booked most of the speakers, did the intermissions and created the content arc.)*
 
 [[14:48]](https://www.youtube.com/watch?v=2BR6nodzzos&t=888s) **Bob:**
 Was that sort of like a [UTXO](https://www.investopedia.com/terms/u/utxo.asp) [Bitcoin](https://bitcoin.org)-y like? Because I know...
@@ -394,7 +394,7 @@ It's like ETH is probably an illegal security. Like we don't want to get anywher
 Though "Blockchain, not [Ethereum](https://ethereum.org)", "not ETH".
 
 [[20:25]](https://www.youtube.com/watch?v=2BR6nodzzos&t=1225s) **Victor:**
-But the one thing that was really interesting, like when we launched that blockchain as a service and it got on [Azure](https://azure.microsoft.com), like we had thousands of people spinning up stuff and then a good number of them reaching out to us. And I will say the use cases that didn't seem speculative did come from these corporates, right? Like to [Kieren]({{ '/people/kieren-james-lubin/' | relative_url }})'s point, it's like, like we did get contacted by sort of smaller groups, but they were like, oh, well, we just want to launch our own token and sell it.
+But the one thing that was really interesting, like when we launched that blockchain as a service and it got on [Azure](https://azure.microsoft.com), like we had thousands of people spinning up stuff and then a good number of them reaching out to us. And I will say the use cases that didn't seem speculative did come from these corporates, right? Like to [Kieren](/people/kieren-james-lubin/)'s point, it's like, like we did get contacted by sort of smaller groups, but they were like, oh, well, we just want to launch our own token and sell it.
 
 Like that, those are all those use cases.
 
@@ -410,7 +410,7 @@ The corporates came first, actually, which was
 [[21:16]](https://www.youtube.com/watch?v=2BR6nodzzos&t=1276s) **Victor:**
 Yeah, exactly.
 
-And so, I mean, you know, that was our experience. And shortly afterwards, and [Bob]({{ '/people/bob-summerwill/' | relative_url }}), you might have the timing, [Libra](https://en.wikipedia.org/wiki/Diem_(digital_currency)) by [Facebook](https://facebook.com/) came along and they were doing their own thing. Do you know the time?
+And so, I mean, you know, that was our experience. And shortly afterwards, and [Bob](/people/bob-summerwill/), you might have the timing, [Libra](https://en.wikipedia.org/wiki/Diem_(digital_currency)) by [Facebook](https://facebook.com/) came along and they were doing their own thing. Do you know the time?
 
 Yeah, [Libra](https://en.wikipedia.org/wiki/Diem_(digital_currency)) was 18, 17. Yeah, we launched Blockchain as a Service in 2015, right?
 
@@ -666,7 +666,7 @@ And it sort of, it led to like a strangulation where you would kind of just need
 
 But even for like, I think you'll see some corporate operational stuff, which again, the like stablecoin, you know, global clearing remittance, settlement remittance stuff is starting to get there. I think that will happen the way I described, as opposed to, again, like these folks all have done extremely heavy IT implementations. Like I've heard that at least in the era when [Oracle](https://oracle.com) and [SAP](https://sap.com) were big at it, on average, an [ERP](https://en.wikipedia.org/wiki/Enterprise_resource_planning) implementation takes 5% of global revenue, no matter the size.
 
-So like the bigger you are, just like, I think [Victor]({{ '/people/victor-wong/' | relative_url }}), maybe you mentioned to me once like working on one for like a full decade.
+So like the bigger you are, just like, I think [Victor](/people/victor-wong/), maybe you mentioned to me once like working on one for like a full decade.
 
 [[36:06]](https://www.youtube.com/watch?v=2BR6nodzzos&t=2166s) **Victor:**
 When I started at a company, they had already been working on an [SAP](https://sap.com) implementation. And when I left six years later, they were still working on it. So it was just like, yeah, the project.
@@ -683,7 +683,7 @@ And like, then it's, you know, the negotiation was endless. It's hard to do the 
 But I think it came down, if the corporations like had this, like, let's just play with it mentality, you might've gotten where I'm describing.
 
 [[37:22]](https://www.youtube.com/watch?v=2BR6nodzzos&t=2242s) **Victor:**
-Yeah, and [Bob]({{ '/people/bob-summerwill/' | relative_url }}), what do you think? Do you have any of you to add on?
+Yeah, and [Bob](/people/bob-summerwill/), what do you think? Do you have any of you to add on?
 
 [[37:25]](https://www.youtube.com/watch?v=2BR6nodzzos&t=2245s) **Bob:**
 Yeah, I mean, I think a lot of it is just technical maturity as well. You know, there wasn't really any ZK, so it's like, how do you do privacy? How does that work?
@@ -712,9 +712,9 @@ I mean, there was also a story that ...
 I think that's true too.
 
 [[38:25]](https://www.youtube.com/watch?v=2BR6nodzzos&t=2305s) **Kieren:**
-While I agree with you, I still think everyone who found that deficiency none of them solved it better really than what exists in the public chains out there today. I keep asking the AIs and looking around the internet on the state of ZK, having still not really there, maybe a little bit, you know, and the enterprises all want the following permissioning model. Like, I should be able to send value to [Victor]({{ '/people/victor-wong/' | relative_url }}).
+While I agree with you, I still think everyone who found that deficiency none of them solved it better really than what exists in the public chains out there today. I keep asking the AIs and looking around the internet on the state of ZK, having still not really there, maybe a little bit, you know, and the enterprises all want the following permissioning model. Like, I should be able to send value to [Victor](/people/victor-wong/).
 
-He should know that whatever I have really exists. You should be able- he should be able to send it on to you. You should be able to verify that [Victor]({{ '/people/victor-wong/' | relative_url }}) had it, but not know that it came from me or how much he has, total.
+He should know that whatever I have really exists. You should be able- he should be able to send it on to you. You should be able to verify that [Victor](/people/victor-wong/) had it, but not know that it came from me or how much he has, total.
 
 And the regulator should somehow be able to see all of this, at least in a financial services setting. And it mostly can't do that still. I kind of can't really tell.
 
@@ -779,13 +779,13 @@ Yeah, and it's true for any real platform, like the app stores, right? Everyone,
 
 ### Are corporate chains the future or DOA?
 
-Are the new round of corpo chains the future or are they DOA based on similar problems? I'll start with [Bob]({{ '/people/bob-summerwill/' | relative_url }}) on this one.
+Are the new round of corpo chains the future or are they DOA based on similar problems? I'll start with [Bob](/people/bob-summerwill/) on this one.
 
 [[43:21]](https://www.youtube.com/watch?v=2BR6nodzzos&t=2601s) **Bob:**
 They are not solving the same problems as truly permissionless ecosystems. However, it's not a winner-takes-all either. So I think maybe the losers here are gonna be the banks, that they can get their business eaten a lot easier than this can cannibalize [Bitcoin](https://bitcoin.org) or [Ethereum](https://ethereum.org), I think.
 
 [[43:50]](https://www.youtube.com/watch?v=2BR6nodzzos&t=2630s) **Victor:**
-Okay. [Kieren]({{ '/people/kieren-james-lubin/' | relative_url }}), your verdict, DOA or are they the future?
+Okay. [Kieren](/people/kieren-james-lubin/), your verdict, DOA or are they the future?
 
 [[43:55]](https://www.youtube.com/watch?v=2BR6nodzzos&t=2635s) **Kieren:**
 I think we'll get a couple long-lived corpo chains. I agree with that. I think they'll be semi-niche.
@@ -864,13 +864,13 @@ Bob has posted that on our Telegram.
 > So it's, you know, back in the world of eight character usernames, I could always get "vic4wong" having an
 > Asian name with the number four in it, like pretty much guaranteed that I could get it.
 
-Thanks. [Bob]({{ '/people/bob-summerwill/' | relative_url }}), where can people find you for if they want to hear more from you?
+Thanks. [Bob](/people/bob-summerwill/), where can people find you for if they want to hear more from you?
 
 [[49:07]](https://www.youtube.com/watch?v=2BR6nodzzos&t=2947s) **Bob:**
 So yeah, again, X. So Bob, Summer Will. So Summer, like the season.  Will, like write your will. That's [me](https://x.com/bobsummerwill).
 
 [[49:15]](https://www.youtube.com/watch?v=2BR6nodzzos&t=2955s) **Victor:**
-And [Kieren]({{ '/people/kieren-james-lubin/' | relative_url }}), where can people find you?
+And [Kieren](/people/kieren-james-lubin/), where can people find you?
 
 [[49:17]](https://www.youtube.com/watch?v=2BR6nodzzos&t=2957s) **Kieren:**
 Also X, [K James Lubin](https://x.com/kjameslubin). It's K James Lubin. L-U-B-I-N.  James, J-A-M-E-S.

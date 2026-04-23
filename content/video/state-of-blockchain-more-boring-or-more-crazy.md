@@ -10,9 +10,9 @@ authorTitle: ""
 videoUrl: "https://www.youtube.com/embed/15MltoqMjZU"
 ---
 
-[Bob]({{ '/people/bob-summerwill/' | relative_url }}), [Kieren]({{ '/people/kieren-james-lubin/' | relative_url }}), [Jaime]({{ '/people/jaime-gonzalez/' | relative_url }}) and [Michael]({{ '/people/michael-tan/' | relative_url }}) were all in Singapore last week for the [TOKEN2049](https://token2049.com) mega-conference.
+[Bob](/people/bob-summerwill/), [Kieren](/people/kieren-james-lubin/), [Jaime](/people/jaime-gonzalez/) and [Michael](/people/michael-tan/) were all in Singapore last week for the [TOKEN2049](https://token2049.com) mega-conference.
 
-[Bob]({{ '/people/bob-summerwill/' | relative_url }}) and [Kieren]({{ '/people/kieren-james-lubin/' | relative_url }}) joined [Victor]({{ '/people/victor-wong/' | relative_url }}) to reflect on the event, and on the market trends which manifested there.
+[Bob](/people/bob-summerwill/) and [Kieren](/people/kieren-james-lubin/) joined [Victor](/people/victor-wong/) to reflect on the event, and on the market trends which manifested there.
 
 ## Audio
 
@@ -102,7 +102,7 @@ Now, the three of us here are all longtime builders and all Ethereum OGs.
 I'm Victor Wong.
 
 [[2:48]](https://www.youtube.com/watch?v=15MltoqMjZU&t=168s) **Kieren:**
-[Vic]({{ '/people/victor-wong/' | relative_url }}), I don't know if you can describe yourself as an OG. I think someone else has to describe it.
+[Vic](/people/victor-wong/), I don't know if you can describe yourself as an OG. I think someone else has to describe it.
 
 [[2:53]](https://www.youtube.com/watch?v=15MltoqMjZU&t=173s) **Victor:**
 Someone has to bestow that. Okay, you two are OGs.
@@ -120,7 +120,7 @@ You are an OG, but yeah, let's do that in a circle.
 Right, exactly.
 
 [[3:09]](https://www.youtube.com/watch?v=15MltoqMjZU&t=189s) **Kieren:**
-You can tell [Bob]({{ '/people/bob-summerwill/' | relative_url }}), [Bob]({{ '/people/bob-summerwill/' | relative_url }})'s an OG. [Bob]({{ '/people/bob-summerwill/' | relative_url }}) can tell me, I can tell you.
+You can tell [Bob](/people/bob-summerwill/), [Bob](/people/bob-summerwill/)'s an OG. [Bob](/people/bob-summerwill/) can tell me, I can tell you.
 
 [[3:12]](https://www.youtube.com/watch?v=15MltoqMjZU&t=192s) **Victor:**
 Yes, so we've been building since the launch of Ethereum and continue to follow this journey. So you'll get hopefully no shilling and a lot of good historical context about what we're going to talk about today. And today we are going to talk about the highlights from [TOKEN2049](https://token2049.com).
@@ -133,7 +133,7 @@ Yes, so we've been building since the launch of Ethereum and continue to follow 
    site="token2049.com"
 %}
 
-And was it more boring or more crazy in terms of the blockchain world? Joining me is Bob Summerwill. [Bob]({{ '/people/bob-summerwill/' | relative_url }}), you want to do a quick intro?
+And was it more boring or more crazy in terms of the blockchain world? Joining me is Bob Summerwill. [Bob](/people/bob-summerwill/), you want to do a quick intro?
 
 [[3:46]](https://www.youtube.com/watch?v=15MltoqMjZU&t=226s) **Bob:**
 Hi there, I'm Bob Summerwill. We are all, we're not old. We're all very experienced.
@@ -145,26 +145,26 @@ Thank you.
 But yes, I'm Head of Ecosystem.
 
 [[3:58]](https://www.youtube.com/watch?v=15MltoqMjZU&t=238s) **Victor:**
-Yeah, and [Kieren]({{ '/people/kieren-james-lubin/' | relative_url }}), of course.
+Yeah, and [Kieren](/people/kieren-james-lubin/), of course.
 
 [[4:01]](https://www.youtube.com/watch?v=15MltoqMjZU&t=241s) **Kieren:**
 Yeah, I am also experienced. You know, not as long as you can be in the space, but it's starting to feel like it, right? Like we've really been around for some time.  But yes, I'm ...
 
 [[4:12]](https://www.youtube.com/watch?v=15MltoqMjZU&t=252s) **Victor:**
-I'm- I will bestow the OG title on you, [Kieren]({{ '/people/kieren-james-lubin/' | relative_url }}). So we could go around. I mean, anyone that's been around since before the launch of Ethereum and was part of it, I think, you know, that would be, we can claim that title.
+I'm- I will bestow the OG title on you, [Kieren](/people/kieren-james-lubin/). So we could go around. I mean, anyone that's been around since before the launch of Ethereum and was part of it, I think, you know, that would be, we can claim that title.
 
 [[4:30]](https://www.youtube.com/watch?v=15MltoqMjZU&t=270s) **Kieren:**
 Ah, how the time goes.
 
 [[4:33]](https://www.youtube.com/watch?v=15MltoqMjZU&t=273s) **Victor:**
-So I will say that I was not in Singapore. I kind of played hooky with [Kieren]({{ '/people/kieren-james-lubin/' | relative_url }})'s approval. You know, international travel is brutal.
+So I will say that I was not in Singapore. I kind of played hooky with [Kieren](/people/kieren-james-lubin/)'s approval. You know, international travel is brutal.
 
 
 <a id="big-themes"></a>
 
 ### Big themes
 
-But [Bob]({{ '/people/bob-summerwill/' | relative_url }}) and [Kieren]({{ '/people/kieren-james-lubin/' | relative_url }}) were there. And why, to get your kind of impressions, what do you think the big themes this year were at [TOKEN2049](https://token2049.com)?
+But [Bob](/people/bob-summerwill/) and [Kieren](/people/kieren-james-lubin/) were there. And why, to get your kind of impressions, what do you think the big themes this year were at [TOKEN2049](https://token2049.com)?
 
 [[4:57]](https://www.youtube.com/watch?v=15MltoqMjZU&t=297s) **Kieren:**
 Yeah, a bunch of big topics. One thing that was notable is that it felt like meme coins had almost completely vanished. And there was a lot of that the previous year.
@@ -216,7 +216,7 @@ Well, actually, that's a good transition. So, you know, we couldn't internally w
 And I'm curious, like, you know, since this is in Singapore, a very global conference, like what countries outside the U.S. seem to be moving in this direction? You know, like, obviously, the U.S. has been a holdup for a really long time. But, you know, how are things getting boring and how are things getting more global?
 
 [[9:05]](https://www.youtube.com/watch?v=15MltoqMjZU&t=545s) **Kieren:**
-[Bob]({{ '/people/bob-summerwill/' | relative_url }}), I want to remind you not to criticize our friends in Washington, at least in a public forum. Supporters of the...
+[Bob](/people/bob-summerwill/), I want to remind you not to criticize our friends in Washington, at least in a public forum. Supporters of the...
 
 [[9:12]](https://www.youtube.com/watch?v=15MltoqMjZU&t=552s) **Bob:**
 Yeah, I'm not getting back in.
@@ -287,7 +287,7 @@ Garbage?
 [[13:44]](https://www.youtube.com/watch?v=15MltoqMjZU&t=824s) **Victor:**
 So, yeah. And we don't want to keep you too long. Obviously, you got important things to do around the house.
 
-[Bob]({{ '/people/bob-summerwill/' | relative_url }}), what do you think about the global and the boring part of it?
+[Bob](/people/bob-summerwill/), what do you think about the global and the boring part of it?
 
 [[13:56]](https://www.youtube.com/watch?v=15MltoqMjZU&t=836s) **Bob:**
 So, yeah, I mean, I guess just something else to say that is I've been to a lot of conferences. I've never seen somewhere with so much floor space of expo halls. Just on and on and on.
@@ -300,7 +300,7 @@ Even bigger than [DEVCON](https://devcon.org) in Thailand last year? Because I r
 [[14:36]](https://www.youtube.com/watch?v=15MltoqMjZU&t=876s) **Bob:**
 Bigger in terms of the expo area, certainly. You know, like [DEVCON](https://devcon.org) was a large, you know, floor area, but it was lots and lots of different rooms of talks. And then little stalls, whereas this is just, you know, expo hall of selling.  I don't know what most of them were.
 
-Thousands and thousands of projects that you've never heard of doing a thing that is pretty indistinguishable from everybody else. So, yeah, talking about the turnover, [Kieren]({{ '/people/kieren-james-lubin/' | relative_url }}), I mean, I'm sure that's the case is the vast majority of them are going to be gone in a year's time.
+Thousands and thousands of projects that you've never heard of doing a thing that is pretty indistinguishable from everybody else. So, yeah, talking about the turnover, [Kieren](/people/kieren-james-lubin/), I mean, I'm sure that's the case is the vast majority of them are going to be gone in a year's time.
 
 And never even know they happened.
 
@@ -357,7 +357,7 @@ By the way, we have a comment from [Shiba](https://x.com/Cryptotarzan19) who say
 You got to hodl the memes, that's the key.
 
 [[20:57]](https://www.youtube.com/watch?v=15MltoqMjZU&t=1257s) **Kieren:**
-Shout out to you, [Shiba](https://x.com/Cryptotarzan19). [Bob]({{ '/people/bob-summerwill/' | relative_url }}), so what do you think about, you know, treasuries and stablecoins?
+Shout out to you, [Shiba](https://x.com/Cryptotarzan19). [Bob](/people/bob-summerwill/), so what do you think about, you know, treasuries and stablecoins?
 
 <a id="enterprise-maturity"></a>
 
@@ -500,7 +500,7 @@ And then it just kind of functions and it's big. Like every week or so, I see li
 And so there's a feeling of inevitability that kicked in for me like a couple months ago that, you know, has I've never quite felt.
 
 [[31:11]](https://www.youtube.com/watch?v=15MltoqMjZU&t=1871s) **Victor:**
-What about you, [Bob]({{ '/people/bob-summerwill/' | relative_url }})? What did you find, you know, on the craziness level? What do you think?
+What about you, [Bob](/people/bob-summerwill/)? What did you find, you know, on the craziness level? What do you think?
 
 <a id="top-signals"></a>
 
@@ -589,7 +589,7 @@ Like it's a strange thing in which retail was in for a while and maybe got burne
 It's not all financial services, obviously, but a lot of them are. And this includes things like making sure people don't lose the keys somehow or what have you. So there's like a needle that's right there, but I think that's gonna be a lot of what the next phase is about.
 
 [[38:59]](https://www.youtube.com/watch?v=15MltoqMjZU&t=2339s) **Victor:**
-[Bob]({{ '/people/bob-summerwill/' | relative_url }}), what do you think?
+[Bob](/people/bob-summerwill/), what do you think?
 
 [[39:01]](https://www.youtube.com/watch?v=15MltoqMjZU&t=2341s) **Bob:**
 Well, I mean, I think the way that that will happen for a lot of retail is that they're not gonna have their hands on directly. It'll all be through these instruments. So their experience is just, oh yeah, I've got a brokerage account and there's those in it as well, but they kind of, they look indistinguishable to, you know, to commodities or equities or bonds or anything else.
@@ -603,7 +603,7 @@ Because everything really at this point has pretty much been speculation or, you
 ### Devconnect
 
 [[40:45]](https://www.youtube.com/watch?v=15MltoqMjZU&t=2445s) **Victor:**
-Yeah, and one question, like, are we going to [DevConnect](https://devconnect.org/)? I know me and [Bob]({{ '/people/bob-summerwill/' | relative_url }}) have already bought our tickets. [Kieren]({{ '/people/kieren-james-lubin/' | relative_url }}), you're the holdout.
+Yeah, and one question, like, are we going to [DevConnect](https://devconnect.org/)? I know me and [Bob](/people/bob-summerwill/) have already bought our tickets. [Kieren](/people/kieren-james-lubin/), you're the holdout.
 
 {% include content-embed.html 
    url="https://devconnect.org/"
@@ -637,19 +637,19 @@ Yeah, well, and so if you like this content, please join us every week.
 
 We have this at the same time. And follow us on Twitter, at [@strato_net](https://x.com/strato_net_) with an A and join our [Telegram community](https://t.me/strato_net).
 
-[Bob]({{ '/people/bob-summerwill/' | relative_url }}), if they wanna hear more from you, where can they find you?
+[Bob](/people/bob-summerwill/), if they wanna hear more from you, where can they find you?
 
 [[41:40]](https://www.youtube.com/watch?v=15MltoqMjZU&t=2500s) **Bob:**
 Yeah, so I'm just [@bobsummerwill](https://x.com/bobsummerwill), same as my name on Twitter.
 
 [[41:46]](https://www.youtube.com/watch?v=15MltoqMjZU&t=2506s) **Victor:**
-And [Kieren]({{ '/people/kieren-james-lubin/' | relative_url }}), where can people find you?
+And [Kieren](/people/kieren-james-lubin/), where can people find you?
 
 [[41:50]](https://www.youtube.com/watch?v=15MltoqMjZU&t=2510s) **Kieren:**
 [@kjameslubin](https://x.com/kjameslubin), so shortened, but my name also on Twitter / X.
 
 [[41:58]](https://www.youtube.com/watch?v=15MltoqMjZU&t=2518s) **Victor:**
-And you can find me at [@vic4wong](https://x.com/vic4wong) on Twitter. [Bob]({{ '/people/bob-summerwill/' | relative_url }}) and [Kieren]({{ '/people/kieren-james-lubin/' | relative_url }}) have both shamed me publicly because I have so few followers, even though I was an early adopter. So please, please connect to me.
+And you can find me at [@vic4wong](https://x.com/vic4wong) on Twitter. [Bob](/people/bob-summerwill/) and [Kieren](/people/kieren-james-lubin/) have both shamed me publicly because I have so few followers, even though I was an early adopter. So please, please connect to me.
 
 Love to hear from you.
 

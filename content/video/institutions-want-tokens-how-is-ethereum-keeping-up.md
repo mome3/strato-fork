@@ -1002,7 +1002,7 @@ Same as my name, [Bob Summerwill](https://x.com/BobSummerwill) with a W-I-L-L, n
 Not the German spelling of it. Yeah.
 
 [[49:24]](https://www.youtube.com/watch?v=CNavXFv3ats&t=2964s) **Victor**:
-[Kieren]({{ '/people/kieren-james-lubin/' | relative_url }})?
+[Kieren](/people/kieren-james-lubin/)?
 
 [[49:25]](https://www.youtube.com/watch?v=CNavXFv3ats&t=2965s) **Kieren**:
 K. James Lubin [on X](https://x.com/kjameslubin), [YouTube](https://www.youtube.com/@KierenJames-Lubin), et cetera.
