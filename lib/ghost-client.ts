@@ -6,6 +6,7 @@ import "server-only"
 
 const GHOST_URL = process.env.GHOST_URL?.replace(/\/$/, "") ?? ""
 const GHOST_KEY = process.env.GHOST_CONTENT_API_KEY ?? ""
+let hasWarnedAboutMissingGhostConfig = false
 
 // ── Types matching Ghost Content API response shapes ─────────────────────
 
@@ -61,6 +62,19 @@ function ghostUrl(endpoint: string, params: Record<string, string> = {}): string
   return url.toString()
 }
 
+export function isGhostConfigured(): boolean {
+  return Boolean(GHOST_URL && GHOST_KEY)
+}
+
+function warnIfGhostUnconfigured() {
+  if (hasWarnedAboutMissingGhostConfig || isGhostConfigured()) return
+
+  hasWarnedAboutMissingGhostConfig = true
+  console.warn(
+    "Ghost is not configured. Continuing without Ghost content because GHOST_URL or GHOST_CONTENT_API_KEY is missing."
+  )
+}
+
 async function ghostFetch<T>(endpoint: string, params: Record<string, string> = {}): Promise<T> {
   const url = ghostUrl(endpoint, params)
   const res = await fetch(url)
@@ -74,6 +88,11 @@ async function ghostFetch<T>(endpoint: string, params: Record<string, string> = 
 
 /** Fetch all published posts (with tags + authors) in a single request. */
 export async function getGhostPosts(): Promise<GhostPost[]> {
+  if (!isGhostConfigured()) {
+    warnIfGhostUnconfigured()
+    return []
+  }
+
   const data = await ghostFetch<GhostPostsResponse>("posts", {
     limit: "all",
     include: "tags,authors",
@@ -84,6 +103,11 @@ export async function getGhostPosts(): Promise<GhostPost[]> {
 
 /** Fetch a single post by slug. Returns undefined if not found. */
 export async function getGhostPostBySlug(slug: string): Promise<GhostPost | undefined> {
+  if (!isGhostConfigured()) {
+    warnIfGhostUnconfigured()
+    return undefined
+  }
+
   try {
     const data = await ghostFetch<GhostPostsResponse>("posts", {
       limit: "1",
