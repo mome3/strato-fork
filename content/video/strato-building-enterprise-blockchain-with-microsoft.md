@@ -3,7 +3,7 @@ title: "STRATO: Building Enterprise Blockchain with Microsoft"
 date: "2026-04-22"
 description: "Victor Wong talks with Kieren James-Lubin and Yorke Rhodes III about how BlockApps and Microsoft launched one of Ethereum's first major enterprise partnerships, why Microsoft chose Ethereum over building its own chain, how early work on Azure, DTCC, supply chain traceability, and the World Bank bond shaped enterprise adoption, and how that path led to STRATO's current focus on tokenized hard assets, DeFi, and agentic commerce."
 categories: "Videos"
-img: ""
+img: /images/covers-for-spaces/strato-building-enterprise-blockchain-with-microsoft.png
 featured: false
 author: "STRATO Team"
 authorTitle: ""
