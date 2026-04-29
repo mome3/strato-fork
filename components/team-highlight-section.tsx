@@ -120,6 +120,7 @@ function EthereumDnaArtwork() {
           loopSrc={ETHEREUM_DNA_LOTTIE_LOOP}
           className="pointer-events-none h-full w-full"
           style={{ position: "absolute", inset: 0 }}
+          renderConfig={{ devicePixelRatio: 1 }}
         />
       </div>
     )
