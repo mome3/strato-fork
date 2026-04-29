@@ -11,6 +11,17 @@ function isDotLottie(path: string): boolean {
   return path.toLowerCase().endsWith(".lottie")
 }
 
+/**
+ * Render configuration for the dotlottie binary player. The most useful knob
+ * here is `devicePixelRatio` — capping it at 1 dramatically reduces canvas
+ * size on retina/iOS screens, which is critical for large source animations.
+ */
+interface LottieRenderConfig {
+  devicePixelRatio?: number
+  autoResize?: boolean
+  freezeOnOffscreen?: boolean
+}
+
 interface LottiePlayerProps {
   /** Path to lottie file (.json or .lottie - auto-detected) */
   src?: string
@@ -30,6 +41,8 @@ interface LottiePlayerProps {
   rendererSettings?: {
     preserveAspectRatio?: string
   }
+  /** Render config passed through to the dotlottie binary player */
+  renderConfig?: LottieRenderConfig
 }
 
 /**
@@ -45,66 +58,65 @@ export function LottiePlayer({
   style,
   onComplete,
   rendererSettings,
+  renderConfig,
 }: LottiePlayerProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
   const lottieRef = useRef<any>(null)
   const [animationData, setAnimationData] = useState<any>(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const [isVisible, setIsVisible] = useState(false)
 
-  // Determine the actual source and format
   const actualSrc = src || dotLottieSrc
   const isBinaryFormat = actualSrc ? isDotLottie(actualSrc) : false
+  // When autoplay is true, only mount the player once visible. This avoids any
+  // imperative play() timing issues — the player simply autoplays on mount.
+  const shouldMount = !autoplay || isVisible
 
-  // Fetch JSON lottie data (only for .json format)
+  // Pre-fetch JSON data on component mount regardless of visibility so the
+  // animation is ready to render the moment the section enters the viewport.
   useEffect(() => {
-    if (!actualSrc || isBinaryFormat) {
-      setIsLoading(false)
-      return
-    }
-
-    setIsLoading(true)
+    if (!actualSrc || isBinaryFormat) return
     fetch(actualSrc)
       .then((res) => res.json())
-      .then((data) => {
-        setAnimationData(data)
-        setIsLoading(false)
-      })
-      .catch((err) => {
-        console.error("Failed to load Lottie animation:", err)
-        setIsLoading(false)
-      })
+      .then(setAnimationData)
+      .catch((err) => console.error("Failed to load Lottie animation:", err))
   }, [actualSrc, isBinaryFormat])
 
-  // Handle .lottie binary format
-  if (actualSrc && isBinaryFormat) {
-    return (
-      <DotLottieReact
-        src={actualSrc}
-        loop={loop}
-        autoplay={autoplay}
-        className={className}
-        style={style}
-      />
+  useEffect(() => {
+    if (!containerRef.current) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      // rootMargin gives us a small head-start so the animation is already
+      // mounted (and loading) before the element fully enters the viewport.
+      { threshold: 0, rootMargin: "100px" }
     )
-  }
+    observer.observe(containerRef.current)
+    return () => observer.disconnect()
+  }, [])
 
-  // Handle .json format
-  if (actualSrc && animationData) {
-    return (
-      <Lottie
-        lottieRef={lottieRef}
-        animationData={animationData}
-        loop={loop}
-        autoplay={autoplay}
-        onComplete={onComplete}
-        className={className}
-        style={style}
-        rendererSettings={rendererSettings}
-      />
-    )
-  }
-
-  // Loading or no source provided - return empty container
-  return <div className={className} style={style} />
+  return (
+    <div ref={containerRef} className={className} style={style}>
+      {actualSrc && isBinaryFormat && shouldMount && (
+        <DotLottieReact
+          src={actualSrc}
+          loop={loop}
+          autoplay={autoplay}
+          renderConfig={renderConfig}
+          style={{ width: "100%", height: "100%" }}
+        />
+      )}
+      {actualSrc && !isBinaryFormat && animationData && shouldMount && (
+        <Lottie
+          lottieRef={lottieRef}
+          animationData={animationData}
+          loop={loop}
+          autoplay={autoplay}
+          onComplete={onComplete}
+          style={{ width: "100%", height: "100%" }}
+          rendererSettings={rendererSettings}
+        />
+      )}
+    </div>
+  )
 }
 
 interface LottieWithIntroProps {
@@ -116,18 +128,24 @@ interface LottieWithIntroProps {
   className?: string
   /** Custom style */
   style?: React.CSSProperties
-  /** Renderer settings */
+  /** Renderer settings (lottie-react / JSON only) */
   rendererSettings?: {
     preserveAspectRatio?: string
   }
+  /** Render config passed through to the dotlottie binary player */
+  renderConfig?: LottieRenderConfig
   /** Threshold for intersection observer (0-1) */
   threshold?: number
 }
 
 /**
  * Lottie player with intro + loop sequence.
- * Plays intro animation once when visible, then transitions to looping animation.
- * Supports both .json and .lottie formats (auto-detected).
+ *
+ * Plays the intro animation when the container scrolls into view, then
+ * transitions to the looping animation. Players are unmounted when the
+ * container leaves the viewport so off-screen sections don't continue
+ * burning CPU/GPU. The intro only plays once across the page lifetime —
+ * after that, scrolling back in mounts the loop directly.
  */
 export function LottieWithIntro({
   introSrc,
@@ -135,183 +153,85 @@ export function LottieWithIntro({
   className,
   style,
   rendererSettings,
-  threshold = 0.3,
+  renderConfig,
+  threshold = 0,
 }: LottieWithIntroProps) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const lottieRef = useRef<any>(null)
   const dotLottieIntroRef = useRef<any>(null)
   const [introData, setIntroData] = useState<any>(null)
   const [loopData, setLoopData] = useState<any>(null)
-  const [introBinary, setIntroBinary] = useState<string | null>(null)
-  const [loopBinary, setLoopBinary] = useState<string | null>(null)
   const [isVisible, setIsVisible] = useState(false)
-  const [hasPlayedIntro, setHasPlayedIntro] = useState(false)
-  const [showLoop, setShowLoop] = useState(false)
+  const [introCompleted, setIntroCompleted] = useState(false)
 
-  // Stable ref so the handleComplete closure always reads current state,
-  // regardless of when DotLottieReact registered the onComplete prop.
-  const showLoopRef = useRef(showLoop)
-  const loopBinaryRef = useRef(loopBinary)
-  const loopDataRef = useRef(loopData)
-  showLoopRef.current = showLoop
-  loopBinaryRef.current = loopBinary
-  loopDataRef.current = loopData
+  const introIsBinary = !!introSrc && isDotLottie(introSrc)
+  const loopIsBinary = !!loopSrc && isDotLottie(loopSrc)
 
-  // Determine format and fetch animation data
+  // Pre-fetch JSON animation data on mount, regardless of visibility
   useEffect(() => {
-    if (introSrc) {
-      if (isDotLottie(introSrc)) {
-        setIntroBinary(introSrc)
-      } else {
-        fetch(introSrc)
-          .then((res) => res.json())
-          .then(setIntroData)
-          .catch((err) => console.error("Failed to load intro animation:", err))
-      }
+    if (introSrc && !introIsBinary) {
+      fetch(introSrc)
+        .then((res) => res.json())
+        .then(setIntroData)
+        .catch((err) => console.error("Failed to load intro animation:", err))
     }
-    if (loopSrc) {
-      if (isDotLottie(loopSrc)) {
-        setLoopBinary(loopSrc)
-      } else {
-        fetch(loopSrc)
-          .then((res) => res.json())
-          .then(setLoopData)
-          .catch((err) => console.error("Failed to load loop animation:", err))
-      }
+    if (loopSrc && !loopIsBinary) {
+      fetch(loopSrc)
+        .then((res) => res.json())
+        .then(setLoopData)
+        .catch((err) => console.error("Failed to load loop animation:", err))
     }
-  }, [introSrc, loopSrc])
+  }, [introSrc, loopSrc, introIsBinary, loopIsBinary])
 
-  // Intersection observer for visibility
+  // Track current visibility (both directions) so we can mount/unmount
   useEffect(() => {
     if (!containerRef.current) return
-
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasPlayedIntro) {
-            setIsVisible(true)
-          }
-        })
-      },
-      { threshold }
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold, rootMargin: "100px" }
     )
-
     observer.observe(containerRef.current)
+    return () => observer.disconnect()
+  }, [threshold])
 
-    // Check if already visible on mount
-    const rect = containerRef.current.getBoundingClientRect()
-    const isInViewport = rect.top < window.innerHeight && rect.bottom > 0
-    if (isInViewport && !hasPlayedIntro) {
-      setIsVisible(true)
-    }
+  const hasIntro = !!introSrc && (introIsBinary || !!introData)
+  const hasLoop = !!loopSrc && (loopIsBinary || !!loopData)
 
-    return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current)
-      }
-    }
-  }, [hasPlayedIntro, threshold])
+  const showIntro = isVisible && hasIntro && !introCompleted
+  const showLoop = isVisible && hasLoop && (introCompleted || !hasIntro)
 
-  // Play intro when visible
-  useEffect(() => {
-    if (isVisible && lottieRef.current && !hasPlayedIntro) {
-      lottieRef.current.play?.()
-      setHasPlayedIntro(true)
-    }
-  }, [isVisible, hasPlayedIntro])
-
-  const handleComplete = () => {
-    if (!showLoopRef.current && (loopDataRef.current || loopBinaryRef.current)) {
-      setShowLoop(true)
-    }
-  }
-
-  const hasIntroJson = !!introSrc && !isDotLottie(introSrc) && !!introData
-  const hasIntroBinary = !!introBinary
-  const hasLoopJson = !!loopSrc && !isDotLottie(loopSrc) && !!loopData
-  const hasLoopBinary = !!loopBinary
-
-  // If only loop provided, just play that
-  if (!hasIntroJson && !hasIntroBinary && (hasLoopJson || hasLoopBinary)) {
-    return (
-      <div ref={containerRef} className={className} style={style}>
-        {hasLoopBinary ? (
+  return (
+    <div ref={containerRef} className={className} style={style}>
+      {showIntro &&
+        (introIsBinary ? (
           <DotLottieReact
-            src={loopBinary}
-            loop
-            autoplay
-            style={{ width: "100%", height: "100%" }}
-          />
-        ) : (
-          <Lottie
-            animationData={loopData}
-            loop
-            autoplay
-            style={{ width: "100%", height: "100%" }}
-            rendererSettings={rendererSettings}
-          />
-        )}
-      </div>
-    )
-  }
-
-  // Intro + Loop sequence (both JSON)
-  if (hasIntroJson && (hasLoopJson || hasLoopBinary)) {
-    return (
-      <div ref={containerRef} className={className} style={style}>
-        {!showLoop ? (
-          <Lottie
-            lottieRef={lottieRef}
-            animationData={introData}
+            src={introSrc!}
             loop={false}
-            autoplay={false}
-            onComplete={handleComplete}
-            style={{ width: "100%", height: "100%" }}
-            rendererSettings={rendererSettings}
-          />
-        ) : hasLoopBinary ? (
-          <DotLottieReact
-            src={loopBinary}
-            loop
             autoplay
-            style={{ width: "100%", height: "100%" }}
-          />
-        ) : (
-          <Lottie
-            animationData={loopData}
-            loop
-            autoplay
-            style={{ width: "100%", height: "100%" }}
-            rendererSettings={rendererSettings}
-          />
-        )}
-      </div>
-    )
-  }
-
-  // Intro + Loop sequence (intro binary)
-  // DotLottieReact v0.13.x does not support onComplete as a prop — register the
-  // 'complete' event directly on the player via dotLottieRefCallback instead.
-  if (hasIntroBinary && (hasLoopJson || hasLoopBinary)) {
-    return (
-      <div ref={containerRef} className={className} style={style}>
-        {!showLoop ? (
-          <DotLottieReact
-            src={introBinary!}
-            loop={false}
-            autoplay={true}
+            renderConfig={renderConfig}
             style={{ width: "100%", height: "100%" }}
             dotLottieRefCallback={(player) => {
               if (!player || dotLottieIntroRef.current === player) return
               dotLottieIntroRef.current = player
-              player.addEventListener("complete", handleComplete)
+              player.addEventListener("complete", () => setIntroCompleted(true))
             }}
           />
-        ) : hasLoopBinary ? (
+        ) : (
+          <Lottie
+            animationData={introData}
+            loop={false}
+            autoplay
+            onComplete={() => setIntroCompleted(true)}
+            style={{ width: "100%", height: "100%" }}
+            rendererSettings={rendererSettings}
+          />
+        ))}
+      {showLoop &&
+        (loopIsBinary ? (
           <DotLottieReact
-            src={loopBinary}
+            src={loopSrc!}
             loop
             autoplay
+            renderConfig={renderConfig}
             style={{ width: "100%", height: "100%" }}
           />
         ) : (
@@ -322,11 +242,7 @@ export function LottieWithIntro({
             style={{ width: "100%", height: "100%" }}
             rendererSettings={rendererSettings}
           />
-        )}
-      </div>
-    )
-  }
-
-  // Loading or no source provided - return empty container
-  return <div ref={containerRef} className={className} style={style} />
+        ))}
+    </div>
+  )
 }
