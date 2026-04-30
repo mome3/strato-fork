@@ -20,8 +20,8 @@ type NavItem = NavPlainLink | NavDropdown
 const NAV_ITEMS: NavItem[] = [
   {
     labelKey: "nav.getStarted",
-    href: "https://docs.strato.nexus/scenarios/first-time-user/",
-    external: true,
+    href: "/get-started",
+    external: false,
   },
   {
     labelKey: "nav.products",
@@ -187,7 +187,7 @@ function MobileAccordionItem({
   )
 }
 
-// ─── Root Navbar ───────────────────────────────────────────────────────────────
+// ─── Root Navbar ────────────────��──────────────────────────────────────────────
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
