@@ -1,7 +1,13 @@
 "use client"
 
 import Link from "next/link"
-import { useRef, useEffect, useState, type ReactNode } from "react"
+import {
+  useRef,
+  useEffect,
+  useState,
+  type ReactNode,
+  type CSSProperties,
+} from "react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import {
@@ -17,6 +23,70 @@ const departmentKeys: Record<TeamMember["department"], TranslationKey> = {
   Leadership: "team.leadership",
   "Team Members": "team.teamMembers",
   Advisors: "team.advisors",
+}
+
+function FadeIn({
+  children,
+  className = "",
+  delay = 0,
+  threshold = 0.15,
+  y = 20,
+  style,
+}: {
+  children: ReactNode
+  className?: string
+  delay?: number
+  threshold?: number
+  y?: number
+  style?: CSSProperties
+}) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+
+    if (!el) return
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches
+
+    if (prefersReducedMotion) {
+      setVisible(true)
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold }
+    )
+
+    observer.observe(el)
+
+    return () => observer.disconnect()
+  }, [threshold])
+
+  return (
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : `translateY(${y}px)`,
+        transition: `opacity 0.5s ease-out ${delay}ms, transform 0.5s ease-out ${delay}ms`,
+        willChange: visible ? "auto" : "opacity, transform",
+        ...style,
+      }}
+    >
+      {children}
+    </div>
+  )
 }
 
 // Social icon components
@@ -93,38 +163,8 @@ function isValidLink(url?: string) {
 }
 
 function MemberCard({ member }: { member: TeamMember }) {
-  const cardRef = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const el = cardRef.current
-    if (!el) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.15 }
-    )
-
-    observer.observe(el)
-
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <div
-      ref={cardRef}
-      className="flex flex-col"
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(20px)",
-        transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
-      }}
-    >
+    <FadeIn className="flex flex-col">
       <Link href={`/team/${member.slug}`} className="group block">
         <div className="aspect-square w-full overflow-hidden rounded-2xl bg-[#d0d0d0] transition-transform duration-300 ease-out group-hover:scale-[1.01]">
           {member.image ? (
@@ -200,7 +240,7 @@ function MemberCard({ member }: { member: TeamMember }) {
           )}
         </div>
       )}
-    </div>
+    </FadeIn>
   )
 }
 
@@ -228,19 +268,19 @@ function DepartmentSection({
   return (
     <div className="flex flex-col gap-8">
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        <div className="hidden flex-col md:flex">
+        <FadeIn className="hidden flex-col md:flex">
           <div className="flex aspect-square w-full items-end">
             <h2 className="text-3xl font-bold text-[#243486] md:text-4xl">
               {t(departmentKeys[department])}
             </h2>
           </div>
-        </div>
+        </FadeIn>
 
-        <div className="flex flex-col md:hidden">
+        <FadeIn className="flex flex-col md:hidden">
           <h2 className="text-3xl font-bold text-[#243486]">
             {t(departmentKeys[department])}
           </h2>
-        </div>
+        </FadeIn>
 
         {firstRowCards.map((member) => (
           <MemberCard key={member.slug} member={member} />
@@ -324,6 +364,19 @@ function VerticalTimeline() {
     itemRefs.current.forEach((el, index) => {
       if (!el) return
 
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches
+
+      if (prefersReducedMotion) {
+        setVisible((prev) => {
+          const next = [...prev]
+          next[index] = true
+          return next
+        })
+        return
+      }
+
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
@@ -393,8 +446,10 @@ function VerticalTimeline() {
               <div
                 style={{
                   opacity: isVis ? 1 : 0,
-                  transform: isVis ? "translateX(0)" : "translateX(16px)",
-                  transition: "opacity 0.45s ease-out, transform 0.45s ease-out",
+                  transform: isVis ? "translateY(0)" : "translateY(20px)",
+                  transition:
+                    "opacity 0.5s ease-out, transform 0.5s ease-out",
+                  willChange: isVis ? "auto" : "opacity, transform",
                 }}
               >
                 <span className="inline-block rounded-lg bg-[#e8eaf5] px-4 py-2 text-sm font-bold tracking-wide text-[#1a1a2e]">
@@ -579,127 +634,129 @@ function HorizontalTimeline() {
   )
 
   return (
-    <div ref={wrapperRef} className="relative py-16 md:py-20">
-      <div className="relative overflow-hidden">
-        <div className="absolute left-0 right-0 top-1/2 h-[2px] -translate-y-1/2 bg-[#243486]/15" />
+    <FadeIn className="relative py-16 md:py-20" threshold={0.1}>
+      <div ref={wrapperRef} className="relative">
+        <div className="relative overflow-hidden">
+          <div className="absolute left-0 right-0 top-1/2 h-[2px] -translate-y-1/2 bg-[#243486]/15" />
 
-        <div
-          className="flex items-center pl-[50vw] will-change-transform"
-          style={{ transform: `translateX(-${translateX}px)` }}
-        >
-          {timelineMilestones.map((milestone, index) => {
-            const isTop = milestone.position === "top"
-            const milestoneProgress = progress * total
-            const visibility = Math.min(
-              1,
-              Math.max(0, milestoneProgress - index + 0.8)
-            )
-            const isVisible = visibility > 0.1
-            const isCurrent = index === activeIndex
+          <div
+            className="flex items-center pl-[50vw] will-change-transform"
+            style={{ transform: `translateX(-${translateX}px)` }}
+          >
+            {timelineMilestones.map((milestone, index) => {
+              const isTop = milestone.position === "top"
+              const milestoneProgress = progress * total
+              const visibility = Math.min(
+                1,
+                Math.max(0, milestoneProgress - index + 0.8)
+              )
+              const isVisible = visibility > 0.1
+              const isCurrent = index === activeIndex
 
-            return (
-              <div
-                key={milestone.quarter}
-                className="relative flex shrink-0 flex-col items-center"
-                style={{ width: SLOT_WIDTH }}
-              >
-                <div className="flex h-64 flex-col items-center justify-end pb-8">
-                  {isTop && (
+              return (
+                <div
+                  key={milestone.quarter}
+                  className="relative flex shrink-0 flex-col items-center"
+                  style={{ width: SLOT_WIDTH }}
+                >
+                  <div className="flex h-64 flex-col items-center justify-end pb-8">
+                    {isTop && (
+                      <div
+                        className="flex flex-col items-center text-center"
+                        style={{
+                          opacity: visibility,
+                          transform: `translateY(${(1 - visibility) * 20}px)`,
+                          transition:
+                            "opacity 0.5s ease-out, transform 0.5s ease-out",
+                        }}
+                      >
+                        <span className="mb-3 inline-block rounded-lg bg-[#e8eaf5] px-5 py-2.5 text-base font-bold tracking-wide text-[#1a1a2e]">
+                          {milestone.quarter}
+                        </span>
+
+                        {milestone.items.map((item, i) => (
+                          <p
+                            key={i}
+                            className="max-w-[400px] text-lg leading-snug text-[#555]"
+                          >
+                            {item}
+                          </p>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="relative flex h-16 flex-col items-center justify-center">
+                    {isTop && (
+                      <div
+                        className="absolute bottom-full h-5 w-px bg-[#243486]/25"
+                        style={{
+                          opacity: visibility,
+                          transition: "opacity 0.5s ease-out",
+                        }}
+                      />
+                    )}
+
                     <div
-                      className="flex flex-col items-center text-center"
+                      className="relative z-10 rounded-full"
                       style={{
-                        opacity: visibility,
-                        transform: `translateY(${(1 - visibility) * -12}px)`,
-                        transition:
-                          "opacity 0.2s ease-out, transform 0.25s ease-out",
-                      }}
-                    >
-                      <span className="mb-3 inline-block rounded-lg bg-[#e8eaf5] px-5 py-2.5 text-base font-bold tracking-wide text-[#1a1a2e]">
-                        {milestone.quarter}
-                      </span>
-
-                      {milestone.items.map((item, i) => (
-                        <p
-                          key={i}
-                          className="max-w-[400px] text-lg leading-snug text-[#555]"
-                        >
-                          {item}
-                        </p>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                <div className="relative flex h-16 flex-col items-center justify-center">
-                  {isTop && (
-                    <div
-                      className="absolute bottom-full h-5 w-px bg-[#243486]/25"
-                      style={{
-                        opacity: visibility,
-                        transition: "opacity 0.2s ease-out",
-                      }}
-                    />
-                  )}
-
-                  <div
-                    className="relative z-10 rounded-full"
-                    style={{
-                      width: isCurrent ? 16 : 12,
-                      height: isCurrent ? 16 : 12,
-                      background: isVisible
-                        ? "#243486"
-                        : "rgba(36,52,134,0.2)",
-                      boxShadow: isCurrent
-                        ? "0 0 0 6px rgba(36,52,134,0.12)"
-                        : "none",
-                      opacity: Math.max(0.25, visibility),
-                      transition: "all 0.2s ease-out",
-                    }}
-                  />
-
-                  {!isTop && (
-                    <div
-                      className="absolute top-full h-5 w-px bg-[#243486]/25"
-                      style={{
-                        opacity: visibility,
-                        transition: "opacity 0.2s ease-out",
+                        width: isCurrent ? 16 : 12,
+                        height: isCurrent ? 16 : 12,
+                        background: isVisible
+                          ? "#243486"
+                          : "rgba(36,52,134,0.2)",
+                        boxShadow: isCurrent
+                          ? "0 0 0 6px rgba(36,52,134,0.12)"
+                          : "none",
+                        opacity: Math.max(0.25, visibility),
+                        transition: "all 0.3s ease-out",
                       }}
                     />
-                  )}
-                </div>
 
-                <div className="flex h-64 flex-col items-center justify-start pt-8">
-                  {!isTop && (
-                    <div
-                      className="flex flex-col items-center text-center"
-                      style={{
-                        opacity: visibility,
-                        transform: `translateY(${(1 - visibility) * 12}px)`,
-                        transition:
-                          "opacity 0.2s ease-out, transform 0.25s ease-out",
-                      }}
-                    >
-                      {milestone.items.map((item, i) => (
-                        <p
-                          key={i}
-                          className="max-w-[400px] text-lg leading-snug text-[#555]"
-                        >
-                          {item}
-                        </p>
-                      ))}
+                    {!isTop && (
+                      <div
+                        className="absolute top-full h-5 w-px bg-[#243486]/25"
+                        style={{
+                          opacity: visibility,
+                          transition: "opacity 0.5s ease-out",
+                        }}
+                      />
+                    )}
+                  </div>
 
-                      <span className="mt-3 inline-block rounded-lg bg-[#e8eaf5] px-5 py-2.5 text-base font-bold tracking-wide text-[#1a1a2e]">
-                        {milestone.quarter}
-                      </span>
-                    </div>
-                  )}
+                  <div className="flex h-64 flex-col items-center justify-start pt-8">
+                    {!isTop && (
+                      <div
+                        className="flex flex-col items-center text-center"
+                        style={{
+                          opacity: visibility,
+                          transform: `translateY(${(1 - visibility) * 20}px)`,
+                          transition:
+                            "opacity 0.5s ease-out, transform 0.5s ease-out",
+                        }}
+                      >
+                        {milestone.items.map((item, i) => (
+                          <p
+                            key={i}
+                            className="max-w-[400px] text-lg leading-snug text-[#555]"
+                          >
+                            {item}
+                          </p>
+                        ))}
+
+                        <span className="mt-3 inline-block rounded-lg bg-[#e8eaf5] px-5 py-2.5 text-base font-bold tracking-wide text-[#1a1a2e]">
+                          {milestone.quarter}
+                        </span>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            )
-          })}
+              )
+            })}
+          </div>
         </div>
       </div>
-    </div>
+    </FadeIn>
   )
 }
 
@@ -713,7 +770,13 @@ function TimelineSection() {
 
   if (!hydrated) return <div className="h-64" />
 
-  return isMobile ? <VerticalTimeline /> : <HorizontalTimeline />
+  return isMobile ? (
+    <FadeIn threshold={0.1}>
+      <VerticalTimeline />
+    </FadeIn>
+  ) : (
+    <HorizontalTimeline />
+  )
 }
 
 function HeroVideo() {
@@ -753,7 +816,7 @@ function HeroVideo() {
 
         <video
           ref={videoRef}
-          className="relative h-full w-full object-cover transition-opacity duration-500"
+          className="relative h-full w-full object-cover transition-opacity duration-700 ease-out"
           style={{
             opacity: videoReady ? 1 : 0,
           }}
@@ -796,33 +859,41 @@ export function TeamPageContent() {
       <div className="relative">
         <div className="mx-auto max-w-[1280px] px-4 md:px-8 lg:px-12">
           {/* Navbar */}
-          <div className="pt-4 md:pt-6 lg:pt-8">
+          <FadeIn className="pt-4 md:pt-6 lg:pt-8" y={12}>
             <Navbar />
-          </div>
+          </FadeIn>
 
           {/* Hero Section */}
           <div className="mt-12 md:mt-16">
-            <p className="text-sm font-bold uppercase tracking-widest text-[#4866f7] md:text-base">
-              SHIPPING ETHEREUM INFRASTRUCTURE SINCE 2014
-            </p>
+            <FadeIn delay={50}>
+              <p className="text-sm font-bold uppercase tracking-widest text-[#4866f7] md:text-base">
+                SHIPPING ETHEREUM INFRASTRUCTURE SINCE 2014
+              </p>
+            </FadeIn>
 
-            <h1 className="mt-3 text-4xl font-bold leading-tight text-[#243486] md:text-5xl lg:text-6xl">
-              Building for Ethereum Before It
-              <br className="hidden sm:block" /> Existed.
-            </h1>
+            <FadeIn delay={100}>
+              <h1 className="mt-3 text-4xl font-bold leading-tight text-[#243486] md:text-5xl lg:text-6xl">
+                Building for Ethereum Before It
+                <br className="hidden sm:block" /> Existed.
+              </h1>
+            </FadeIn>
 
-            <HeroVideo />
+            <FadeIn delay={150}>
+              <HeroVideo />
+            </FadeIn>
 
             {/* Description text */}
-            <p className="mt-8 text-sm leading-relaxed text-[#555] md:text-base">
-              Strato didn&apos;t start with a whitepaper and a token sale. It
-              started in 2014, when our founders joined the Ethereum project and
-              began writing one of its six original mainnet-compatible clients in
-              Haskell, because they were mathematicians and physicists, not hype
-              merchants. Over the years, the team went on to build enterprise
-              blockchain infrastructure for Fortune 500 companies and
-              governments, and has poured that experience into Strato.
-            </p>
+            <FadeIn delay={200}>
+              <p className="mt-8 text-sm leading-relaxed text-[#555] md:text-base">
+                Strato didn&apos;t start with a whitepaper and a token sale. It
+                started in 2014, when our founders joined the Ethereum project and
+                began writing one of its six original mainnet-compatible clients in
+                Haskell, because they were mathematicians and physicists, not hype
+                merchants. Over the years, the team went on to build enterprise
+                blockchain infrastructure for Fortune 500 companies and
+                governments, and has poured that experience into Strato.
+              </p>
+            </FadeIn>
           </div>
         </div>
 
@@ -842,9 +913,9 @@ export function TeamPageContent() {
       </div>
 
       {/* Footer */}
-      <div className="relative">
+      <FadeIn className="relative">
         <Footer />
-      </div>
+      </FadeIn>
     </div>
   )
 }
