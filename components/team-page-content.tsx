@@ -784,6 +784,7 @@ function TimelineSection() {
 function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [videoReady, setVideoReady] = useState(false)
+  const [controlsEnabled, setControlsEnabled] = useState(false)
 
   useEffect(() => {
     const video = videoRef.current
@@ -796,7 +797,7 @@ function HeroVideo() {
         video.playsInline = true
         await video.play()
       } catch {
-        // Autoplay may fail on some devices. Native controls remain available.
+        // Autoplay may fail on some devices.
       }
     }
 
@@ -807,7 +808,12 @@ function HeroVideo() {
 
   return (
     <div className="mt-8 overflow-hidden rounded-2xl bg-[#1a1a2e]">
-      <div className="relative aspect-video w-full">
+      <button
+        type="button"
+        className="relative block aspect-video w-full cursor-pointer text-left"
+        aria-label="Enable video controls"
+        onClick={() => setControlsEnabled(true)}
+      >
         <img
           src="/team/hero-poster.jpg"
           alt=""
@@ -823,8 +829,9 @@ function HeroVideo() {
           className="relative h-full w-full object-cover transition-opacity duration-700 ease-out"
           style={{
             opacity: videoReady ? 1 : 0,
+            pointerEvents: controlsEnabled ? "auto" : "none",
           }}
-          controls
+          controls={controlsEnabled}
           autoPlay
           muted
           loop
@@ -837,7 +844,13 @@ function HeroVideo() {
           <source src="/team/hero-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-      </div>
+
+        {!controlsEnabled && (
+          <span className="pointer-events-none absolute bottom-4 right-4 rounded-full bg-black/50 px-4 py-2 text-sm font-medium text-white backdrop-blur">
+            Tap for controls
+          </span>
+        )}
+      </button>
     </div>
   )
 }
@@ -879,7 +892,7 @@ export function TeamPageContent() {
             </FadeIn>
 
             <FadeIn delay={150}>
-              <div className="mt-8 aspect-video rounded-2xl bg-[#1a1a2e]" />
+              <HeroVideo />
             </FadeIn>
 
             <FadeIn delay={200}>
