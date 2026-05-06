@@ -481,7 +481,7 @@ function HorizontalTimeline() {
   const SLOT_WIDTH = 520
   const maxTranslate = (total - 1) * SLOT_WIDTH
 
-  const LOCK_SENSITIVITY = 0.001
+  const LOCK_SENSITIVITY = 0.0007
   const RELEASE_EPSILON = 0.02
 
   const DOWN_CONTROL_LINE = 2 / 3
