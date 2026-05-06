@@ -3,7 +3,12 @@
 import { useRef, useEffect, useState } from "react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
-import { departments, getMembersByDepartment, TeamMember, timelineMilestones } from "@/lib/team-data"
+import {
+  departments,
+  getMembersByDepartment,
+  TeamMember,
+  timelineMilestones,
+} from "@/lib/team-data"
 import { useTranslation } from "@/lib/i18n"
 import type { TranslationKey } from "@/lib/translations"
 
@@ -38,8 +43,38 @@ function GitHubIcon({ className }: { className?: string }) {
 }
 
 function MemberCard({ member }: { member: TeamMember }) {
+  const cardRef = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = cardRef.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.15 }
+    )
+
+    observer.observe(el)
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <div className="flex flex-col">
+    <div
+      ref={cardRef}
+      className="flex flex-col"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(20px)",
+        transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
+      }}
+    >
       <div className="aspect-square w-full overflow-hidden rounded-2xl bg-[#d0d0d0]">
         {member.image ? (
           <img
@@ -63,8 +98,7 @@ function MemberCard({ member }: { member: TeamMember }) {
         <p className="text-base font-semibold text-[#1a1a2e]">{member.name}</p>
         <p className="text-sm font-medium text-[#243486]">{member.jobTitle}</p>
         <p className="mt-2 text-xs leading-relaxed text-[#555]">{member.bio}</p>
-        
-        {/* Social Links */}
+
         {member.links && (
           <div className="mt-3 flex items-center gap-2">
             {member.links.x && (
@@ -78,6 +112,7 @@ function MemberCard({ member }: { member: TeamMember }) {
                 <XIcon className="h-3.5 w-3.5" />
               </a>
             )}
+
             {member.links.linkedin && (
               <a
                 href={member.links.linkedin}
@@ -89,6 +124,7 @@ function MemberCard({ member }: { member: TeamMember }) {
                 <LinkedInIcon className="h-3.5 w-3.5" />
               </a>
             )}
+
             {member.links.github && (
               <a
                 href={member.links.github}
@@ -110,25 +146,23 @@ function MemberCard({ member }: { member: TeamMember }) {
 function DepartmentSection({ department }: { department: TeamMember["department"] }) {
   const members = getMembersByDepartment(department)
   const { t } = useTranslation()
+
   if (members.length === 0) return null
 
-  // First row has title in col-1 + up to 2 cards for advisors, 3 for leadership
   const isAdvisors = department === "Advisors"
   const firstRowCount = isAdvisors ? 2 : 3
   const firstRowCards = members.slice(0, firstRowCount)
   const remainingCards = members.slice(firstRowCount)
 
-  // Chunk remaining into rows of 4
   const remainingRows: TeamMember[][] = []
+
   for (let i = 0; i < remainingCards.length; i += 4) {
     remainingRows.push(remainingCards.slice(i, i + 4))
   }
 
   return (
     <div className="flex flex-col gap-8">
-      {/* First row: title cell + first cards */}
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {/* Title cell — aspect-square matches the headshot so title sits at its bottom edge */}
         <div className="hidden flex-col md:flex">
           <div className="flex aspect-square w-full items-end">
             <h2 className="text-3xl font-bold text-[#243486] md:text-4xl">
@@ -136,7 +170,7 @@ function DepartmentSection({ department }: { department: TeamMember["department"
             </h2>
           </div>
         </div>
-        {/* Mobile: plain title, no aspect-square needed */}
+
         <div className="flex flex-col md:hidden">
           <h2 className="text-3xl font-bold text-[#243486]">
             {t(departmentKeys[department])}
@@ -148,9 +182,11 @@ function DepartmentSection({ department }: { department: TeamMember["department"
         ))}
       </div>
 
-      {/* Overflow rows: full 4-col rows */}
       {remainingRows.map((row, rowIndex) => (
-        <div key={rowIndex} className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div
+          key={rowIndex}
+          className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        >
           {row.map((member) => (
             <MemberCard key={member.slug} member={member} />
           ))}
@@ -162,13 +198,21 @@ function DepartmentSection({ department }: { department: TeamMember["department"
 
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(false)
+
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)")
+
     setIsMobile(mq.matches)
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+
+    const handler = (event: MediaQueryListEvent) => {
+      setIsMobile(event.matches)
+    }
+
     mq.addEventListener("change", handler)
+
     return () => mq.removeEventListener("change", handler)
   }, [])
+
   return isMobile
 }
 
@@ -179,12 +223,12 @@ function VerticalTimeline() {
   const [visible, setVisible] = useState<boolean[]>(() => timelineMilestones.map(() => false))
   const [lineStyle, setLineStyle] = useState<{ top: number; height: number } | null>(null)
 
-  // Measure dot positions after render to get exact line coordinates
   useEffect(() => {
     const measure = () => {
       const container = containerRef.current
       const firstDot = dotRefs.current[0]
       const lastDot = dotRefs.current[timelineMilestones.length - 1]
+
       if (!container || !firstDot || !lastDot) return
 
       const containerTop = container.getBoundingClientRect().top
@@ -198,8 +242,10 @@ function VerticalTimeline() {
     }
 
     measure()
-    window.addEventListener('resize', measure)
-    return () => window.removeEventListener('resize', measure)
+
+    window.addEventListener("resize", measure)
+
+    return () => window.removeEventListener("resize", measure)
   }, [])
 
   useEffect(() => {
@@ -207,31 +253,33 @@ function VerticalTimeline() {
 
     itemRefs.current.forEach((el, index) => {
       if (!el) return
+
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
-            setVisible(prev => {
+            setVisible((prev) => {
               const next = [...prev]
               next[index] = true
               return next
             })
+
             observer.disconnect()
           }
         },
         { threshold: 0.3 }
       )
+
       observer.observe(el)
       observers.push(observer)
     })
 
-    return () => observers.forEach(o => o.disconnect())
+    return () => observers.forEach((observer) => observer.disconnect())
   }, [])
 
   const DOT_SIZE = 20
 
   return (
     <div ref={containerRef} className="relative px-6 py-12">
-      {/* Vertical axis line — measured from first dot center to last dot center */}
       {lineStyle && (
         <div
           className="absolute left-[calc(1.5rem+9px)] w-[2px] bg-[#243486]/15"
@@ -242,37 +290,44 @@ function VerticalTimeline() {
       <div className="flex flex-col gap-0">
         {timelineMilestones.map((milestone, index) => {
           const isVis = visible[index]
+
           return (
             <div
               key={milestone.quarter}
-              ref={el => { itemRefs.current[index] = el }}
+              ref={(el) => {
+                itemRefs.current[index] = el
+              }}
               className="relative flex items-start gap-6 py-8"
             >
-              {/* Dot on the vertical line */}
-              <div ref={el => { dotRefs.current[index] = el }} className="relative z-10 mt-1 shrink-0">
+              <div
+                ref={(el) => {
+                  dotRefs.current[index] = el
+                }}
+                className="relative z-10 mt-1 shrink-0"
+              >
                 <div
                   className="rounded-full"
                   style={{
                     width: DOT_SIZE,
                     height: DOT_SIZE,
-                    background: isVis ? '#243486' : 'rgba(36,52,134,0.15)',
-                    boxShadow: isVis ? '0 0 0 6px rgba(36,52,134,0.10)' : 'none',
-                    transition: 'background 0.4s ease-out, box-shadow 0.4s ease-out',
+                    background: isVis ? "#243486" : "rgba(36,52,134,0.15)",
+                    boxShadow: isVis ? "0 0 0 6px rgba(36,52,134,0.10)" : "none",
+                    transition: "background 0.4s ease-out, box-shadow 0.4s ease-out",
                   }}
                 />
               </div>
 
-              {/* Content */}
               <div
                 style={{
                   opacity: isVis ? 1 : 0,
-                  transform: isVis ? 'translateX(0)' : 'translateX(16px)',
-                  transition: 'opacity 0.45s ease-out, transform 0.45s ease-out',
+                  transform: isVis ? "translateX(0)" : "translateX(16px)",
+                  transition: "opacity 0.45s ease-out, transform 0.45s ease-out",
                 }}
               >
                 <span className="inline-block rounded-lg bg-[#e8eaf5] px-4 py-2 text-sm font-bold tracking-wide text-[#1a1a2e]">
                   {milestone.quarter}
                 </span>
+
                 <div className="mt-2 space-y-0.5">
                   {milestone.items.map((item, i) => (
                     <p key={i} className="text-base leading-snug text-[#555]">
@@ -303,32 +358,94 @@ function HorizontalTimeline() {
   const LOCK_SENSITIVITY = 0.001
   const RELEASE_EPSILON = 0.02
 
+  // Scrolling down: lock when the timeline reaches the lower third.
+  // Scrolling up: lock when the timeline reaches the upper third.
+  const DOWN_ACTIVATION_Y = 2 / 3
+  const UP_ACTIVATION_Y = 1 / 3
+
   useEffect(() => {
     progressRef.current = progress
   }, [progress])
 
   useEffect(() => {
     const wrapper = wrapperRef.current
+
     if (!wrapper) return
 
-    const isInActivationZone = () => {
+    const isInActivationZone = (direction: number) => {
       const rect = wrapper.getBoundingClientRect()
       const viewportHeight = window.innerHeight
-      const centerY = viewportHeight / 2
-      const tolerance = Math.min(80, viewportHeight * 0.1)
+
       const wrapperCenterY = rect.top + rect.height / 2
 
-      return Math.abs(wrapperCenterY - centerY) <= tolerance
+      const downTargetY = viewportHeight * DOWN_ACTIVATION_Y
+      const upTargetY = viewportHeight * UP_ACTIVATION_Y
+      const tolerance = Math.min(90, viewportHeight * 0.12)
+
+      const current = progressRef.current
+
+      const isNearDownTarget = Math.abs(wrapperCenterY - downTargetY) <= tolerance
+      const isNearUpTarget = Math.abs(wrapperCenterY - upTargetY) <= tolerance
+
+      const isBetweenActivationPoints =
+        wrapperCenterY >= upTargetY &&
+        wrapperCenterY <= downTargetY
+
+      // Normal entry from above:
+      // while scrolling down, lock near the lower third of the screen.
+      if (direction > 0 && isNearDownTarget) {
+        return true
+      }
+
+      // Normal entry from below:
+      // while scrolling up, lock near the upper third of the screen.
+      if (direction < 0 && isNearUpTarget) {
+        return true
+      }
+
+      // Edge case:
+      // after finishing the timeline and scrolling slightly past it,
+      // scrolling back up may happen while the timeline is still between
+      // the upper-third and lower-third trigger points.
+      // In that case, relock immediately.
+      if (
+        direction < 0 &&
+        current >= 1 - RELEASE_EPSILON &&
+        isBetweenActivationPoints
+      ) {
+        return true
+      }
+
+      // Symmetric edge case:
+      // after rewinding the timeline to the beginning and scrolling slightly above it,
+      // scrolling down again may happen while the timeline is still between
+      // the two trigger points.
+      // In that case, relock immediately.
+      if (
+        direction > 0 &&
+        current <= RELEASE_EPSILON &&
+        isBetweenActivationPoints
+      ) {
+        return true
+      }
+
+      return false
     }
 
     const stepProgress = (deltaY: number) => {
-      if (!isLockedRef.current && !isInActivationZone()) return false
+      const direction = Math.sign(deltaY)
+
+      if (direction === 0) return false
+
+      if (!isLockedRef.current && !isInActivationZone(direction)) {
+        return false
+      }
 
       const current = progressRef.current
-      const direction = Math.sign(deltaY)
       const next = Math.max(0, Math.min(1, current + deltaY * LOCK_SENSITIVITY))
 
-      // Near boundaries, snap and release immediately to avoid sticky/laggy handoff.
+      // Timeline complete while scrolling down:
+      // release normal page scroll.
       if (direction > 0 && current >= 1 - RELEASE_EPSILON) {
         progressRef.current = 1
         setProgress(1)
@@ -336,6 +453,8 @@ function HorizontalTimeline() {
         return false
       }
 
+      // Timeline back at the start while scrolling up:
+      // release normal page scroll.
       if (direction < 0 && current <= RELEASE_EPSILON) {
         progressRef.current = 0
         setProgress(0)
@@ -357,6 +476,7 @@ function HorizontalTimeline() {
 
     const handleWheel = (event: WheelEvent) => {
       const consumed = stepProgress(event.deltaY)
+
       if (consumed) {
         event.preventDefault()
       }
@@ -368,8 +488,10 @@ function HorizontalTimeline() {
 
     const handleTouchMove = (event: TouchEvent) => {
       if (touchStartYRef.current == null) return
+
       const currentTouchY = event.touches[0]?.clientY
-      if (typeof currentTouchY !== 'number') return
+
+      if (typeof currentTouchY !== "number") return
 
       const deltaY = touchStartYRef.current - currentTouchY
       const consumed = stepProgress(deltaY)
@@ -385,16 +507,16 @@ function HorizontalTimeline() {
       touchStartYRef.current = null
     }
 
-    window.addEventListener('wheel', handleWheel, { passive: false })
-    window.addEventListener('touchstart', handleTouchStart, { passive: true })
-    window.addEventListener('touchmove', handleTouchMove, { passive: false })
-    window.addEventListener('touchend', handleTouchEnd, { passive: true })
+    window.addEventListener("wheel", handleWheel, { passive: false })
+    window.addEventListener("touchstart", handleTouchStart, { passive: true })
+    window.addEventListener("touchmove", handleTouchMove, { passive: false })
+    window.addEventListener("touchend", handleTouchEnd, { passive: true })
 
     return () => {
-      window.removeEventListener('wheel', handleWheel)
-      window.removeEventListener('touchstart', handleTouchStart)
-      window.removeEventListener('touchmove', handleTouchMove)
-      window.removeEventListener('touchend', handleTouchEnd)
+      window.removeEventListener("wheel", handleWheel)
+      window.removeEventListener("touchstart", handleTouchStart)
+      window.removeEventListener("touchmove", handleTouchMove)
+      window.removeEventListener("touchend", handleTouchEnd)
     }
   }, [])
 
@@ -402,7 +524,7 @@ function HorizontalTimeline() {
   const activeIndex = Math.min(total - 1, Math.floor(progress * (total - 1) + 0.25))
 
   return (
-    <div ref={wrapperRef} className="relative py-20 md:py-28">
+    <div ref={wrapperRef} className="relative py-16 md:py-20">
       <div className="relative overflow-hidden">
         {/* Horizontal axis line */}
         <div className="absolute left-0 right-0 top-1/2 h-[2px] -translate-y-1/2 bg-[#243486]/15" />
@@ -432,12 +554,13 @@ function HorizontalTimeline() {
                       style={{
                         opacity: visibility,
                         transform: `translateY(${(1 - visibility) * -12}px)`,
-                        transition: 'opacity 0.2s ease-out, transform 0.25s ease-out',
+                        transition: "opacity 0.2s ease-out, transform 0.25s ease-out",
                       }}
                     >
                       <span className="mb-3 inline-block rounded-lg bg-[#e8eaf5] px-5 py-2.5 text-base font-bold tracking-wide text-[#1a1a2e]">
                         {milestone.quarter}
                       </span>
+
                       {milestone.items.map((item, i) => (
                         <p key={i} className="max-w-[400px] text-lg leading-snug text-[#555]">
                           {item}
@@ -451,7 +574,7 @@ function HorizontalTimeline() {
                   {isTop && (
                     <div
                       className="absolute bottom-full h-5 w-px bg-[#243486]/25"
-                      style={{ opacity: visibility, transition: 'opacity 0.2s ease-out' }}
+                      style={{ opacity: visibility, transition: "opacity 0.2s ease-out" }}
                     />
                   )}
 
@@ -460,17 +583,17 @@ function HorizontalTimeline() {
                     style={{
                       width: isCurrent ? 16 : 12,
                       height: isCurrent ? 16 : 12,
-                      background: isVisible ? '#243486' : 'rgba(36,52,134,0.2)',
-                      boxShadow: isCurrent ? '0 0 0 6px rgba(36,52,134,0.12)' : 'none',
+                      background: isVisible ? "#243486" : "rgba(36,52,134,0.2)",
+                      boxShadow: isCurrent ? "0 0 0 6px rgba(36,52,134,0.12)" : "none",
                       opacity: Math.max(0.25, visibility),
-                      transition: 'all 0.2s ease-out',
+                      transition: "all 0.2s ease-out",
                     }}
                   />
 
                   {!isTop && (
                     <div
                       className="absolute top-full h-5 w-px bg-[#243486]/25"
-                      style={{ opacity: visibility, transition: 'opacity 0.2s ease-out' }}
+                      style={{ opacity: visibility, transition: "opacity 0.2s ease-out" }}
                     />
                   )}
                 </div>
@@ -482,7 +605,7 @@ function HorizontalTimeline() {
                       style={{
                         opacity: visibility,
                         transform: `translateY(${(1 - visibility) * 12}px)`,
-                        transition: 'opacity 0.2s ease-out, transform 0.25s ease-out',
+                        transition: "opacity 0.2s ease-out, transform 0.25s ease-out",
                       }}
                     >
                       {milestone.items.map((item, i) => (
@@ -490,6 +613,7 @@ function HorizontalTimeline() {
                           {item}
                         </p>
                       ))}
+
                       <span className="mt-3 inline-block rounded-lg bg-[#e8eaf5] px-5 py-2.5 text-base font-bold tracking-wide text-[#1a1a2e]">
                         {milestone.quarter}
                       </span>
@@ -500,8 +624,6 @@ function HorizontalTimeline() {
             )
           })}
         </div>
-
-
       </div>
     </div>
   )
@@ -509,27 +631,77 @@ function HorizontalTimeline() {
 
 function TimelineSection() {
   const isMobile = useIsMobile()
-  // Render nothing until hydrated so we don't flash the wrong variant
   const [hydrated, setHydrated] = useState(false)
-  useEffect(() => setHydrated(true), [])
+
+  useEffect(() => {
+    setHydrated(true)
+  }, [])
+
   if (!hydrated) return <div className="h-64" />
+
   return isMobile ? <VerticalTimeline /> : <HorizontalTimeline />
 }
 
-export function TeamPageContent() {
-  const { t } = useTranslation()
+function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const [videoReady, setVideoReady] = useState(false)
 
-  // Best practice for autoplay: muted + playsinline for mobile compatibility
   useEffect(() => {
     const video = videoRef.current
-    if (video) {
-      video.play().catch(() => {
-        // Autoplay was prevented, video will show first frame
-      })
+
+    if (!video) return
+
+    const startVideo = async () => {
+      try {
+        video.muted = true
+        video.playsInline = true
+        await video.play()
+      } catch {
+        // Autoplay may fail on some devices. Native controls remain available.
+      }
     }
+
+    startVideo()
   }, [])
 
+  return (
+    <div className="mt-8 overflow-hidden rounded-2xl bg-[#1a1a2e]">
+      <div className="relative aspect-video w-full">
+        <img
+          src="/team/hero-poster.jpg"
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+
+        {!videoReady && (
+          <div className="absolute inset-0 bg-black/10 backdrop-blur-[1px]" />
+        )}
+
+        <video
+          ref={videoRef}
+          className="relative h-full w-full object-cover transition-opacity duration-500"
+          style={{
+            opacity: videoReady ? 1 : 0,
+          }}
+          controls
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster="/team/hero-poster.jpg"
+          onLoadedData={() => setVideoReady(true)}
+          onCanPlay={() => setVideoReady(true)}
+        >
+          <source src="/team/hero-video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  )
+}
+
+export function TeamPageContent() {
   return (
     <div className="relative min-h-screen bg-[#f9f9f9]">
       {/* Background artwork */}
@@ -559,41 +731,13 @@ export function TeamPageContent() {
             <p className="text-sm font-bold uppercase tracking-widest text-[#4866f7] md:text-base">
               SHIPPING ETHEREUM INFRASTRUCTURE SINCE 2014
             </p>
+
             <h1 className="mt-3 text-4xl font-bold leading-tight text-[#243486] md:text-5xl lg:text-6xl">
-              Building for Ethereum Before It<br className="hidden sm:block" /> Existed.
+              Building for Ethereum Before It
+              <br className="hidden sm:block" /> Existed.
             </h1>
 
-            {/* Video Section */}
-            <div className="mt-8 overflow-hidden rounded-2xl bg-[#1a1a2e]">
-              <div className="relative aspect-video w-full">
-                {/* Video element - ready for H.264 upload */}
-                <video
-                  ref={videoRef}
-                  className="h-full w-full object-cover"
-                  muted
-                  loop
-                  playsInline
-                  autoPlay
-                  preload="metadata"
-                  poster="/team/hero-poster.jpg"
-                >
-                  {/* H.264 video source will be added here */}
-                  <source src="/team/hero-video.mp4" type="video/mp4" />
-                </video>
-                {/* Play button overlay - shown when video is paused */}
-                <button 
-                  className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity hover:opacity-100"
-                  onClick={() => videoRef.current?.play()}
-                  aria-label="Play video"
-                >
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/90">
-                    <svg className="ml-1 h-6 w-6 text-[#1a1a2e]" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </div>
-                </button>
-              </div>
-            </div>
+            <HeroVideo />
 
             {/* Description text */}
             <p className="mt-8 text-sm leading-relaxed text-[#555] md:text-base">
@@ -603,7 +747,7 @@ export function TeamPageContent() {
         </div>
 
         {/* Timeline Section - full width */}
-        <div className="mb-16 mt-16 md:mb-44 md:mt-24">
+        <div className="mb-16 mt-16 md:mb-24 md:mt-24">
           <TimelineSection />
         </div>
 
