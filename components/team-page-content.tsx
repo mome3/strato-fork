@@ -21,7 +21,6 @@ import type { TranslationKey } from "@/lib/translations"
 
 const departmentKeys: Record<TeamMember["department"], TranslationKey> = {
   Leadership: "team.leadership",
-  "Team Members": "team.teamMembers",
   Advisors: "team.advisors",
 }
 
@@ -152,10 +151,10 @@ function MemberCard({ member }: { member: TeamMember }) {
         </div>
 
         <div className="mt-4">
-          <p className="text-base font-semibold text-[#1a1a2e]">
+          <p className="text-sm font-semibold text-[#1a1a2e] md:text-base">
             {member.name}
           </p>
-          <p className="text-sm font-medium text-[#243486]">
+          <p className="text-xs font-medium text-[#243486] md:text-sm">
             {member.jobTitle}
           </p>
 
@@ -230,36 +229,48 @@ function DepartmentSection({
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        <FadeIn className="hidden flex-col md:flex">
-          <div className="flex aspect-square w-full items-end">
-            <h2 className="text-3xl font-bold text-[#243486] md:text-4xl">
-              {t(departmentKeys[department])}
-            </h2>
-          </div>
-        </FadeIn>
-
-        <FadeIn className="flex flex-col md:hidden">
+      {/* Mobile layout: simple continuous 2-column grid */}
+      <div className="md:hidden">
+        <FadeIn className="mb-8">
           <h2 className="text-3xl font-bold text-[#243486]">
             {t(departmentKeys[department])}
           </h2>
         </FadeIn>
 
-        {firstRowCards.map((member) => (
-          <MemberCard key={member.slug} member={member} />
-        ))}
-      </div>
-
-      {remainingRows.map((row, rowIndex) => (
-        <div
-          key={rowIndex}
-          className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-        >
-          {row.map((member) => (
+        <div className="grid grid-cols-2 gap-5">
+          {members.map((member) => (
             <MemberCard key={member.slug} member={member} />
           ))}
         </div>
-      ))}
+      </div>
+
+      {/* Desktop layout: keeps the original heading-inside-grid design */}
+      <div className="hidden flex-col gap-8 md:flex">
+        <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-4">
+          <FadeIn className="flex flex-col">
+            <div className="flex aspect-square w-full items-end">
+              <h2 className="text-3xl font-bold text-[#243486] md:text-4xl">
+                {t(departmentKeys[department])}
+              </h2>
+            </div>
+          </FadeIn>
+
+          {firstRowCards.map((member) => (
+            <MemberCard key={member.slug} member={member} />
+          ))}
+        </div>
+
+        {remainingRows.map((row, rowIndex) => (
+          <div
+            key={rowIndex}
+            className="grid gap-8 md:grid-cols-3 lg:grid-cols-4"
+          >
+            {row.map((member) => (
+              <MemberCard key={member.slug} member={member} />
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
