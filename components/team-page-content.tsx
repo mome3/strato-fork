@@ -481,80 +481,42 @@ function HorizontalTimeline() {
   const SLOT_WIDTH = 520
   const maxTranslate = (total - 1) * SLOT_WIDTH
 
-  const LOCK_SENSITIVITY = 0.0007
+  const LOCK_SENSITIVITY = 0.001
   const RELEASE_EPSILON = 0.02
-
-  const DOWN_CONTROL_LINE = 2 / 3
-  const UP_CONTROL_LINE = 1 / 3
-  const MIN_VISIBLE_PIXELS = 120
 
   useEffect(() => {
     progressRef.current = progress
   }, [progress])
 
   useEffect(() => {
-    const canTimelineControlScroll = (direction: number) => {
-      const section = sectionRef.current
+    const section = sectionRef.current
 
-      if (!section) return false
-
-      const rect = section.getBoundingClientRect()
-      const viewportHeight = window.innerHeight
-      const current = progressRef.current
-
-      const visiblePixels = Math.max(
-        0,
-        Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0)
-      )
-
-      const isMeaningfullyVisible =
-        visiblePixels >= Math.min(MIN_VISIBLE_PIXELS, rect.height * 0.35)
-
-      if (!isMeaningfullyVisible) return false
-
-      if (direction > 0) {
-        if (current >= 1 - RELEASE_EPSILON) return false
-
-        const controlY = viewportHeight * DOWN_CONTROL_LINE
-        return rect.top <= controlY && rect.bottom >= controlY
-      }
-
-      if (direction < 0) {
-        if (current <= RELEASE_EPSILON) return false
-
-        const controlY = viewportHeight * UP_CONTROL_LINE
-        return rect.top <= controlY && rect.bottom >= controlY
-      }
-
-      return false
-    }
+    if (!section) return
 
     const stepProgress = (deltaY: number) => {
       const direction = Math.sign(deltaY)
 
       if (direction === 0) return false
-      if (!canTimelineControlScroll(direction)) return false
 
       const current = progressRef.current
-      const nextRaw = current + deltaY * LOCK_SENSITIVITY
 
-      const next = Math.max(0, Math.min(1, nextRaw))
-
-      const reachedEnd = direction > 0 && next >= 1 - RELEASE_EPSILON
-      const reachedStart = direction < 0 && next <= RELEASE_EPSILON
-
-      const finalProgress = reachedEnd ? 1 : reachedStart ? 0 : next
-
-      if (finalProgress !== current) {
-        progressRef.current = finalProgress
-        setProgress(finalProgress)
+      if (direction > 0 && current >= 1 - RELEASE_EPSILON) {
+        progressRef.current = 1
+        setProgress(1)
+        return false
       }
 
-      // This is the important part:
-      // when the event completes the timeline, do NOT block that same event.
-      // Let the page scroll continue immediately.
-      if (reachedEnd || reachedStart) {
+      if (direction < 0 && current <= RELEASE_EPSILON) {
+        progressRef.current = 0
+        setProgress(0)
         return false
+      }
+
+      const next = Math.max(0, Math.min(1, current + deltaY * LOCK_SENSITIVITY))
+
+      if (next !== current) {
+        progressRef.current = next
+        setProgress(next)
       }
 
       return true
@@ -593,16 +555,16 @@ function HorizontalTimeline() {
       touchStartYRef.current = null
     }
 
-    window.addEventListener("wheel", handleWheel, { passive: false })
-    window.addEventListener("touchstart", handleTouchStart, { passive: true })
-    window.addEventListener("touchmove", handleTouchMove, { passive: false })
-    window.addEventListener("touchend", handleTouchEnd, { passive: true })
+    section.addEventListener("wheel", handleWheel, { passive: false })
+    section.addEventListener("touchstart", handleTouchStart, { passive: true })
+    section.addEventListener("touchmove", handleTouchMove, { passive: false })
+    section.addEventListener("touchend", handleTouchEnd, { passive: true })
 
     return () => {
-      window.removeEventListener("wheel", handleWheel)
-      window.removeEventListener("touchstart", handleTouchStart)
-      window.removeEventListener("touchmove", handleTouchMove)
-      window.removeEventListener("touchend", handleTouchEnd)
+      section.removeEventListener("wheel", handleWheel)
+      section.removeEventListener("touchstart", handleTouchStart)
+      section.removeEventListener("touchmove", handleTouchMove)
+      section.removeEventListener("touchend", handleTouchEnd)
     }
   }, [])
 
@@ -777,7 +739,9 @@ function HeroVideo() {
       }
     }
 
-    startVideo()
+    const timeout = window.setTimeout(startVideo, 250)
+
+    return () => window.clearTimeout(timeout)
   }, [])
 
   return (
@@ -804,7 +768,7 @@ function HeroVideo() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           poster="/team/hero-poster.jpg"
           onLoadedData={() => setVideoReady(true)}
           onCanPlay={() => setVideoReady(true)}
