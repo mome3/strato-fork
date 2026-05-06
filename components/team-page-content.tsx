@@ -297,27 +297,24 @@ function DepartmentSection({
   )
 }
 
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(() => {
-    if (typeof window === "undefined") return false
-    return window.matchMedia("(max-width: 767px)").matches
-  })
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false)
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)")
+    const mq = window.matchMedia("(min-width: 768px)")
 
-    setIsMobile(mq.matches)
-
-    const handler = (event: MediaQueryListEvent) => {
-      setIsMobile(event.matches)
+    const update = () => {
+      setIsDesktop(mq.matches)
     }
 
-    mq.addEventListener("change", handler)
+    update()
 
-    return () => mq.removeEventListener("change", handler)
+    mq.addEventListener("change", update)
+
+    return () => mq.removeEventListener("change", update)
   }, [])
 
-  return isMobile
+  return isDesktop
 }
 
 function VerticalTimeline() {
@@ -472,10 +469,12 @@ function VerticalTimeline() {
 }
 
 function HorizontalTimeline() {
-  const sectionRef = useRef<HTMLDivElement>(null)
+  const wrapperRef = useRef<HTMLDivElement>(null)
   const [progress, setProgress] = useState(0)
   const progressRef = useRef(0)
+  const isLockedRef = useRef(false)
   const touchStartYRef = useRef<number | null>(null)
+  const isDesktop = useIsDesktop()
 
   const total = timelineMilestones.length
   const SLOT_WIDTH = 520
@@ -484,35 +483,94 @@ function HorizontalTimeline() {
   const LOCK_SENSITIVITY = 0.001
   const RELEASE_EPSILON = 0.02
 
+  const DOWN_ACTIVATION_Y = 2 / 3
+  const UP_ACTIVATION_Y = 1 / 3
+
   useEffect(() => {
     progressRef.current = progress
   }, [progress])
 
   useEffect(() => {
-    const section = sectionRef.current
+    if (!isDesktop) {
+      isLockedRef.current = false
+      touchStartYRef.current = null
+      return
+    }
 
-    if (!section) return
+    const wrapper = wrapperRef.current
+
+    if (!wrapper) return
+
+    const isInActivationZone = (direction: number) => {
+      const rect = wrapper.getBoundingClientRect()
+      const viewportHeight = window.innerHeight
+
+      const wrapperCenterY = rect.top + rect.height / 2
+      const current = progressRef.current
+
+      const downTargetY = viewportHeight * DOWN_ACTIVATION_Y
+      const upTargetY = viewportHeight * UP_ACTIVATION_Y
+
+      const tolerance = Math.min(120, viewportHeight * 0.14)
+
+      const isNearDownTarget =
+        Math.abs(wrapperCenterY - downTargetY) <= tolerance
+
+      const isNearUpTarget =
+        Math.abs(wrapperCenterY - upTargetY) <= tolerance
+
+      if (direction > 0) {
+        return current < 1 - RELEASE_EPSILON && isNearDownTarget
+      }
+
+      if (direction < 0) {
+        return current > RELEASE_EPSILON && isNearUpTarget
+      }
+
+      return false
+    }
+
+    const releaseIfAtEdge = (direction: number) => {
+      const current = progressRef.current
+
+      if (direction > 0 && current >= 1 - RELEASE_EPSILON) {
+        progressRef.current = 1
+        setProgress(1)
+        isLockedRef.current = false
+        return true
+      }
+
+      if (direction < 0 && current <= RELEASE_EPSILON) {
+        progressRef.current = 0
+        setProgress(0)
+        isLockedRef.current = false
+        return true
+      }
+
+      return false
+    }
 
     const stepProgress = (deltaY: number) => {
       const direction = Math.sign(deltaY)
 
       if (direction === 0) return false
 
+      if (releaseIfAtEdge(direction)) {
+        return false
+      }
+
+      if (!isLockedRef.current && !isInActivationZone(direction)) {
+        return false
+      }
+
+      isLockedRef.current = true
+
       const current = progressRef.current
 
-      if (direction > 0 && current >= 1 - RELEASE_EPSILON) {
-        progressRef.current = 1
-        setProgress(1)
-        return false
-      }
-
-      if (direction < 0 && current <= RELEASE_EPSILON) {
-        progressRef.current = 0
-        setProgress(0)
-        return false
-      }
-
-      const next = Math.max(0, Math.min(1, current + deltaY * LOCK_SENSITIVITY))
+      const next = Math.max(
+        0,
+        Math.min(1, current + deltaY * LOCK_SENSITIVITY)
+      )
 
       if (next !== current) {
         progressRef.current = next
@@ -555,28 +613,32 @@ function HorizontalTimeline() {
       touchStartYRef.current = null
     }
 
-    section.addEventListener("wheel", handleWheel, { passive: false })
-    section.addEventListener("touchstart", handleTouchStart, { passive: true })
-    section.addEventListener("touchmove", handleTouchMove, { passive: false })
-    section.addEventListener("touchend", handleTouchEnd, { passive: true })
+    window.addEventListener("wheel", handleWheel, { passive: false })
+    window.addEventListener("touchstart", handleTouchStart, { passive: true })
+    window.addEventListener("touchmove", handleTouchMove, { passive: false })
+    window.addEventListener("touchend", handleTouchEnd, { passive: true })
 
     return () => {
-      section.removeEventListener("wheel", handleWheel)
-      section.removeEventListener("touchstart", handleTouchStart)
-      section.removeEventListener("touchmove", handleTouchMove)
-      section.removeEventListener("touchend", handleTouchEnd)
+      window.removeEventListener("wheel", handleWheel)
+      window.removeEventListener("touchstart", handleTouchStart)
+      window.removeEventListener("touchmove", handleTouchMove)
+      window.removeEventListener("touchend", handleTouchEnd)
+
+      isLockedRef.current = false
+      touchStartYRef.current = null
     }
-  }, [])
+  }, [isDesktop])
 
   const translateX = progress * maxTranslate
+
   const activeIndex = Math.min(
     total - 1,
     Math.floor(progress * (total - 1) + 0.25)
   )
 
   return (
-    <div ref={sectionRef} className="relative py-16 md:py-20">
-      <FadeIn className="relative" threshold={0.1}>
+    <FadeIn className="relative py-16 md:py-20" threshold={0.1}>
+      <div ref={wrapperRef} className="relative">
         <div className="relative overflow-hidden">
           <div className="absolute left-0 right-0 top-1/2 h-[2px] -translate-y-1/2 bg-[#243486]/15" />
 
@@ -587,10 +649,12 @@ function HorizontalTimeline() {
             {timelineMilestones.map((milestone, index) => {
               const isTop = milestone.position === "top"
               const milestoneProgress = progress * total
+
               const visibility = Math.min(
                 1,
                 Math.max(0, milestoneProgress - index + 0.8)
               )
+
               const isVisible = visibility > 0.1
               const isCurrent = index === activeIndex
 
@@ -696,27 +760,24 @@ function HorizontalTimeline() {
             })}
           </div>
         </div>
-      </FadeIn>
-    </div>
+      </div>
+    </FadeIn>
   )
 }
 
 function TimelineSection() {
-  const isMobile = useIsMobile()
-  const [hydrated, setHydrated] = useState(false)
+  return (
+    <>
+      <div className="md:hidden">
+        <FadeIn threshold={0.1}>
+          <VerticalTimeline />
+        </FadeIn>
+      </div>
 
-  useEffect(() => {
-    setHydrated(true)
-  }, [])
-
-  if (!hydrated) return <div className="h-64" />
-
-  return isMobile ? (
-    <FadeIn threshold={0.1}>
-      <VerticalTimeline />
-    </FadeIn>
-  ) : (
-    <HorizontalTimeline />
+      <div className="hidden md:block">
+        <HorizontalTimeline />
+      </div>
+    </>
   )
 }
 
