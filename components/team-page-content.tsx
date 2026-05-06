@@ -13,6 +13,7 @@ import { Footer } from "@/components/footer"
 import {
   departments,
   getMembersByDepartment,
+  timelineMilestones,
 } from "@/lib/team-data"
 import type { TeamMember } from "@/lib/team-data"
 import { useTranslation } from "@/lib/i18n"
@@ -28,7 +29,6 @@ function FadeIn({
   children,
   className = "",
   delay = 0,
-  threshold = 0.15,
   y = 20,
   style,
 }: {
@@ -39,49 +39,17 @@ function FadeIn({
   y?: number
   style?: CSSProperties
 }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-
-    if (!el) return
-
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches
-
-    if (prefersReducedMotion) {
-      setVisible(true)
-      return
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold }
-    )
-
-    observer.observe(el)
-
-    return () => observer.disconnect()
-  }, [threshold])
-
   return (
     <div
-      ref={ref}
       className={className}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : `translateY(${y}px)`,
-        transition: `opacity 0.5s ease-out ${delay}ms, transform 0.5s ease-out ${delay}ms`,
-        willChange: visible ? "auto" : "opacity, transform",
-        ...style,
-      }}
+      style={
+        {
+          "--fade-y": `${y}px`,
+          "--fade-delay": `${delay}ms`,
+          animation: "teamFadeIn 0.5s ease-out var(--fade-delay) both",
+          ...style,
+        } as CSSProperties
+      }
     >
       {children}
     </div>
@@ -296,6 +264,490 @@ function DepartmentSection({
   )
 }
 
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)")
+
+    const update = () => {
+      setIsDesktop(mq.matches)
+    }
+
+    update()
+
+    mq.addEventListener("change", update)
+
+    return () => mq.removeEventListener("change", update)
+  }, [])
+
+  return isDesktop
+}
+
+function VerticalTimeline() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const dotRefs = useRef<(HTMLDivElement | null)[]>([])
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([])
+  const [visible, setVisible] = useState<boolean[]>(() =>
+    timelineMilestones.map(() => false)
+  )
+  const [lineStyle, setLineStyle] = useState<{
+    top: number
+    height: number
+  } | null>(null)
+
+  useEffect(() => {
+    const measure = () => {
+      const container = containerRef.current
+      const firstDot = dotRefs.current[0]
+      const lastDot = dotRefs.current[timelineMilestones.length - 1]
+
+      if (!container || !firstDot || !lastDot) return
+
+      const containerTop = container.getBoundingClientRect().top
+      const firstRect = firstDot.getBoundingClientRect()
+      const lastRect = lastDot.getBoundingClientRect()
+
+      const top = firstRect.top + firstRect.height / 2 - containerTop
+      const height = lastRect.top + lastRect.height / 2 - containerTop - top
+
+      setLineStyle({ top, height })
+    }
+
+    measure()
+
+    window.addEventListener("resize", measure)
+
+    return () => window.removeEventListener("resize", measure)
+  }, [])
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = []
+
+    itemRefs.current.forEach((el, index) => {
+      if (!el) return
+
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches
+
+      if (prefersReducedMotion) {
+        setVisible((prev) => {
+          const next = [...prev]
+          next[index] = true
+          return next
+        })
+        return
+      }
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setVisible((prev) => {
+              const next = [...prev]
+              next[index] = true
+              return next
+            })
+
+            observer.disconnect()
+          }
+        },
+        { threshold: 0.3 }
+      )
+
+      observer.observe(el)
+      observers.push(observer)
+    })
+
+    return () => observers.forEach((observer) => observer.disconnect())
+  }, [])
+
+  const DOT_SIZE = 20
+
+  return (
+    <div ref={containerRef} className="relative px-6 py-12">
+      {lineStyle && (
+        <div
+          className="absolute left-[calc(1.5rem+9px)] w-[2px] bg-[#243486]/15"
+          style={{ top: lineStyle.top, height: lineStyle.height }}
+        />
+      )}
+
+      <div className="flex flex-col gap-0">
+        {timelineMilestones.map((milestone, index) => {
+          const isVis = visible[index]
+
+          return (
+            <div
+              key={milestone.quarter}
+              ref={(el) => {
+                itemRefs.current[index] = el
+              }}
+              className="relative flex items-start gap-6 py-8"
+            >
+              <div
+                ref={(el) => {
+                  dotRefs.current[index] = el
+                }}
+                className="relative z-10 mt-1 shrink-0"
+              >
+                <div
+                  className="rounded-full"
+                  style={{
+                    width: DOT_SIZE,
+                    height: DOT_SIZE,
+                    background: isVis ? "#243486" : "rgba(36,52,134,0.15)",
+                    boxShadow: isVis
+                      ? "0 0 0 6px rgba(36,52,134,0.10)"
+                      : "none",
+                    transition:
+                      "background 0.4s ease-out, box-shadow 0.4s ease-out",
+                  }}
+                />
+              </div>
+
+              <div
+                style={{
+                  opacity: isVis ? 1 : 0,
+                  transform: isVis ? "translateY(0)" : "translateY(20px)",
+                  transition:
+                    "opacity 0.5s ease-out, transform 0.5s ease-out",
+                  willChange: isVis ? "auto" : "opacity, transform",
+                }}
+              >
+                <span className="inline-block rounded-lg bg-[#e8eaf5] px-4 py-2 text-sm font-bold tracking-wide text-[#1a1a2e]">
+                  {milestone.quarter}
+                </span>
+
+                <div className="mt-2 space-y-0.5">
+                  {milestone.items.map((item, i) => (
+                    <p key={i} className="text-base leading-snug text-[#555]">
+                      {item}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+function HorizontalTimeline() {
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const [progress, setProgress] = useState(0)
+  const progressRef = useRef(0)
+  const isLockedRef = useRef(false)
+  const touchStartYRef = useRef<number | null>(null)
+  const isDesktop = useIsDesktop()
+
+  const total = timelineMilestones.length
+  const SLOT_WIDTH = 520
+  const maxTranslate = (total - 1) * SLOT_WIDTH
+
+  const LOCK_SENSITIVITY = 0.001
+  const RELEASE_EPSILON = 0.02
+
+  const DOWN_ACTIVATION_Y = 2 / 3
+  const UP_ACTIVATION_Y = 1 / 3
+
+  useEffect(() => {
+    progressRef.current = progress
+  }, [progress])
+
+  useEffect(() => {
+    if (!isDesktop) {
+      isLockedRef.current = false
+      touchStartYRef.current = null
+      return
+    }
+
+    const wrapper = wrapperRef.current
+
+    if (!wrapper) return
+
+    const isInActivationZone = (direction: number) => {
+      const rect = wrapper.getBoundingClientRect()
+      const viewportHeight = window.innerHeight
+
+      const wrapperCenterY = rect.top + rect.height / 2
+      const current = progressRef.current
+
+      const downTargetY = viewportHeight * DOWN_ACTIVATION_Y
+      const upTargetY = viewportHeight * UP_ACTIVATION_Y
+
+      const tolerance = Math.min(120, viewportHeight * 0.14)
+
+      const isNearDownTarget =
+        Math.abs(wrapperCenterY - downTargetY) <= tolerance
+
+      const isNearUpTarget =
+        Math.abs(wrapperCenterY - upTargetY) <= tolerance
+
+      if (direction > 0) {
+        return current < 1 - RELEASE_EPSILON && isNearDownTarget
+      }
+
+      if (direction < 0) {
+        return current > RELEASE_EPSILON && isNearUpTarget
+      }
+
+      return false
+    }
+
+    const releaseIfAtEdge = (direction: number) => {
+      const current = progressRef.current
+
+      if (direction > 0 && current >= 1 - RELEASE_EPSILON) {
+        progressRef.current = 1
+        setProgress(1)
+        isLockedRef.current = false
+        return true
+      }
+
+      if (direction < 0 && current <= RELEASE_EPSILON) {
+        progressRef.current = 0
+        setProgress(0)
+        isLockedRef.current = false
+        return true
+      }
+
+      return false
+    }
+
+    const stepProgress = (deltaY: number) => {
+      const direction = Math.sign(deltaY)
+
+      if (direction === 0) return false
+
+      if (releaseIfAtEdge(direction)) {
+        return false
+      }
+
+      if (!isLockedRef.current && !isInActivationZone(direction)) {
+        return false
+      }
+
+      isLockedRef.current = true
+
+      const current = progressRef.current
+
+      const next = Math.max(
+        0,
+        Math.min(1, current + deltaY * LOCK_SENSITIVITY)
+      )
+
+      if (next !== current) {
+        progressRef.current = next
+        setProgress(next)
+      }
+
+      return true
+    }
+
+    const handleWheel = (event: WheelEvent) => {
+      const consumed = stepProgress(event.deltaY)
+
+      if (consumed) {
+        event.preventDefault()
+      }
+    }
+
+    const handleTouchStart = (event: TouchEvent) => {
+      touchStartYRef.current = event.touches[0]?.clientY ?? null
+    }
+
+    const handleTouchMove = (event: TouchEvent) => {
+      if (touchStartYRef.current == null) return
+
+      const currentTouchY = event.touches[0]?.clientY
+
+      if (typeof currentTouchY !== "number") return
+
+      const deltaY = touchStartYRef.current - currentTouchY
+      const consumed = stepProgress(deltaY)
+
+      if (consumed) {
+        event.preventDefault()
+      }
+
+      touchStartYRef.current = currentTouchY
+    }
+
+    const handleTouchEnd = () => {
+      touchStartYRef.current = null
+    }
+
+    window.addEventListener("wheel", handleWheel, { passive: false })
+    window.addEventListener("touchstart", handleTouchStart, { passive: true })
+    window.addEventListener("touchmove", handleTouchMove, { passive: false })
+    window.addEventListener("touchend", handleTouchEnd, { passive: true })
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel)
+      window.removeEventListener("touchstart", handleTouchStart)
+      window.removeEventListener("touchmove", handleTouchMove)
+      window.removeEventListener("touchend", handleTouchEnd)
+
+      isLockedRef.current = false
+      touchStartYRef.current = null
+    }
+  }, [isDesktop])
+
+  const translateX = progress * maxTranslate
+
+  const activeIndex = Math.min(
+    total - 1,
+    Math.floor(progress * (total - 1) + 0.25)
+  )
+
+  return (
+    <FadeIn className="relative py-16 md:py-20" threshold={0.1}>
+      <div ref={wrapperRef} className="relative">
+        <div className="relative overflow-hidden">
+          <div className="absolute left-0 right-0 top-1/2 h-[2px] -translate-y-1/2 bg-[#243486]/15" />
+
+          <div
+            className="flex items-center pl-[50vw] will-change-transform"
+            style={{ transform: `translateX(-${translateX}px)` }}
+          >
+            {timelineMilestones.map((milestone, index) => {
+              const isTop = milestone.position === "top"
+              const milestoneProgress = progress * total
+
+              const visibility = Math.min(
+                1,
+                Math.max(0, milestoneProgress - index + 0.8)
+              )
+
+              const isVisible = visibility > 0.1
+              const isCurrent = index === activeIndex
+
+              return (
+                <div
+                  key={milestone.quarter}
+                  className="relative flex shrink-0 flex-col items-center"
+                  style={{ width: SLOT_WIDTH }}
+                >
+                  <div className="flex h-64 flex-col items-center justify-end pb-8">
+                    {isTop && (
+                      <div
+                        className="flex flex-col items-center text-center"
+                        style={{
+                          opacity: visibility,
+                          transform: `translateY(${(1 - visibility) * 20}px)`,
+                          transition:
+                            "opacity 0.5s ease-out, transform 0.5s ease-out",
+                        }}
+                      >
+                        <span className="mb-3 inline-block rounded-lg bg-[#e8eaf5] px-5 py-2.5 text-base font-bold tracking-wide text-[#1a1a2e]">
+                          {milestone.quarter}
+                        </span>
+
+                        {milestone.items.map((item, i) => (
+                          <p
+                            key={i}
+                            className="max-w-[400px] text-lg leading-snug text-[#555]"
+                          >
+                            {item}
+                          </p>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="relative flex h-16 flex-col items-center justify-center">
+                    {isTop && (
+                      <div
+                        className="absolute bottom-full h-5 w-px bg-[#243486]/25"
+                        style={{
+                          opacity: visibility,
+                          transition: "opacity 0.5s ease-out",
+                        }}
+                      />
+                    )}
+
+                    <div
+                      className="relative z-10 rounded-full"
+                      style={{
+                        width: isCurrent ? 16 : 12,
+                        height: isCurrent ? 16 : 12,
+                        background: isVisible
+                          ? "#243486"
+                          : "rgba(36,52,134,0.2)",
+                        boxShadow: isCurrent
+                          ? "0 0 0 6px rgba(36,52,134,0.12)"
+                          : "none",
+                        opacity: Math.max(0.25, visibility),
+                        transition: "all 0.3s ease-out",
+                      }}
+                    />
+
+                    {!isTop && (
+                      <div
+                        className="absolute top-full h-5 w-px bg-[#243486]/25"
+                        style={{
+                          opacity: visibility,
+                          transition: "opacity 0.5s ease-out",
+                        }}
+                      />
+                    )}
+                  </div>
+
+                  <div className="flex h-64 flex-col items-center justify-start pt-8">
+                    {!isTop && (
+                      <div
+                        className="flex flex-col items-center text-center"
+                        style={{
+                          opacity: visibility,
+                          transform: `translateY(${(1 - visibility) * 20}px)`,
+                          transition:
+                            "opacity 0.5s ease-out, transform 0.5s ease-out",
+                        }}
+                      >
+                        {milestone.items.map((item, i) => (
+                          <p
+                            key={i}
+                            className="max-w-[400px] text-lg leading-snug text-[#555]"
+                          >
+                            {item}
+                          </p>
+                        ))}
+
+                        <span className="mt-3 inline-block rounded-lg bg-[#e8eaf5] px-5 py-2.5 text-base font-bold tracking-wide text-[#1a1a2e]">
+                          {milestone.quarter}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+    </FadeIn>
+  )
+}
+
+function TimelineSection() {
+  return (
+    <>
+      <div className="md:hidden">
+        <FadeIn threshold={0.1}>
+          <VerticalTimeline />
+        </FadeIn>
+      </div>
+
+      <div className="hidden md:block">
+        <HorizontalTimeline />
+      </div>
+    </>
+  )
+}
+
 function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [videoReady, setVideoReady] = useState(false)
@@ -357,105 +809,30 @@ function HeroVideo() {
   )
 }
 
-function ScrollDebugProbe() {
-  useEffect(() => {
-    let lastScrollY = window.scrollY
-    let gestureCount = 0
-
-    const getPageInfo = () => ({
-      scrollY: window.scrollY,
-      innerHeight: window.innerHeight,
-      documentHeight: document.documentElement.scrollHeight,
-      bodyHeight: document.body.scrollHeight,
-      canScroll:
-        document.documentElement.scrollHeight > window.innerHeight + 1,
-      htmlOverflow: window.getComputedStyle(document.documentElement).overflow,
-      bodyOverflow: window.getComputedStyle(document.body).overflow,
-    })
-
-    const logGesture = (type: string, event: Event) => {
-      const gestureId = ++gestureCount
-      const target = event.target as HTMLElement | null
-
-      const before = {
-        gestureId,
-        type,
-        defaultPreventedAtCapture: event.defaultPrevented,
-        targetTag: target?.tagName,
-        targetClass:
-          typeof target?.className === "string" ? target.className : undefined,
-        page: getPageInfo(),
-      }
-
-      window.setTimeout(() => {
-        const afterScrollY = window.scrollY
-
-        console.log("[scroll-debug]", {
-          ...before,
-          defaultPreventedAfterEvent: event.defaultPrevented,
-          changed: afterScrollY !== lastScrollY,
-          previousScrollY: lastScrollY,
-          nextScrollY: afterScrollY,
-          delta: afterScrollY - lastScrollY,
-          pageAfter: getPageInfo(),
-        })
-
-        lastScrollY = afterScrollY
-      }, 120)
-    }
-
-    const handleWheel = (event: WheelEvent) => {
-      logGesture("wheel", event)
-    }
-
-    const handleTouchMove = (event: TouchEvent) => {
-      logGesture("touchmove", event)
-    }
-
-    const handleScroll = () => {
-      console.log("[scroll-debug:scroll-event]", {
-        scrollY: window.scrollY,
-      })
-    }
-
-    window.addEventListener("wheel", handleWheel, { capture: true })
-    window.addEventListener("touchmove", handleTouchMove, { capture: true })
-    window.addEventListener("scroll", handleScroll, { passive: true })
-
-    return () => {
-      window.removeEventListener("wheel", handleWheel, { capture: true })
-      window.removeEventListener("touchmove", handleTouchMove, {
-        capture: true,
-      })
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
-
-  return null
-}
-
-function TimelineSection() {
-  return (
-    <div className="mx-auto max-w-[1280px] px-4 md:px-8 lg:px-12">
-      <div className="flex min-h-[720px] items-center justify-center rounded-2xl border border-[#243486]/15 bg-[#e8eaf5]/70 px-6 text-center">
-        <div>
-          <p className="text-sm font-bold uppercase tracking-widest text-[#4866f7]">
-            Timeline temporarily disabled
-          </p>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#555] md:text-base">
-            This block is here only to test whether the first-scroll issue still
-            happens when the timeline interaction is fully removed.
-          </p>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 export function TeamPageContent() {
   return (
     <div className="relative min-h-screen bg-[#f9f9f9]">
-      <ScrollDebugProbe />
+      <style>{`
+        @keyframes teamFadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(var(--fade-y));
+          }
+
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          [style*="teamFadeIn"] {
+            animation: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+          }
+        }
+      `}</style>
 
       <div className="pointer-events-none fixed inset-0 overflow-hidden opacity-80">
         <img
