@@ -879,7 +879,7 @@ export function TeamPageContent() {
             </FadeIn>
 
             <FadeIn delay={150}>
-              <HeroVideo />
+              <div className="mt-8 aspect-video rounded-2xl bg-[#1a1a2e]" />
             </FadeIn>
 
             <FadeIn delay={200}>
