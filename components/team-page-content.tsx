@@ -884,14 +884,14 @@ export function TeamPageContent() {
 
             <FadeIn delay={200}>
               <p className="mt-8 text-sm leading-relaxed text-[#555] md:text-base">
-                Strato didn&apos;t start with a whitepaper and a token sale. It
+                STRATO didn&apos;t start with a whitepaper and a token sale. It
                 started in 2014, when our founders joined the Ethereum project
                 and began writing one of its six original mainnet-compatible
                 clients in Haskell, because they were mathematicians and
                 physicists, not hype merchants. Over the years, the team went on
                 to build enterprise blockchain infrastructure for Fortune 500
                 companies and governments, and has poured that experience into
-                Strato.
+                STRATO.
               </p>
             </FadeIn>
           </div>
