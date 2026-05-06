@@ -946,7 +946,7 @@ export function TeamPageContent() {
                 Haskell, because they were mathematicians and physicists, not hype
                 merchants. Over the years, the team went on to build enterprise
                 blockchain infrastructure for Fortune 500 companies and
-                governments, and has poured that experience into Strato.
+                governments, and has poured that experience into Strato. 
               </p>
             </FadeIn>
           </div>
