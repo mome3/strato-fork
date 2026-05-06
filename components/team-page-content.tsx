@@ -472,11 +472,9 @@ function VerticalTimeline() {
 }
 
 function HorizontalTimeline() {
-  const wrapperRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLDivElement>(null)
   const [progress, setProgress] = useState(0)
   const progressRef = useRef(0)
-  const isLockedRef = useRef(false)
-  const lockAnchorRef = useRef<"down" | "up" | null>(null)
   const touchStartYRef = useRef<number | null>(null)
 
   const total = timelineMilestones.length
@@ -486,155 +484,78 @@ function HorizontalTimeline() {
   const LOCK_SENSITIVITY = 0.001
   const RELEASE_EPSILON = 0.02
 
-  const ACTIVATION_ZONE_FRACTION = 1 / 3
-  const MIN_VISIBLE_PIXELS = 140
+  const DOWN_CONTROL_LINE = 2 / 3
+  const UP_CONTROL_LINE = 1 / 3
+  const MIN_VISIBLE_PIXELS = 120
 
   useEffect(() => {
     progressRef.current = progress
   }, [progress])
 
   useEffect(() => {
-    const wrapper = wrapperRef.current
+    const canTimelineControlScroll = (direction: number) => {
+      const section = sectionRef.current
 
-    if (!wrapper) return
+      if (!section) return false
 
-    const releaseLock = () => {
-      isLockedRef.current = false
-      lockAnchorRef.current = null
-    }
-
-    const getViewportState = () => {
-      const rect = wrapper.getBoundingClientRect()
+      const rect = section.getBoundingClientRect()
       const viewportHeight = window.innerHeight
-
-      const downActivationY =
-        viewportHeight * (1 - ACTIVATION_ZONE_FRACTION)
-      const upActivationY = viewportHeight * ACTIVATION_ZONE_FRACTION
+      const current = progressRef.current
 
       const visiblePixels = Math.max(
         0,
         Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0)
       )
 
-      const requiredVisiblePixels = Math.min(
-        MIN_VISIBLE_PIXELS,
-        rect.height * 0.35
-      )
-
-      const isMeaningfullyVisible = visiblePixels >= requiredVisiblePixels
-
-      const crossesDownActivationLine =
-        rect.top <= downActivationY && rect.bottom >= downActivationY
-
-      const crossesUpActivationLine =
-        rect.top <= upActivationY && rect.bottom >= upActivationY
-
-      return {
-        isMeaningfullyVisible,
-        crossesDownActivationLine,
-        crossesUpActivationLine,
-      }
-    }
-
-    const getStartAnchor = (direction: number) => {
-      const current = progressRef.current
-      const {
-        isMeaningfullyVisible,
-        crossesDownActivationLine,
-        crossesUpActivationLine,
-      } = getViewportState()
-
-      if (!isMeaningfullyVisible) return null
-
-      if (
-        direction > 0 &&
-        current < 1 - RELEASE_EPSILON &&
-        crossesDownActivationLine
-      ) {
-        return "down" as const
-      }
-
-      if (
-        direction < 0 &&
-        current > RELEASE_EPSILON &&
-        crossesUpActivationLine
-      ) {
-        return "up" as const
-      }
-
-      return null
-    }
-
-    const isCurrentLockStillValid = () => {
-      const anchor = lockAnchorRef.current
-
-      if (!anchor) return false
-
-      const {
-        isMeaningfullyVisible,
-        crossesDownActivationLine,
-        crossesUpActivationLine,
-      } = getViewportState()
+      const isMeaningfullyVisible =
+        visiblePixels >= Math.min(MIN_VISIBLE_PIXELS, rect.height * 0.35)
 
       if (!isMeaningfullyVisible) return false
 
-      if (anchor === "down") {
-        return crossesDownActivationLine
+      if (direction > 0) {
+        if (current >= 1 - RELEASE_EPSILON) return false
+
+        const controlY = viewportHeight * DOWN_CONTROL_LINE
+        return rect.top <= controlY && rect.bottom >= controlY
       }
 
-      return crossesUpActivationLine
+      if (direction < 0) {
+        if (current <= RELEASE_EPSILON) return false
+
+        const controlY = viewportHeight * UP_CONTROL_LINE
+        return rect.top <= controlY && rect.bottom >= controlY
+      }
+
+      return false
     }
 
     const stepProgress = (deltaY: number) => {
       const direction = Math.sign(deltaY)
 
       if (direction === 0) return false
+      if (!canTimelineControlScroll(direction)) return false
 
       const current = progressRef.current
+      const nextRaw = current + deltaY * LOCK_SENSITIVITY
 
-      if (isLockedRef.current) {
-        if (!isCurrentLockStillValid()) {
-          releaseLock()
-          return false
-        }
+      const next = Math.max(0, Math.min(1, nextRaw))
 
-        if (direction > 0 && current >= 1 - RELEASE_EPSILON) {
-          progressRef.current = 1
-          setProgress(1)
-          releaseLock()
-          return false
-        }
+      const reachedEnd = direction > 0 && next >= 1 - RELEASE_EPSILON
+      const reachedStart = direction < 0 && next <= RELEASE_EPSILON
 
-        if (direction < 0 && current <= RELEASE_EPSILON) {
-          progressRef.current = 0
-          setProgress(0)
-          releaseLock()
-          return false
-        }
+      const finalProgress = reachedEnd ? 1 : reachedStart ? 0 : next
 
-        const next = Math.max(
-          0,
-          Math.min(1, current + deltaY * LOCK_SENSITIVITY)
-        )
-
-        if (next !== current) {
-          progressRef.current = next
-          setProgress(next)
-        }
-
-        return true
+      if (finalProgress !== current) {
+        progressRef.current = finalProgress
+        setProgress(finalProgress)
       }
 
-      const startAnchor = getStartAnchor(direction)
-
-      if (!startAnchor) return false
-
-      const next = Math.max(0, Math.min(1, current + deltaY * LOCK_SENSITIVITY))
-
-      isLockedRef.current = true
-      lockAnchorRef.current = startAnchor
-      progressRef.current = next
-      setProgress(next)
+      // This is the important part:
+      // when the event completes the timeline, do NOT block that same event.
+      // Let the page scroll continue immediately.
+      if (reachedEnd || reachedStart) {
+        return false
+      }
 
       return true
     }
@@ -670,7 +591,6 @@ function HorizontalTimeline() {
 
     const handleTouchEnd = () => {
       touchStartYRef.current = null
-      releaseLock()
     }
 
     window.addEventListener("wheel", handleWheel, { passive: false })
@@ -679,7 +599,6 @@ function HorizontalTimeline() {
     window.addEventListener("touchend", handleTouchEnd, { passive: true })
 
     return () => {
-      releaseLock()
       window.removeEventListener("wheel", handleWheel)
       window.removeEventListener("touchstart", handleTouchStart)
       window.removeEventListener("touchmove", handleTouchMove)
@@ -694,8 +613,8 @@ function HorizontalTimeline() {
   )
 
   return (
-    <FadeIn className="relative py-16 md:py-20" threshold={0.1}>
-      <div ref={wrapperRef} className="relative">
+    <div ref={sectionRef} className="relative py-16 md:py-20">
+      <FadeIn className="relative" threshold={0.1}>
         <div className="relative overflow-hidden">
           <div className="absolute left-0 right-0 top-1/2 h-[2px] -translate-y-1/2 bg-[#243486]/15" />
 
@@ -815,8 +734,8 @@ function HorizontalTimeline() {
             })}
           </div>
         </div>
-      </div>
-    </FadeIn>
+      </FadeIn>
+    </div>
   )
 }
 
@@ -941,12 +860,13 @@ export function TeamPageContent() {
             <FadeIn delay={200}>
               <p className="mt-8 text-sm leading-relaxed text-[#555] md:text-base">
                 Strato didn&apos;t start with a whitepaper and a token sale. It
-                started in 2014, when our founders joined the Ethereum project and
-                began writing one of its six original mainnet-compatible clients in
-                Haskell, because they were mathematicians and physicists, not hype
-                merchants. Over the years, the team went on to build enterprise
-                blockchain infrastructure for Fortune 500 companies and
-                governments, and has poured that experience into Strato. 
+                started in 2014, when our founders joined the Ethereum project
+                and began writing one of its six original mainnet-compatible
+                clients in Haskell, because they were mathematicians and
+                physicists, not hype merchants. Over the years, the team went on
+                to build enterprise blockchain infrastructure for Fortune 500
+                companies and governments, and has poured that experience into
+                Strato.
               </p>
             </FadeIn>
           </div>
