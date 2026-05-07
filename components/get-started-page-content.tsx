@@ -75,8 +75,8 @@ const CAROUSEL_CARDS = [
       { source: "Sky savings rate", estimated: "Variable" },
       { source: "Borrow Cost", estimated: "~5%" },
     ],
-    primaryCta: { label: "Provide Liquidity", href: `${EXTERNAL_LINKS.app}dashboard/liquidity` },
-    secondaryCta: { label: "Full Yield Maxxing Guide", href: `${EXTERNAL_LINKS.docs}scenarios/yield-maxxing/` },
+    primaryCta: { label: "Provide Liquidity", href: `${EXTERNAL_LINKS.app}dashboard/earn` },
+    secondaryCta: { label: "Full Yield Maxxing Guide", href: `${EXTERNAL_LINKS.docs}scenarios/maximize-yield` },
     screenshot: "/get-started/card-03-earn.png",
   },
 ]
@@ -130,7 +130,7 @@ function RewardsBadge() {
         </p>
         <div className="mt-4">
           <a
-            href="https://strato.nexus/blog/strato-x-book-of-ethereum-booe-stakers-get-2x-points-in-season-2"
+            href="https://strato.nexus/blog/announcing-strato-rewards-season-2"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-sm font-semibold transition-opacity hover:opacity-70"
