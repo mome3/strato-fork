@@ -75,8 +75,8 @@ const CAROUSEL_CARDS = [
       { source: "Sky savings rate", estimated: "Variable" },
       { source: "Borrow Cost", estimated: "~5%" },
     ],
-    primaryCta: { label: "Provide Liquidity", href: `${EXTERNAL_LINKS.app}dashboard/liquidity` },
-    secondaryCta: { label: "Full Yield Maxxing Guide", href: `${EXTERNAL_LINKS.docs}scenarios/yield-maxxing/` },
+    primaryCta: { label: "Provide Liquidity", href: `${EXTERNAL_LINKS.app}dashboard/earn` },
+    secondaryCta: { label: "Full Yield Maxxing Guide", href: `${EXTERNAL_LINKS.docs}scenarios/maximize-yield` },
     screenshot: "/get-started/card-03-earn.png",
   },
 ]
@@ -128,6 +128,17 @@ function RewardsBadge() {
           Rewards are running on STRATO now. 1% of the total token supply up for grabs.
           Ten emission-earning activities span liquidity provision, CDP minting, savings, bridging, and vault deposits. Every meaningful action on the platform earns Reward Points before TGE.
         </p>
+        <div className="mt-4">
+          <a
+            href="https://strato.nexus/blog/announcing-strato-rewards-season-2"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold transition-opacity hover:opacity-70"
+            style={{ color: "#a4daff" }}
+          >
+            Start Earning <ArrowRight className="h-3.5 w-3.5" />
+          </a>
+        </div>
       </div>
     </section>
   )
@@ -446,12 +457,12 @@ function InnovationSection() {
             In collaboration with Founding members of the Ethereum Enterprise Alliance, the team now brings the hardest assets—gold and silver—to users globally through STRATO.
           </p>
           <a
-            href={`${EXTERNAL_LINKS.docs}about/`}
+            href="https://app.strato.nexus/"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#243486] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1a2761]"
           >
-            How it Works
+            Try STRATO
             <ArrowRight className="h-4 w-4" />
           </a>
         </div>
