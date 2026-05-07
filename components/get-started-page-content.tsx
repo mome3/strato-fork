@@ -87,8 +87,8 @@ function HeroSection() {
   const { ref, visible } = useReveal()
 
   return (
-    <section className="relative w-full pt-4 md:pt-6 lg:pt-8">
-      <div ref={ref} className="relative mx-auto max-w-[1280px] px-4 md:px-8 lg:px-12">
+    <section ref={ref} className="relative w-full pt-4 md:pt-6 lg:pt-8">
+      <div className="relative mx-auto max-w-[1280px] px-4 md:px-8 lg:px-12">
         <Navbar />
 
         <div className="pb-12 pt-12 md:pb-16 md:pt-20" style={revealStyle(visible, 100)}>
