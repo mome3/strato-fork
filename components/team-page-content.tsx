@@ -101,6 +101,24 @@ function WikipediaIcon({ className }: { className?: string }) {
   )
 }
 
+function ArrowRightIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M5 12h14" />
+      <path d="m12 5 7 7-7 7" />
+    </svg>
+  )
+}
+
 function SocialButton({
   href,
   label,
@@ -275,512 +293,294 @@ function DepartmentSection({
   )
 }
 
-function useIsDesktop() {
-  const [isDesktop, setIsDesktop] = useState(false)
+function useInView<T extends HTMLElement>(threshold = 0.1) {
+  const ref = useRef<T | null>(null)
+  const [inView, setInView] = useState(false)
 
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)")
+    const el = ref.current
+    if (!el) return
 
-    const update = () => {
-      setIsDesktop(mq.matches)
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      setInView(true)
+      return
     }
 
-    update()
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true)
+          observer.disconnect()
+        }
+      },
+      { threshold }
+    )
 
-    mq.addEventListener("change", update)
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [threshold])
 
-    return () => mq.removeEventListener("change", update)
-  }, [])
-
-  return isDesktop
+  return [ref, inView] as const
 }
 
-function VerticalTimeline() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const dotRefs = useRef<(HTMLDivElement | null)[]>([])
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([])
-  const [visible, setVisible] = useState<boolean[]>(() =>
-    timelineMilestones.map(() => false)
-  )
-  const [lineStyle, setLineStyle] = useState<{
-    top: number
-    height: number
-  } | null>(null)
+// Animation timing — shared between horizontal and vertical timelines so the
+// line fill progresses in sync with the staggered milestone fade-ins.
+const TL_STAGGER = 200 // ms between successive milestones
+const TL_FADE_DURATION = 500 // ms for each milestone's fade-in
+const dateLabelClass =
+  "inline-block rounded-full bg-white px-4 py-1.5 text-xs font-medium tracking-wide text-[#1a1a2e]"
 
-  useEffect(() => {
-    const measure = () => {
-      const container = containerRef.current
-      const firstDot = dotRefs.current[0]
-      const lastDot = dotRefs.current[timelineMilestones.length - 1]
-
-      if (!container || !firstDot || !lastDot) return
-
-      const containerTop = container.getBoundingClientRect().top
-      const firstRect = firstDot.getBoundingClientRect()
-      const lastRect = lastDot.getBoundingClientRect()
-
-      const top = firstRect.top + firstRect.height / 2 - containerTop
-      const height = lastRect.top + lastRect.height / 2 - containerTop - top
-
-      setLineStyle({ top, height })
-    }
-
-    measure()
-
-    window.addEventListener("resize", measure)
-
-    return () => window.removeEventListener("resize", measure)
-  }, [])
-
-  useEffect(() => {
-    const observers: IntersectionObserver[] = []
-
-    itemRefs.current.forEach((el, index) => {
-      if (!el) return
-
-      const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches
-
-      if (prefersReducedMotion) {
-        setVisible((prev) => {
-          const next = [...prev]
-          next[index] = true
-          return next
-        })
-        return
-      }
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setVisible((prev) => {
-              const next = [...prev]
-              next[index] = true
-              return next
-            })
-
-            observer.disconnect()
-          }
-        },
-        { threshold: 0.3 }
-      )
-
-      observer.observe(el)
-      observers.push(observer)
-    })
-
-    return () => observers.forEach((observer) => observer.disconnect())
-  }, [])
-
-  const DOT_SIZE = 20
+function StaticHorizontalTimeline() {
+  const total = timelineMilestones.length
+  const [ref, inView] = useInView<HTMLDivElement>(0.15)
+  const lineDuration = Math.max(1, total - 1) * TL_STAGGER
 
   return (
-    <div ref={containerRef} className="relative px-6 py-12">
-      {lineStyle && (
+    <div
+      ref={ref}
+      className="mx-auto w-full max-w-[1400px] px-8 lg:px-12"
+    >
+      <div className="relative">
+        {/* Background line (always visible, faint) */}
         <div
-          className="absolute left-[calc(1.5rem+9px)] w-[2px] bg-[#243486]/15"
-          style={{ top: lineStyle.top, height: lineStyle.height }}
+          className="pointer-events-none absolute h-[2px] bg-[#243486]/15"
+          style={{
+            left: `calc(100% / ${total * 2})`,
+            right: `calc(100% / ${total * 2})`,
+            top: "calc(170px + 7px)",
+          }}
         />
-      )}
+        {/* Foreground line — fills left to right when in view */}
+        <div
+          className="pointer-events-none absolute h-[2px] origin-left bg-[#243486]"
+          style={{
+            left: `calc(100% / ${total * 2})`,
+            right: `calc(100% / ${total * 2})`,
+            top: "calc(170px + 7px)",
+            transform: inView ? "scaleX(1)" : "scaleX(0)",
+            transition: `transform ${lineDuration}ms linear`,
+          }}
+        />
 
-      <div className="flex flex-col gap-0">
-        {timelineMilestones.map((milestone, index) => {
-          const isVis = visible[index]
+        <div
+          className="grid items-stretch"
+          style={{
+            gridTemplateColumns: `repeat(${total}, minmax(0, 1fr))`,
+          }}
+        >
+          {timelineMilestones.map((milestone, index) => {
+            const isTop = milestone.position === "top"
+            const delay = index * TL_STAGGER
 
-          return (
-            <div
-              key={milestone.quarter}
-              ref={(el) => {
-                itemRefs.current[index] = el
-              }}
-              className="relative flex items-start gap-6 py-8"
-            >
+            const fadeStyle: CSSProperties = {
+              opacity: inView ? 1 : 0,
+              transform: inView ? "translateY(0)" : "translateY(15px)",
+              transition: `opacity ${TL_FADE_DURATION}ms ease-out, transform ${TL_FADE_DURATION}ms ease-out`,
+              transitionDelay: `${delay}ms`,
+            }
+
+            const dotStyle: CSSProperties = {
+              opacity: inView ? 1 : 0,
+              transform: inView ? "scale(1)" : "scale(0.4)",
+              transition:
+                "opacity 350ms ease-out, transform 350ms cubic-bezier(0.34, 1.56, 0.64, 1)",
+              transitionDelay: `${delay}ms`,
+            }
+
+            return (
               <div
-                ref={(el) => {
-                  dotRefs.current[index] = el
-                }}
-                className="relative z-10 mt-1 shrink-0"
+                key={milestone.quarter}
+                className="relative flex flex-col items-center"
               >
-                <div
-                  className="rounded-full"
-                  style={{
-                    width: DOT_SIZE,
-                    height: DOT_SIZE,
-                    background: isVis ? "#243486" : "rgba(36,52,134,0.15)",
-                    boxShadow: isVis
-                      ? "0 0 0 6px rgba(36,52,134,0.10)"
-                      : "none",
-                    transition:
-                      "background 0.4s ease-out, box-shadow 0.4s ease-out",
-                  }}
-                />
-              </div>
+                {/* Top slot */}
+                <div className="flex min-h-[170px] w-full flex-col items-center justify-end px-2 pb-3 text-center">
+                  {isTop && (
+                    <div
+                      className="flex flex-col items-center"
+                      style={fadeStyle}
+                    >
+                      <span className={`${dateLabelClass} xl:text-sm`}>
+                        {milestone.quarter}
+                      </span>
+                      <div className="mt-2 space-y-0.5">
+                        {milestone.items.map((item, i) => (
+                          <p
+                            key={i}
+                            className="text-xs leading-snug text-[#555] xl:text-sm"
+                          >
+                            {item}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
 
-              <div
-                style={{
-                  opacity: isVis ? 1 : 0,
-                  transform: isVis ? "translateY(0)" : "translateY(20px)",
-                  transition:
-                    "opacity 0.5s ease-out, transform 0.5s ease-out",
-                  willChange: isVis ? "auto" : "opacity, transform",
-                }}
-              >
-                <span className="inline-block rounded-lg bg-[#e8eaf5] px-4 py-2 text-sm font-bold tracking-wide text-[#1a1a2e]">
-                  {milestone.quarter}
-                </span>
+                {/* Dot row */}
+                <div className="relative flex h-4 w-full items-center justify-center">
+                  <div
+                    className="relative z-10 h-3 w-3 rounded-full bg-[#243486]"
+                    style={dotStyle}
+                  />
+                </div>
 
-                <div className="mt-2 space-y-0.5">
-                  {milestone.items.map((item, i) => (
-                    <p key={i} className="text-base leading-snug text-[#555]">
-                      {item}
-                    </p>
-                  ))}
+                {/* Bottom slot */}
+                <div className="flex min-h-[170px] w-full flex-col items-center justify-start px-2 pt-3 text-center">
+                  {!isTop && (
+                    <div
+                      className="flex flex-col items-center"
+                      style={fadeStyle}
+                    >
+                      <span className={`${dateLabelClass} xl:text-sm`}>
+                        {milestone.quarter}
+                      </span>
+                      <div className="mt-2 space-y-0.5">
+                        {milestone.items.map((item, i) => (
+                          <p
+                            key={i}
+                            className="text-xs leading-snug text-[#555] xl:text-sm"
+                          >
+                            {item}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
     </div>
   )
 }
 
-function HorizontalTimeline() {
-  const wrapperRef = useRef<HTMLDivElement>(null)
-  const [progress, setProgress] = useState(0)
-  const progressRef = useRef(0)
-  const isLockedRef = useRef(false)
-  const touchStartYRef = useRef<number | null>(null)
-  const isDesktop = useIsDesktop()
-
+function StaticVerticalTimeline() {
   const total = timelineMilestones.length
-  const SLOT_WIDTH = 520
-  const maxTranslate = (total - 1) * SLOT_WIDTH
-
-  const LOCK_SENSITIVITY = 0.001
-  const RELEASE_EPSILON = 0.02
-
-  const DOWN_ACTIVATION_Y = 2 / 3
-  const UP_ACTIVATION_Y = 1 / 3
-
-  useEffect(() => {
-    progressRef.current = progress
-  }, [progress])
-
-  useEffect(() => {
-    if (!isDesktop) {
-      isLockedRef.current = false
-      touchStartYRef.current = null
-      return
-    }
-
-    const wrapper = wrapperRef.current
-
-    if (!wrapper) return
-
-    const isInActivationZone = (direction: number) => {
-      const rect = wrapper.getBoundingClientRect()
-      const viewportHeight = window.innerHeight
-
-      const wrapperCenterY = rect.top + rect.height / 2
-      const current = progressRef.current
-
-      const downTargetY = viewportHeight * DOWN_ACTIVATION_Y
-      const upTargetY = viewportHeight * UP_ACTIVATION_Y
-
-      const tolerance = Math.min(120, viewportHeight * 0.14)
-
-      const isNearDownTarget =
-        Math.abs(wrapperCenterY - downTargetY) <= tolerance
-
-      const isNearUpTarget =
-        Math.abs(wrapperCenterY - upTargetY) <= tolerance
-
-      if (direction > 0) {
-        return current < 1 - RELEASE_EPSILON && isNearDownTarget
-      }
-
-      if (direction < 0) {
-        return current > RELEASE_EPSILON && isNearUpTarget
-      }
-
-      return false
-    }
-
-    const releaseIfAtEdge = (direction: number) => {
-      const current = progressRef.current
-
-      if (direction > 0 && current >= 1 - RELEASE_EPSILON) {
-        progressRef.current = 1
-        setProgress(1)
-        isLockedRef.current = false
-        return true
-      }
-
-      if (direction < 0 && current <= RELEASE_EPSILON) {
-        progressRef.current = 0
-        setProgress(0)
-        isLockedRef.current = false
-        return true
-      }
-
-      return false
-    }
-
-    const stepProgress = (deltaY: number) => {
-      const direction = Math.sign(deltaY)
-
-      if (direction === 0) return false
-
-      if (releaseIfAtEdge(direction)) {
-        return false
-      }
-
-      if (!isLockedRef.current && !isInActivationZone(direction)) {
-        return false
-      }
-
-      isLockedRef.current = true
-
-      const current = progressRef.current
-
-      const next = Math.max(
-        0,
-        Math.min(1, current + deltaY * LOCK_SENSITIVITY)
-      )
-
-      if (next !== current) {
-        progressRef.current = next
-        setProgress(next)
-      }
-
-      return true
-    }
-
-    const handleWheel = (event: WheelEvent) => {
-      const consumed = stepProgress(event.deltaY)
-
-      if (consumed) {
-        event.preventDefault()
-      }
-    }
-
-    const handleTouchStart = (event: TouchEvent) => {
-      touchStartYRef.current = event.touches[0]?.clientY ?? null
-    }
-
-    const handleTouchMove = (event: TouchEvent) => {
-      if (touchStartYRef.current == null) return
-
-      const currentTouchY = event.touches[0]?.clientY
-
-      if (typeof currentTouchY !== "number") return
-
-      const deltaY = touchStartYRef.current - currentTouchY
-      const consumed = stepProgress(deltaY)
-
-      if (consumed) {
-        event.preventDefault()
-      }
-
-      touchStartYRef.current = currentTouchY
-    }
-
-    const handleTouchEnd = () => {
-      touchStartYRef.current = null
-    }
-
-    window.addEventListener("wheel", handleWheel, { passive: false })
-    window.addEventListener("touchstart", handleTouchStart, { passive: true })
-    window.addEventListener("touchmove", handleTouchMove, { passive: false })
-    window.addEventListener("touchend", handleTouchEnd, { passive: true })
-
-    return () => {
-      window.removeEventListener("wheel", handleWheel)
-      window.removeEventListener("touchstart", handleTouchStart)
-      window.removeEventListener("touchmove", handleTouchMove)
-      window.removeEventListener("touchend", handleTouchEnd)
-
-      isLockedRef.current = false
-      touchStartYRef.current = null
-    }
-  }, [isDesktop])
-
-  const translateX = progress * maxTranslate
-
-  const activeIndex = Math.min(
-    total - 1,
-    Math.floor(progress * (total - 1) + 0.25)
-  )
+  const [ref, inView] = useInView<HTMLDivElement>(0.1)
+  const lineDuration = Math.max(1, total - 1) * TL_STAGGER
 
   return (
-    <FadeIn className="relative py-16 md:py-20" threshold={0.1}>
-      <div ref={wrapperRef} className="relative">
-        <div className="relative overflow-hidden">
-          <div className="absolute left-0 right-0 top-1/2 h-[2px] -translate-y-1/2 bg-[#243486]/15" />
+    <div ref={ref} className="mx-auto w-full max-w-[640px] px-6">
+      <div className="relative">
+        {/* Background line */}
+        <div className="pointer-events-none absolute bottom-2 left-[5px] top-2 w-[2px] bg-[#243486]/15" />
+        {/* Foreground line — fills top to bottom when in view */}
+        <div
+          className="pointer-events-none absolute bottom-2 left-[5px] top-2 w-[2px] origin-top bg-[#243486]"
+          style={{
+            transform: inView ? "scaleY(1)" : "scaleY(0)",
+            transition: `transform ${lineDuration}ms linear`,
+          }}
+        />
 
-          <div
-            className="flex items-center pl-[50vw] will-change-transform"
-            style={{ transform: `translateX(-${translateX}px)` }}
-          >
-            {timelineMilestones.map((milestone, index) => {
-              const isTop = milestone.position === "top"
-              const milestoneProgress = progress * total
+        <div className="flex flex-col gap-6">
+          {timelineMilestones.map((milestone, index) => {
+            const delay = index * TL_STAGGER
 
-              const visibility = Math.min(
-                1,
-                Math.max(0, milestoneProgress - index + 0.8)
-              )
-
-              const isVisible = visibility > 0.1
-              const isCurrent = index === activeIndex
-
-              return (
+            return (
+              <div
+                key={milestone.quarter}
+                className="relative flex items-start gap-4"
+                style={{
+                  opacity: inView ? 1 : 0,
+                  transform: inView ? "translateY(0)" : "translateY(12px)",
+                  transition: `opacity ${TL_FADE_DURATION}ms ease-out, transform ${TL_FADE_DURATION}ms ease-out`,
+                  transitionDelay: `${delay}ms`,
+                }}
+              >
                 <div
-                  key={milestone.quarter}
-                  className="relative flex shrink-0 flex-col items-center"
-                  style={{ width: SLOT_WIDTH }}
-                >
-                  <div className="flex h-64 flex-col items-center justify-end pb-8">
-                    {isTop && (
-                      <div
-                        className="flex flex-col items-center text-center"
-                        style={{
-                          opacity: visibility,
-                          transform: `translateY(${(1 - visibility) * 20}px)`,
-                          transition:
-                            "opacity 0.5s ease-out, transform 0.5s ease-out",
-                        }}
-                      >
-                        <span className="mb-3 inline-block rounded-lg bg-[#e8eaf5] px-5 py-2.5 text-base font-bold tracking-wide text-[#1a1a2e]">
-                          {milestone.quarter}
-                        </span>
+                  className="relative z-10 mt-1.5 h-3 w-3 shrink-0 rounded-full bg-[#243486]"
+                  style={{
+                    opacity: inView ? 1 : 0,
+                    transform: inView ? "scale(1)" : "scale(0.4)",
+                    transition:
+                      "opacity 350ms ease-out, transform 350ms cubic-bezier(0.34, 1.56, 0.64, 1)",
+                    transitionDelay: `${delay}ms`,
+                  }}
+                />
 
-                        {milestone.items.map((item, i) => (
-                          <p
-                            key={i}
-                            className="max-w-[400px] text-lg leading-snug text-[#555]"
-                          >
-                            {item}
-                          </p>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="relative flex h-16 flex-col items-center justify-center">
-                    {isTop && (
-                      <div
-                        className="absolute bottom-full h-5 w-px bg-[#243486]/25"
-                        style={{
-                          opacity: visibility,
-                          transition: "opacity 0.5s ease-out",
-                        }}
-                      />
-                    )}
-
-                    <div
-                      className="relative z-10 rounded-full"
-                      style={{
-                        width: isCurrent ? 16 : 12,
-                        height: isCurrent ? 16 : 12,
-                        background: isVisible
-                          ? "#243486"
-                          : "rgba(36,52,134,0.2)",
-                        boxShadow: isCurrent
-                          ? "0 0 0 6px rgba(36,52,134,0.12)"
-                          : "none",
-                        opacity: Math.max(0.25, visibility),
-                        transition: "all 0.3s ease-out",
-                      }}
-                    />
-
-                    {!isTop && (
-                      <div
-                        className="absolute top-full h-5 w-px bg-[#243486]/25"
-                        style={{
-                          opacity: visibility,
-                          transition: "opacity 0.5s ease-out",
-                        }}
-                      />
-                    )}
-                  </div>
-
-                  <div className="flex h-64 flex-col items-center justify-start pt-8">
-                    {!isTop && (
-                      <div
-                        className="flex flex-col items-center text-center"
-                        style={{
-                          opacity: visibility,
-                          transform: `translateY(${(1 - visibility) * 20}px)`,
-                          transition:
-                            "opacity 0.5s ease-out, transform 0.5s ease-out",
-                        }}
-                      >
-                        {milestone.items.map((item, i) => (
-                          <p
-                            key={i}
-                            className="max-w-[400px] text-lg leading-snug text-[#555]"
-                          >
-                            {item}
-                          </p>
-                        ))}
-
-                        <span className="mt-3 inline-block rounded-lg bg-[#e8eaf5] px-5 py-2.5 text-base font-bold tracking-wide text-[#1a1a2e]">
-                          {milestone.quarter}
-                        </span>
-                      </div>
-                    )}
+                <div className="flex-1">
+                  <span className={dateLabelClass}>{milestone.quarter}</span>
+                  <div className="mt-1.5 space-y-0.5">
+                    {milestone.items.map((item, j) => (
+                      <p key={j} className="text-sm leading-snug text-[#555]">
+                        {item}
+                      </p>
+                    ))}
                   </div>
                 </div>
-              )
-            })}
-          </div>
+              </div>
+            )
+          })}
         </div>
       </div>
-    </FadeIn>
+    </div>
   )
 }
 
 function TimelineSection() {
   return (
-    <>
-      <div className="md:hidden">
-        <FadeIn threshold={0.1}>
-          <VerticalTimeline />
-        </FadeIn>
+    <div className="py-12 md:py-20">
+      <div className="hidden lg:block">
+        <StaticHorizontalTimeline />
       </div>
-
-      <div className="hidden md:block">
-        <HorizontalTimeline />
+      <div className="lg:hidden">
+        <StaticVerticalTimeline />
       </div>
-    </>
+    </div>
   )
 }
 
 function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [videoReady, setVideoReady] = useState(false)
+  const playAttemptedRef = useRef(false)
 
   useEffect(() => {
     const video = videoRef.current
 
     if (!video) return
 
-    const startVideo = async () => {
-      try {
-        video.muted = true
-        video.playsInline = true
-        await video.play()
-      } catch {
-        // Autoplay may fail on some devices. Native controls remain available.
+    // Set imperatively in case React's prop-to-attribute timing missed it.
+    // iOS Safari decides autoplay eligibility based on attributes at parse time.
+    video.muted = true
+    video.defaultMuted = true
+    video.playsInline = true
+    video.setAttribute("muted", "")
+    video.setAttribute("playsinline", "")
+    video.setAttribute("webkit-playsinline", "")
+
+    const tryPlay = () => {
+      if (playAttemptedRef.current) return
+      playAttemptedRef.current = true
+
+      const promise = video.play()
+
+      if (promise && typeof promise.catch === "function") {
+        promise.catch(() => {
+          // Likely Low Power Mode or Low Data Mode on iOS. Native controls
+          // remain available so the user can start playback manually.
+          playAttemptedRef.current = false
+        })
       }
     }
 
-    const timeout = window.setTimeout(startVideo, 250)
+    if (video.readyState >= 2) {
+      tryPlay()
+    } else {
+      video.addEventListener("loadeddata", tryPlay, { once: true })
+      video.addEventListener("canplay", tryPlay, { once: true })
+    }
 
-    return () => window.clearTimeout(timeout)
+    return () => {
+      video.removeEventListener("loadeddata", tryPlay)
+      video.removeEventListener("canplay", tryPlay)
+    }
   }, [])
 
   return (
@@ -805,9 +605,10 @@ function HeroVideo() {
           controls
           autoPlay
           muted
+          defaultMuted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           poster="/team/hero-poster.jpg"
           onLoadedData={() => setVideoReady(true)}
           onCanPlay={() => setVideoReady(true)}
@@ -902,11 +703,21 @@ export function TeamPageContent() {
         </div>
 
         <div className="mx-auto max-w-[1280px] px-4 md:px-8 lg:px-12">
-          <div className="flex flex-col gap-20 pb-24">
+          <div className="flex flex-col gap-20">
             {departments.map((dept) => (
               <DepartmentSection key={dept} department={dept} />
             ))}
           </div>
+
+          <FadeIn className="mt-16 flex justify-center pb-24 md:mt-20">
+            <Link
+              href="/get-started"
+              className="inline-flex items-center gap-2 rounded-full bg-[#243486] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1a2761]"
+            >
+              Get Started
+              <ArrowRightIcon className="h-4 w-4" />
+            </Link>
+          </FadeIn>
         </div>
       </div>
 
